@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantú's Sabores Caseiros | Cardápio Digital</title>
+    <meta name="description" content="Bolos e tortas caseiras Cantú's. Escolha seus favoritos e peça pelo WhatsApp.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fffbeed',
+                            100: '#fef3c7',
+                            400: '#f3bd9f',
+                            500: '#bd6b78',
+                            600: '#9b4a5f',
+                            700: '#b45309',
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Modern Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+        /* Hide scrollbar for category selector */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Glassmorphic effect */
+        .glass {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-header {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+        }
+        body { background: #21151e !important; }
+        .glass-header {background:rgba(33,21,30,.9)}
+        .glass {background:rgba(65,36,49,.78)}
+        #store-banner {object-position:center}
+        #store-name {text-shadow:0 2px 14px rgba(0,0,0,.4)}
+        #products-grid > div {background:rgba(59,35,47,.88)}
+        #products-grid > div:hover {border-color:#b67a85}
+        .sticky {background-color:rgba(33,21,30,.96)}
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen pb-24 selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- MAIN WRAPPER -->
+    <div class="max-w-md md:max-w-2xl lg:max-w-5xl mx-auto px-4 sm:px-6">
+
+        <!-- RESTAURANT HEADER / COVER -->
+        <header class="relative pt-4 mb-6">
+            <!-- Banner Image -->
+            <div class="relative h-44 sm:h-56 md:h-64 w-full rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
+                <img id="store-banner" src="" alt="Capa da Cantú's" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+            </div>
+
+            <!-- Profile Info Card -->
+            <div class="relative -mt-16 px-4 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+                <div class="flex items-end gap-4">
+                    <!-- Logo Avatar -->
+                    <div class="relative group">
+                        <img id="store-logo" src="" alt="Logo Cantú's" class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl object-cover border-4 border-slate-950 shadow-2xl bg-slate-900">
+                    </div>
+
+                    <!-- Details -->
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 id="store-name" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Cantú's Sabores Caseiros</h1>
+
+                        </div>
+                        <p id="store-slogan" class="text-slate-400 text-sm font-medium mt-0.5">Carinho e amor em forma de sabor.</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- STICKY SEARCH & CATEGORY BAR -->
+        <div class="sticky top-0 z-30 pt-2 pb-4 bg-slate-950/90 backdrop-blur-md">
+            <!-- Search Box -->
+            <div class="relative mb-3">
+                <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Buscar bolo, torta ou sabor..." 
+                    class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl pl-12 pr-10 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/20 transition-all shadow-inner">
+                <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Categories Slider -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="categories-container">
+                <!-- Dynamically Rendered -->
+            </div>
+        </div>
+
+        <!-- PRODUCTS MENU SECTION -->
+        <main class="mt-2">
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Products dynamically rendered here -->
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
+                <div class="w-16 h-16 bg-slate-900 border border-slate-800 rounded-full flex items-center justify-center text-slate-500 mb-4">
+                    <i data-lucide="utensils-crossed" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Nenhum item encontrado</h3>
+                <p class="text-slate-400 text-sm mt-1 max-w-xs">Tente buscar por outro termo ou remova os filtros selecionados.</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-semibold rounded-xl transition">Limpar Filtros</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- FLOATING CART BUTTON -->
+    <div id="floating-cart" class="fixed bottom-5 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-40 transition-all duration-300 translate-y-24 opacity-0">
+        <button onclick="toggleCartDrawer(true)" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold p-4 rounded-2xl shadow-xl shadow-amber-500/20 flex items-center justify-between border border-amber-300/30 active:scale-[0.98] transition-all">
+            <div class="flex items-center gap-3">
+                <div class="relative bg-slate-950/20 p-2 rounded-xl">
+                    <i data-lucide="shopping-bag" class="w-6 h-6 text-slate-950"></i>
+                    <span id="cart-badge-count" class="absolute -top-2 -right-2 bg-slate-950 text-amber-400 text-xs font-black w-5 h-5 rounded-full flex items-center justify-center border border-amber-500">0</span>
+                </div>
+                <div class="text-left">
+                    <span class="block text-xs uppercase tracking-wider font-extrabold text-slate-950/70">Seu Carrinho</span>
+                    <span id="cart-drawer-total-preview" class="text-lg font-black text-slate-950">R$ 0,00</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 text-sm font-black text-slate-950">
+                <span>Ver Pedido</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </div>
+        </button>
+    </div>
+
+    <!-- PRODUCT DETAILS / CUSTOMIZATION MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl transform translate-y-full sm:translate-y-0 transition-transform duration-300 max-h-[90vh] flex flex-col">
+            <!-- Modal Header / Image -->
+            <div class="relative h-56 sm:h-64 w-full bg-slate-950 shrink-0">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-slate-950/70 hover:bg-slate-950 text-slate-300 p-2 rounded-full border border-slate-700 backdrop-blur-md transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 overflow-y-auto space-y-5 flex-1">
+                <div>
+                    <div class="flex items-start justify-between gap-2">
+                        <h2 id="modal-title" class="text-2xl font-extrabold text-white"></h2>
+                        <span id="modal-price" class="text-xl font-black text-amber-400 whitespace-nowrap"></span>
+                    </div>
+                    <p id="modal-desc" class="text-slate-400 text-sm mt-2 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between gap-4 shrink-0">
+                <!-- Quantity selector -->
+                <div class="flex items-center bg-slate-900 border border-slate-800 rounded-2xl p-1">
+                    <button onclick="adjustModalQty(-1)" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-amber-400 font-bold active:scale-95 transition">
+                        <i data-lucide="minus" class="w-4 h-4"></i>
+                    </button>
+                    <span id="modal-qty" class="w-8 text-center font-black text-white text-base">1</span>
+                    <button onclick="adjustModalQty(1)" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-amber-400 font-bold active:scale-95 transition">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Add button -->
+                <button onclick="confirmAddToCart()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-3.5 px-4 rounded-2xl shadow-lg shadow-amber-500/10 flex items-center justify-between transition">
+                    <span>Adicionar</span>
+                    <span id="modal-total-btn">R$ 0,00</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART & CHECKOUT DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 flex justify-end bg-slate-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-slate-900 border-l border-slate-800 w-full max-w-lg h-full shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
+            
+            <!-- Drawer Header -->
+            <div class="p-5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-amber-400"></i>
+                    <h2 class="text-lg font-bold text-white">Seu Pedido</h2>
+                </div>
+                <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-white p-2 rounded-xl">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Drawer Content -->
+            <div class="flex-1 overflow-y-auto p-5 space-y-6">
+                <!-- Cart Items List -->
+                <div>
+                    <div id="cart-items-list" class="space-y-3">
+                        <!-- Items rendered dynamically -->
+                    </div>
+                    <div id="cart-empty-msg" class="hidden text-center py-12 text-slate-500 space-y-3">
+                        <i data-lucide="shopping-cart" class="w-12 h-12 mx-auto text-slate-700"></i>
+                        <p class="text-sm font-medium">Seu carrinho está vazio no momento.</p>
+                    </div>
+                </div>
+
+                <div id="checkout-section" class="space-y-5 pt-4 border-t border-slate-800">
+                    <div>
+                        <label for="cust-name" class="block text-sm font-bold text-slate-200 mb-2">Seu nome <span class="text-rose-400">*</span></label>
+                        <input type="text" id="cust-name" maxlength="80" autocomplete="name" placeholder="Digite seu nome para enviar o pedido" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500" required>
+                        <p class="text-xs text-slate-400 mt-2">Só precisamos do seu nome. O pedido será encaminhado pelo WhatsApp.</p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800/80 space-y-2 text-sm">
+                        <div class="flex justify-between text-slate-400"><span>Subtotal</span><span id="summary-subtotal">R$ 0,00</span></div>
+                        <div class="flex justify-between text-white font-extrabold text-base pt-2 border-t border-slate-800"><span>Total do pedido</span><span id="summary-total" class="text-amber-400">R$ 0,00</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drawer Footer / Finish Button -->
+            <div class="p-4 bg-slate-950 border-t border-slate-800">
+                <button onclick="submitOrderToWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-4 rounded-2xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 text-base transition active:scale-[0.99]">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                    <span>Enviar Pedido pelo WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // Cardápio oficial da Cantú's: altere este bloco para futuras atualizações.
+        const DEFAULT_STORE = {
+            name: "Cantú's Sabores Caseiros",
+            slogan: "Carinho e amor em forma de sabor.",
+            phone: "5511950330766",
+            banner: "",
+            logo: ""
+        };
+        const DEFAULT_CATEGORIES = [
+            {id:"all", name:"Todos", icon:"layout-grid"},
+            {id:"bolos250", name:"Bolos 250 ml", icon:"cake-slice"},
+            {id:"tortas220", name:"Tortas 220 ml", icon:"utensils"},
+            {id:"tortas750", name:"Tortas 750 ml", icon:"package"},
+            {id:"redondos", name:"Bolos redondos", icon:"cake"}
+        ];
+        const DEFAULT_PRODUCTS = [
+            {id:"p1",name:"Bolo de chocolate com cobertura de chocolate",category:"bolos250",price:10,description:"Na marmita de 250 ml",image:""},
+            {id:"p2",name:"Bolo de chocolate com cobertura de Ninho",category:"bolos250",price:10,description:"Na marmita de 250 ml",image:""},
+            {id:"p3",name:"Torta salgada de frios (presunto e queijo)",category:"tortas220",price:10,description:"Na marmita de 220 ml",image:""},
+            {id:"p4",name:"Torta salgada de frango com requeijão",category:"tortas220",price:10,description:"Na marmita de 220 ml",image:""},
+            {id:"p5",name:"Torta salgada de calabresa com requeijão",category:"tortas220",price:10,description:"Na marmita de 220 ml",image:""},
+            {id:"p6",name:"Torta salgada de frios (presunto e queijo)",category:"tortas750",price:27,description:"Na marmita de 750 ml",image:""},
+            {id:"p7",name:"Torta salgada de frango com requeijão",category:"tortas750",price:27,description:"Na marmita de 750 ml",image:""},
+            {id:"p8",name:"Torta salgada de calabresa com requeijão",category:"tortas750",price:27,description:"Na marmita de 750 ml",image:""},
+            {id:"p9",name:"Bolo redondo caseiro de chocolate",category:"redondos",price:20,description:"Bolo redondo caseiro",image:""},
+            {id:"p10",name:"Bolo redondo caseiro de cenoura",category:"redondos",price:20,description:"Bolo redondo caseiro",image:""}
+        ];
+        // Futuras fotos reais: informe o caminho da imagem na propriedade 'image' de cada produto.
+        const formatMoney = value => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(value);
+        const placeholder = (label='Foto em breve') => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450"><rect width="600" height="450" fill="#341d28"/><rect x="30" y="30" width="540" height="390" rx="28" fill="#4c2837" stroke="#936375" stroke-width="2"/><path d="M270 174h60m-30-30v60" stroke="#e8c9b4" stroke-width="8" stroke-linecap="round"/><text x="300" y="272" font-family="Arial" font-size="24" text-anchor="middle" fill="#f8e8db">${label}</text></svg>`)}`;
+        const store = DEFAULT_STORE;
+        const products = DEFAULT_PRODUCTS;
+        let cart = [];
+        try { const saved = JSON.parse(localStorage.getItem('cantus_cart_v1') || '[]'); if (Array.isArray(saved)) cart = saved.filter(i => products.some(p=>p.id===i.productId)).map(i=>{const p=products.find(p=>p.id===i.productId);return {cartItemId:String(i.cartItemId),productId:p.id,name:p.name+' ('+p.description.replace('Na marmita de ','').replace('Bolo redondo caseiro','redondo')+')',unitPrice:p.price,quantity:Math.max(1,Math.min(999,Number(i.quantity)||1)),image:p.image||placeholder()};}); } catch(e) {cart=[];}
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let currentModalProduct = null;
+        let modalQuantity = 1;
+        // Application Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStoreHeader();
+            renderCategories();
+            renderProducts();
+            updateCartUI();
+            lucide.createIcons();
+        });
+
+        // Store Renderers
+        function renderStoreHeader() {
+            document.getElementById('store-name').textContent = store.name;
+            document.getElementById('store-slogan').textContent = store.slogan;
+            document.getElementById('store-banner').src = store.banner || placeholder("Cantú's • Sabores Caseiros");
+            document.getElementById('store-logo').src = store.logo || placeholder("Cantú's");
+            document.title = `${store.name} | Cardápio Digital`;
+        }
+
+        // Render Categories Bar
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = DEFAULT_CATEGORIES.map(cat => {
+                const isActive = activeCategory === cat.id;
+                return `
+                    <button onclick="setCategory('${cat.id}')" class="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all whitespace-nowrap shadow-sm ${
+                        isActive 
+                        ? 'bg-amber-500 text-slate-950 scale-105 shadow-amber-500/20' 
+                        : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                    }">
+                        <i data-lucide="${cat.icon}" class="w-4 h-4"></i>
+                        <span>${cat.name}</span>
+                    </button>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        function setCategory(id) {
+            activeCategory = id;
+            renderCategories();
+            renderProducts();
+        }
+
+        // Search & Filters Logic
+        function handleSearch() {
+            const val = document.getElementById('search-input').value;
+            searchQuery = val.toLowerCase().trim();
+            document.getElementById('clear-search').classList.toggle('hidden', searchQuery === '');
+            renderProducts();
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            searchQuery = '';
+            document.getElementById('clear-search').classList.add('hidden');
+            renderProducts();
+        }
+
+        function resetFilters() { clearSearch(); setCategory('all'); }
+
+        // Filter and Render Products Grid
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            let filtered = products.filter(p => {
+                // Category filter
+                if (activeCategory !== 'all' && p.category !== activeCategory) return false;
+                
+                // Search query filter
+                if (searchQuery) {
+                    const matchName = p.name.toLowerCase().includes(searchQuery);
+                    const matchDesc = p.description.toLowerCase().includes(searchQuery);
+                    if (!matchName && !matchDesc) return false;
+                }
+
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            emptyState.classList.remove('flex');
+
+            grid.innerHTML = filtered.map(product => {
+                const formattedPrice = product.price.toFixed(2).replace('.', ',');
+                return `
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-slate-700/80 rounded-3xl p-3.5 flex gap-4 items-center group transition-all duration-300 hover:shadow-xl hover:shadow-slate-950/50">
+                        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shrink-0 bg-slate-950">
+                            <img src="${product.image || placeholder()}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            
+                        </div>
+
+                        <div class="flex-1 min-w-0 flex flex-col justify-between h-full py-0.5">
+                            <div>
+                                <div class="flex items-start justify-between gap-1">
+                                    <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-2">${product.name}</h3>
+                                </div>
+                                <p class="text-slate-400 text-xs mt-1 line-clamp-2 leading-relaxed">${product.description}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between mt-3">
+                                <span class="text-base font-black text-amber-400">R$ ${formattedPrice}</span>
+                                <button onclick="openProductModal('${product.id}')" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white p-2.5 rounded-xl transition-all active:scale-95 flex items-center justify-center border border-slate-700 hover:border-amber-400 shadow-md">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        // Product Modal Logic
+        function openProductModal(productId) {
+            currentModalProduct = products.find(p => p.id === productId);
+            if (!currentModalProduct) return;
+
+            modalQuantity = 1;
+
+            document.getElementById('modal-img').src = currentModalProduct.image || placeholder();
+            document.getElementById('modal-title').innerText = currentModalProduct.name;
+            document.getElementById('modal-desc').innerText = currentModalProduct.description;
+            document.getElementById('modal-price').innerText = `R$ ${currentModalProduct.price.toFixed(2).replace('.', ',')}`;
+            document.getElementById('modal-qty').innerText = modalQuantity;
+            updateModalPriceTotal();
+
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.firstElementChild.classList.remove('translate-y-full');
+            lucide.createIcons();
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.firstElementChild.classList.add('translate-y-full');
+        }
+
+        function adjustModalQty(delta) {
+            if (modalQuantity + delta >= 1) {
+                modalQuantity += delta;
+                document.getElementById('modal-qty').innerText = modalQuantity;
+                updateModalPriceTotal();
+            }
+        }
+
+        function updateModalPriceTotal() {
+            if (!currentModalProduct) return;
+            const total = currentModalProduct.price * modalQuantity;
+            document.getElementById('modal-total-btn').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function confirmAddToCart() {
+            if (!currentModalProduct) return;
+            const p = currentModalProduct;
+            const existing = cart.find(i => i.productId === p.id);
+            if (existing) existing.quantity += modalQuantity;
+            else cart.push({cartItemId:p.id,productId:p.id,name:p.name + (p.category==='redondos'?'':` (${p.description.replace('Na marmita de ','')}, na marmita)`),unitPrice:p.price,quantity:modalQuantity,image:p.image||placeholder()});
+            saveCartToStorage(); updateCartUI(); closeProductModal(); showToast('Produto adicionado ao carrinho!');
+        }
+
+        // Cart State & Renderers
+        function saveCartToStorage() {
+            localStorage.setItem('cantus_cart_v1', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            const subtotal = cart.reduce((acc, item) => acc + (item.unitPrice * item.quantity), 0);
+
+            // Floating Cart Bar
+            const floatingCart = document.getElementById('floating-cart');
+            const cartCountBadge = document.getElementById('cart-badge-count');
+            const cartTotalPreview = document.getElementById('cart-drawer-total-preview');
+
+            cartCountBadge.innerText = totalItems;
+            cartTotalPreview.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+
+            if (totalItems > 0) {
+                floatingCart.classList.remove('translate-y-24', 'opacity-0');
+            } else {
+                floatingCart.classList.add('translate-y-24', 'opacity-0');
+            }
+
+            renderCartDrawerItems();
+            calculateOrderSummary();
+        }
+
+        function renderCartDrawerItems() {
+            const container = document.getElementById('cart-items-list');
+            const emptyMsg = document.getElementById('cart-empty-msg');
+            const checkoutSec = document.getElementById('checkout-section');
+
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                emptyMsg.classList.remove('hidden');
+                checkoutSec.classList.add('hidden');
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            checkoutSec.classList.remove('hidden');
+
+            container.innerHTML = cart.map(item => {
+                const itemTotal = item.unitPrice * item.quantity;
+    
+
+                return `
+                    <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex gap-3 items-start relative group">
+                        <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-sm font-bold text-white line-clamp-3 pr-2">${item.name}</h4>
+                                <button onclick="removeCartItem('${item.cartItemId}')" class="text-slate-500 hover:text-rose-400 p-1 transition">
+                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs font-black text-amber-400">R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+                                <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
+                                    <button onclick="adjustCartQty('${item.cartItemId}', -1)" class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white font-bold">-</button>
+                                    <span class="w-6 text-center text-xs font-bold text-white">${item.quantity}</span>
+                                    <button onclick="adjustCartQty('${item.cartItemId}', 1)" class="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        function adjustCartQty(cartItemId, delta) {
+            const item = cart.find(i => i.cartItemId === cartItemId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.cartItemId !== cartItemId);
+            }
+            saveCartToStorage();
+            updateCartUI();
+        }
+
+        function removeCartItem(cartItemId) {
+            cart = cart.filter(i => i.cartItemId !== cartItemId);
+            saveCartToStorage();
+            updateCartUI();
+            showToast("Item removido do carrinho");
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                drawer.firstElementChild.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('opacity-0', 'pointer-events-none');
+                drawer.firstElementChild.classList.add('translate-x-full');
+            }
+        }
+
+        function calculateOrderSummary() {
+            const total = cart.reduce((sum,item)=>sum + item.unitPrice * item.quantity,0);
+            document.getElementById('summary-subtotal').textContent = formatMoney(total);
+            document.getElementById('summary-total').textContent = formatMoney(total);
+        }
+        function submitOrderToWhatsApp() {
+            if (!cart.length) { showToast('Escolha ao menos um produto.'); return; }
+            const field = document.getElementById('cust-name');
+            const name = field.value.trim();
+            if (!name) { showToast('Informe seu nome para continuar.'); field.focus(); return; }
+            let msg = `❤️ *CANTÚ'S | NOVO PEDIDO*\n\n👤 *Cliente:* ${name}\n\n🛍️ *PRODUTOS*\n\n`;
+            for (const item of cart) {
+                msg += `*${item.quantity}x ${item.name}*\nValor unitário: ${formatMoney(item.unitPrice)}\nSubtotal: ${formatMoney(item.unitPrice*item.quantity)}\n\n`;
+            }
+            const total = cart.reduce((sum,item)=>sum + item.unitPrice*item.quantity,0);
+            msg += `💰 *TOTAL DO PEDIDO: ${formatMoney(total)}*\n\n_Aguardo confirmação de disponibilidade e do pedido._`;
+            const url = `https://wa.me/${store.phone}?text=${encodeURIComponent(msg)}`;
+            window.location.href = url;
+        }
+
+        // Toast Feedback Notification Helper
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-slate-900 border border-amber-500/40 text-amber-400 font-bold text-xs px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 transform transition-all duration-300 translate-x-12 opacity-0 pointer-events-auto';
+            toast.innerHTML = `<i data-lucide="info" class="w-4 h-4"></i> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-12', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-x-12', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
