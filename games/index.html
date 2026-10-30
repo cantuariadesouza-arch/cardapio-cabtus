@@ -130,7 +130,7 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 .mines .tool{color:#2d6a2a;box-shadow:0 4px 0 rgba(40,90,30,.2),0 6px 14px rgba(40,90,30,.1)}
 .mines .tool.on{background:linear-gradient(180deg,#5cbf4a,#2f8a3b);color:#fff;box-shadow:0 4px 0 #1f5e27}
 .mines .hint{color:#2d5a28}
-.mn-grid{--cs:30px;display:grid;border-radius:12px;overflow:hidden;box-shadow:0 0 0 4px #4f8f3a,0 14px 30px rgba(30,70,20,.3);touch-action:none;flex-shrink:0;user-select:none;-webkit-user-select:none}
+.mn-grid{--cs:30px;display:grid;border-radius:12px;overflow:hidden;box-shadow:0 0 0 4px #4f8f3a,0 14px 30px rgba(30,70,20,.3);touch-action:pan-x pan-y pinch-zoom;flex-shrink:0;user-select:none;-webkit-user-select:none}
 .mn-c{width:var(--cs);height:var(--cs);display:grid;place-items:center;font-size:calc(var(--cs)*.58);font-weight:800;line-height:1;background:#8fd16a;box-shadow:inset 0 1px 0 rgba(255,255,255,.18);cursor:pointer}
 .mn-c.b{background:#83c75e}
 .mn-c.open{background:#f4e3c9;box-shadow:none;cursor:default}.mn-c.open.b{background:#ebd6b6}
@@ -192,6 +192,52 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 .rk-empty .tool{margin-top:12px;flex:none;padding:0 18px}
 .rkme{margin:0;text-align:center;font-weight:800;color:var(--wine);min-height:1.2em}
 .rktoast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;background:#2f8a3b;color:#fff;font-weight:800;padding:12px 20px;border-radius:999px;box-shadow:0 10px 26px rgba(0,0,0,.25);white-space:nowrap}
+/* Níveis bem separados (Sudoku e Campo Minado) */
+.lvl{display:flex;gap:10px;justify-content:center;width:100%;flex-shrink:0}
+.lvl button{flex:1;max-width:128px;min-height:46px;border-radius:14px;background:#fff;color:var(--muted);font-weight:800;font-size:16px;border:2px solid transparent;box-shadow:0 3px 0 rgba(122,31,54,.14),0 4px 10px rgba(122,31,54,.08)}
+.lvl button[data-d=easy].on{background:#e2f6da;color:#2e7d32;border-color:#4caf50}
+.lvl button[data-d=med].on{background:#fff2cc;color:#9a5b00;border-color:#f0a020}
+.lvl button[data-d=hard].on{background:#ffe0e3;color:#c62828;border-color:#e5484d}
+/* Campo Minado com rolagem e zoom */
+.mn-scroll{flex:1;min-height:0;width:100%;overflow:auto;display:flex;padding:8px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.mn-scroll .mn-grid{margin:auto}
+.mn-zoom{display:flex;align-items:center;gap:8px}.mn-zoom .hint{flex:1;text-align:center}
+.zbtn{width:46px;height:42px;border-radius:12px;background:#fff;color:#2d6a2a;font-size:22px;font-weight:800;box-shadow:0 3px 0 rgba(40,90,30,.2)}
+/* Ranking na tela inicial */
+.rksec{margin:36px 0 8px}
+.rksec-t{text-align:center;font-size:32px;font-weight:800;margin:0;color:var(--wine)}
+.rksec-s{text-align:center;color:var(--muted);margin:2px 0 16px}
+.rkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.rkblk{background:linear-gradient(180deg,#fff,#fffaf5);border:1px solid rgba(122,31,54,.08);border-radius:22px;padding:14px;box-shadow:0 10px 24px rgba(122,31,54,.1)}
+.rkblk-h{font-weight:800;font-size:19px;margin-bottom:8px}
+.rkblk-tabs{display:flex;gap:6px;margin-bottom:8px}
+.rkblk-tabs button{flex:1;background:#fff0e4;color:var(--wine);border-radius:10px;padding:6px 0;font-weight:800;font-size:14px}
+.rkblk-tabs button.on{background:linear-gradient(180deg,#d14a68,#8b2941);color:#fff}
+.rkblk-l{display:flex;flex-direction:column;gap:5px}
+.rkblk .rk-row-i{padding:6px 10px;box-shadow:none;background:#fff7f1}
+.rkblk .rk-row-i.top{background:linear-gradient(90deg,#fff1cf,#fff7f1)}
+.rkblk .rk-row-i.me{background:linear-gradient(90deg,#ffe08a,#ffd1dc)}
+.rk-empty.sm{padding:14px 6px;font-size:14px}
+.card:nth-child(7){animation-delay:.48s}.card:nth-child(7) .icon{animation-delay:-3s}
+/* Snake: celular retrô (só neste jogo) */
+.snakeg{background:linear-gradient(180deg,#fdebe0,#f3cfc2)}
+.hbtns{display:flex;gap:6px}
+#sn-board{display:flex;align-items:center;justify-content:center;padding:8px;touch-action:none}
+.phone{font-size:16px;width:20em;padding:1em 1.2em 1.4em;border-radius:3.2em 3.2em 4.2em 4.2em;background:linear-gradient(160deg,#5b8ae0,#2c53a8 55%,#1f3d82);box-shadow:inset 0 .25em .4em rgba(255,255,255,.35),inset 0 -.4em .6em rgba(0,0,0,.3),0 1.2em 2.4em rgba(20,30,80,.4);display:flex;flex-direction:column;align-items:center;gap:.5em;user-select:none;-webkit-user-select:none}
+.ph-speaker{display:flex;gap:.35em;margin-top:.3em}.ph-speaker i{width:1.5em;height:.32em;border-radius:1em;background:#162a5c;box-shadow:inset 0 .08em .1em rgba(0,0,0,.6)}
+.ph-brand{font-family:var(--font);font-weight:800;letter-spacing:.3em;font-size:.95em;color:#e3ebff;text-shadow:0 .06em 0 rgba(0,0,0,.35);margin:-.1em 0 -.1em}
+.ph-screen{width:100%;padding:.7em;border-radius:1.2em 1.2em 1.7em 1.7em;background:#18284f;box-shadow:inset 0 .15em .4em rgba(0,0,0,.6)}
+.lcd{position:relative;width:100%;aspect-ratio:5/4;border-radius:.45em;background:#a9b88f;box-shadow:inset 0 0 .9em rgba(0,0,0,.35);overflow:hidden}
+.lcd canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ph-nav{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0 .4em}
+.ph-soft{width:3.4em;height:.9em;border-radius:1em;background:#cdd6e9;box-shadow:0 .15em 0 #8190b2}
+.ph-mid{width:4.4em;height:1.7em;border-radius:50%;background:linear-gradient(#eef2fa,#b9c4da);box-shadow:0 .18em 0 #7c8bab}
+.ph-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em .7em;width:100%}
+.key{height:2.45em;border-radius:1.3em/1.1em;background:linear-gradient(#f5f7fc,#c9d1e2);color:#1e2b4f;box-shadow:0 .2em 0 #7a87a6,0 .3em .5em rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;gap:.3em;padding:0;font-family:system-ui,sans-serif;touch-action:manipulation}
+.key b{font-size:1.2em;font-weight:800}.key small{font-size:.55em;opacity:.65;text-transform:uppercase;letter-spacing:.05em}
+.key.dir{background:linear-gradient(#fff0b8,#f6c04f);box-shadow:0 .2em 0 #b07c12,0 .3em .5em rgba(0,0,0,.22)}
+.key.press,.key:active{transform:translateY(.15em)!important;box-shadow:0 .05em 0 #7a87a6}
+.key.dir.press,.key.dir:active{box-shadow:0 .05em 0 #b07c12}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
@@ -215,7 +261,7 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 <header><div><strong>❤️ CANTÚ'S GAMES</strong><small>Carinho e amor em forma de sabor.</small></div><button class="nav" id="home">Início</button></header>
 
 <main id="menu" class="page">
- <div class="intro"><h1>Hora de jogar! 🎮</h1><p>Obrigado por comprar na Cantú's! Escolha sua diversão.</p><button class="rkbtn" onclick="rkOpen()">🏆 Ranking</button></div>
+ <div class="intro"><h1>Hora de jogar! 🎮</h1><p>Obrigado por comprar na Cantú's! Escolha sua diversão.</p><button class="rkbtn" onclick="document.getElementById('rk-home-sec').scrollIntoView({behavior:'smooth'})">🏆 Ranking</button></div>
  <div class="cards">
   <div class="card" style="--glow:linear-gradient(135deg,#ffc36b,#ff7a59)"><div class="icon">🦘</div><h2>Kangaroo Run</h2><p>Pule os obstáculos e bata seu recorde.</p><p class="best" id="dBest"></p><button class="play" onclick="start('dino')">Jogar Canguru</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#7b8cff,#a35cff)"><div class="icon">🏀</div><h2>Basket Shot</h2><p>Arraste a bola, mire e faça cestas!</p><p class="best" id="bBest"></p><button class="play" onclick="start('basket')">Jogar Basquete</button></div>
@@ -223,7 +269,9 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
   <div class="card" style="--glow:linear-gradient(135deg,#ff9a8b,#d65db1)"><div class="icon">🔢</div><h2>Sudoku</h2><p>Um Sudoku novo a cada partida.</p><p class="best" id="suBest"></p><button class="play" onclick="startSudoku()">Jogar Sudoku</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#9be15d,#00b09b)"><div class="icon">💣</div><h2>Campo Minado</h2><p>Abra o campo sem tocar nas bombas.</p><p class="best" id="mnBest"></p><button class="play" onclick="startMines()">Jogar Campo Minado</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#fddb92,#f6a04d)"><div class="icon">🔍</div><h2>7 Erros</h2><p>Ache as 7 diferenças na cozinha.</p><p class="best" id="dfBest"></p><button class="play" onclick="startDiff()">Jogar 7 Erros</button></div>
+  <div class="card" style="--glow:linear-gradient(135deg,#8fdc8a,#2a7d4f)"><div class="icon">🐍</div><h2>Snake</h2><p>A cobrinha clássica dos celulares antigos</p><p class="best" id="nBest"></p><button class="play" onclick="startSnake()">Jogar Snake</button></div>
  </div>
+ <section class="rksec" id="rk-home-sec"><h2 class="rksec-t">🏆 Ranking</h2><p class="rksec-s">Os 5 melhores de cada jogo</p><div class="rkgrid" id="rk-home"></div></section>
  <p style="text-align:center"><a class="back" href="https://cardapio-cantus.lovable.app">← Voltar ao cardápio</a></p>
 </main>
 
@@ -256,26 +304,36 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
  <div class="bottom"><button class="jump" aria-label="Esquerda" onclick="blockMove(-1,0)">◀</button><button class="jump rot" aria-label="Girar" onclick="blockRotate()">↻</button><button class="jump" aria-label="Direita" onclick="blockMove(1,0)">▶</button><button class="jump" aria-label="Descer" onclick="blockMove(0,1)">▼</button></div>
 </section>
 
+<section id="snake" class="game snakeg hide">
+ <div class="hud"><div class="chips"><span class="chip main">🐍 Snake</span></div><div class="hbtns"><button class="pbtn" onclick="snNew()">↺ Recomeçar</button><button class="pbtn" id="npb" onclick="snPause()">⏸ Pausar</button></div></div>
+ <div class="board" id="sn-board">
+  <div class="phone" id="sn-phone"><div class="ph-speaker"><i></i><i></i><i></i><i></i><i></i></div><div class="ph-brand">CANTÚ'S</div><div class="ph-screen"><div class="lcd" id="sn-lcd"><canvas id="sn-c"></canvas></div></div><div class="ph-nav"><span class="ph-soft"></span><span class="ph-mid"></span><span class="ph-soft"></span></div><div class="ph-keys" id="sn-keys"></div></div>
+  <div id="npause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>A cobrinha espera por você.</p><button class="play" onclick="snPause()">▶ Continuar</button><button class="ghost" onclick="snNew()">↺ Recomeçar</button></div></div>
+  <div id="nover" class="overlay hide"><div class="panel"><h2>Fim de jogo!</h2><div class="big" id="nbig">0</div><div class="badge hide" id="nrec">🏆 Novo recorde!</div><p id="nresult"></p><button class="play" onclick="snNew()">Jogar de novo</button></div></div>
+ </div>
+</section>
+
 <section id="sudoku" class="game sudo hide">
- <div class="hud"><div class="chips"><span class="chip main">⏱ <b id="su-time">0:00</b></span><span class="chip">❌ <span id="su-err">0</span>/3</span><span class="chip">🏆 <span id="su-best">—</span></span></div><button class="pbtn" id="spb" onclick="suPause()">⏸ Pausar</button></div>
+ <div class="hud"><div class="chips"><span class="chip main">🔎 Tentativas de conferência: <b id="su-chk">0</b>/2</span><span class="chip">🏆 <span id="su-best">—</span></span></div><button class="pbtn" id="spb" onclick="suPause()">⏸ Pausar</button></div>
  <div class="board nboard" id="su-board">
-  <div class="seg" id="su-seg"><button data-d="easy">Fácil</button><button data-d="med">Médio</button><button data-d="hard">Difícil</button></div>
+  <div class="lvl" id="su-seg"><button data-d="easy">🟢 Fácil</button><button data-d="med">🟡 Médio</button><button data-d="hard">🔴 Difícil</button></div>
   <div class="su-grid" id="su-grid"></div>
   <div id="spause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>O Sudoku espera por você.</p><button class="play" onclick="suPause()">▶ Continuar</button><button class="ghost" onclick="suNew()">↺ Recomeçar com outro</button></div></div>
   <div id="sover" class="overlay hide"><div class="panel"><h2 id="stitle">Parabéns!</h2><div class="big" id="sbig">0:00</div><div class="badge hide" id="srec">🏆 Novo recorde!</div><p id="sresult"></p><button class="play" onclick="suNew()">Novo Sudoku</button></div></div>
+  <div id="scheck" class="overlay hide"><div class="panel"><h2>Há erros no seu Sudoku 🧐</h2><p id="su-chkmsg" style="margin-top:10px"></p><button class="play" onclick="suReview()">🔍 Revisar</button></div></div>
  </div>
- <div class="bottom"><div class="su-tools"><button class="tool" id="su-notes" onclick="suToggleNotes()">✏️ Anotar: não</button><button class="tool" onclick="suErase()">⌫ Apagar</button></div><div class="su-pad" id="su-pad"></div></div>
+ <div class="bottom"><div class="su-tools"><button class="tool" id="su-notes" onclick="suToggleNotes()">✏️ Anotar: não</button><button class="tool" onclick="suErase()">⌫ Apagar</button><button class="tool" id="su-check" onclick="suCheck()">✅ Conferir</button></div><div class="su-pad" id="su-pad"></div></div>
 </section>
 
 <section id="mines" class="game mines hide">
  <div class="hud"><div class="chips"><span class="chip main">💣 <b id="mn-left">10</b></span><span class="chip">⏱ <span id="mn-time">0:00</span></span><span class="chip">🏆 <span id="mn-best">—</span></span></div><button class="pbtn" id="mpb" onclick="mnPause()">⏸ Pausar</button></div>
  <div class="board nboard" id="mn-board">
-  <div class="seg" id="mn-seg"><button data-d="easy">Fácil</button><button data-d="med">Médio</button><button data-d="hard">Difícil</button></div>
-  <div class="mn-grid" id="mn-grid"></div>
+  <div class="lvl" id="mn-seg"><button data-d="easy">🟢 Fácil</button><button data-d="med">🟡 Médio</button><button data-d="hard">🔴 Difícil</button></div>
+  <div class="mn-scroll" id="mn-scroll"><div class="mn-grid" id="mn-grid"></div></div>
   <div id="mpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>As bombas não vão a lugar nenhum.</p><button class="play" onclick="mnPause()">▶ Continuar</button><button class="ghost" onclick="mnNew()">↺ Recomeçar</button></div></div>
   <div id="mover" class="overlay hide"><div class="panel"><h2 id="mtitle">Você venceu!</h2><div class="big" id="mbig">0:00</div><div class="badge hide" id="mrec">🏆 Novo recorde!</div><p id="mresult"></p><button class="play" onclick="mnNew()">Nova partida</button></div></div>
  </div>
- <div class="bottom" style="flex-direction:column;align-items:stretch;gap:6px;padding-top:6px"><div class="su-tools"><button class="tool on" id="mn-open" onclick="mnMode(false)">⛏️ Abrir</button><button class="tool" id="mn-flag" onclick="mnMode(true)">🚩 Bandeira</button></div><span class="hint" style="text-align:center">Dica: segure uma casa para colocar 🚩</span></div>
+ <div class="bottom" style="flex-direction:column;align-items:stretch;gap:6px;padding-top:6px"><div class="su-tools"><button class="tool on" id="mn-open" onclick="mnMode(false)">⛏️ Abrir</button><button class="tool" id="mn-flag" onclick="mnMode(true)">🚩 Bandeira</button></div><div class="mn-zoom"><button class="zbtn" aria-label="Diminuir tabuleiro" onclick="mnZoom(-1)">－</button><span class="hint">Segure uma casa para 🚩</span><button class="zbtn" aria-label="Aumentar tabuleiro" onclick="mnZoom(1)">＋</button></div></div>
 </section>
 
 <section id="diff" class="game diffg hide">
@@ -423,7 +481,7 @@ function saveMin(k,n){n=Math.max(1,Math.floor(n));const c=best(k);if(!c||n<c)try
 function getPref(k,def){try{return localStorage.getItem('cantus_'+k)||def}catch{return def}}
 function setPref(k,v){try{localStorage.setItem('cantus_'+k,v)}catch(e){}}
 function bestTxt(k){const v=best(k);return v?fmtT(v):'—'}
-function newBests(){const sd=getPref('su_diff','easy'),md=getPref('mn_diff','easy');$('suBest').textContent='🏆 Recorde ('+DIFF_NAMES[sd]+'): '+bestTxt('sudoku_'+sd);$('mnBest').textContent='🏆 Recorde ('+DIFF_NAMES[md]+'): '+bestTxt('mines_'+md);$('dfBest').textContent='🏆 Melhor cena: '+bestTxt('diff')}
+function newBests(){const sd=getPref('su_diff','easy'),md=getPref('mn_diff','easy');$('suBest').textContent='🏆 Recorde ('+DIFF_NAMES[sd]+'): '+bestTxt('sudoku_'+sd);$('mnBest').textContent='🏆 Recorde ('+DIFF_NAMES[md]+'): '+bestTxt('mines_'+md);$('dfBest').textContent='🏆 Melhor cena: '+bestTxt('diff');$('nBest').textContent='🏆 Recorde: '+best('snake');if(typeof rkHome==='function')rkHome()}
 function enterGame(id){cancelAnimationFrame(raf);cancelAnimationFrame(blockRaf);clearInterval(tTimer);paused=false;mode=id;$('menu').classList.add('hide');hideGames();$(id).classList.remove('hide')}
 function segInit(id,fn){$(id).querySelectorAll('button').forEach(bt=>bt.onclick=()=>fn(bt.dataset.d))}
 function segSet(id,v){$(id).querySelectorAll('button').forEach(bt=>bt.classList.toggle('on',bt.dataset.d===v))}
@@ -432,15 +490,15 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;
 const pick=a=>a[Math.random()*a.length|0];
 let su={},mn={},df={},nLast=performance.now();
 setInterval(()=>{const now=performance.now(),dt=Math.min((now-nLast)/1000,1);nLast=now;if(document.hidden)return;
- if(mode==='sudoku'&&su.running&&!su.paused){su.time+=dt;$('su-time').textContent=fmtT(su.time)}
+ if(mode==='sudoku'&&su.running&&!su.paused){su.time+=dt}
  else if(mode==='mines'&&mn.running&&!mn.paused){mn.time+=dt;$('mn-time').textContent=fmtT(mn.time)}
  else if(mode==='diff'&&df.running&&!df.paused){df.time+=dt;$('df-time').textContent=fmtT(df.time)}},250);
-function nResize(){if(mode==='sudoku')suSize();else if(mode==='mines')mnSize();else if(mode==='diff')dfSize()}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)return;if(mode==='sudoku'&&su.running&&!su.paused)suPause();if(mode==='mines'&&mn.running&&!mn.paused)mnPause();if(mode==='diff'&&df.running&&!df.paused)dfPause()});
+function nResize(){if(mode==='snake')snSize();else if(mode==='sudoku')suSize();else if(mode==='mines')mnSize();else if(mode==='diff')dfSize()}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)return;if(mode==='snake'&&!sn.over&&!sn.paused)snPause();if(mode==='sudoku'&&su.running&&!su.paused)suPause();if(mode==='mines'&&mn.running&&!mn.paused)mnPause();if(mode==='diff'&&df.running&&!df.paused)dfPause()});
 
 // ---------- Sudoku ----------
 // Gerador: preenche uma grade completa ao acaso e retira números enquanto a solução continuar única.
-const SU_GIVENS={easy:40,med:32,hard:26};
+const SU_GIVENS={easy:44,med:34,hard:26};
 function suCount(g,limit){const rows=Array(9).fill(0),cols=Array(9).fill(0),box=Array(9).fill(0),empty=[];
  for(let i=0;i<81;i++){const v=g[i];if(v){const r=i/9|0,c=i%9,bit=1<<v;rows[r]|=bit;cols[c]|=bit;box[(r/3|0)*3+(c/3|0)]|=bit}else empty.push(i)}
  let count=0;
@@ -456,41 +514,47 @@ function suInit(){const gr=$('su-grid');for(let i=0;i<81;i++){const c=document.c
  for(let n=1;n<=9;n++){const bt=document.createElement('button');bt.className='nk';bt.textContent=n;bt.onclick=()=>suInput(n);$('su-pad').append(bt)}
  segInit('su-seg',dd=>{setPref('su_diff',dd);suNew(dd)})}
 function startSudoku(){enterGame('sudoku');suNew(getPref('su_diff','easy'))}
-function suNew(diff){diff=diff||su.diff||'easy';const{sol,p}=suMake(diff);su={diff,sol,given:p.map(v=>v>0),val:p.slice(),notes:Array(81).fill(0),sel:-1,notesMode:false,errors:0,time:0,running:true,paused:false,over:false};
- $('sover').classList.add('hide');setPause('s',false);segSet('su-seg',diff);$('su-err').textContent=0;$('su-time').textContent='0:00';$('su-best').textContent=bestTxt('sudoku_'+diff);suNotesBtn();suSize();suRender();anim($('su-grid'),'fresh')}
+function suNew(diff){diff=diff||su.diff||'easy';const{sol,p}=suMake(diff);su={diff,sol,given:p.map(v=>v>0),val:p.slice(),notes:Array(81).fill(0),sel:-1,notesMode:false,checks:0,time:0,running:true,paused:false,over:false};
+ $('sover').classList.add('hide');$('scheck').classList.add('hide');setPause('s',false);segSet('su-seg',diff);$('su-chk').textContent=0;$('su-best').textContent=bestTxt('sudoku_'+diff);suNotesBtn();suSize();suRender();anim($('su-grid'),'fresh')}
 function suSize(){const bd=$('su-board').getBoundingClientRect(),sh=$('su-seg').offsetHeight;let s=Math.floor(Math.min(bd.width-24,bd.height-sh-28,560));s=Math.max(180,s);const g=$('su-grid');g.style.width=g.style.height=s+'px';g.style.gridTemplateRows='repeat(9,1fr)';g.style.setProperty('--cs',(s/9)+'px')}
 function suSelect(i){if(su.over||su.paused)return;su.sel=i;suRender()}
 function suRender(){const cells=$('su-grid').children,s=su.sel,sv=s>=0?su.val[s]:0,sr=s/9|0,sc=s%9,sb=s>=0?(sr/3|0)*3+(sc/3|0):-1,done=Array(10).fill(0);
- for(let i=0;i<81;i++){const c=cells[i],r=i/9|0,cc=i%9,bx=(r/3|0)*3+(cc/3|0),v=su.val[i];if(v&&v===su.sol[i])done[v]++;
-  c.classList.toggle('sel',i===s);c.classList.toggle('peer',s>=0&&i!==s&&(r===sr||cc===sc||bx===sb));c.classList.toggle('same',!!sv&&i!==s&&v===sv);c.classList.toggle('given',su.given[i]);c.classList.toggle('bad',!!v&&v!==su.sol[i]);
+ for(let i=0;i<81;i++){const c=cells[i],r=i/9|0,cc=i%9,bx=(r/3|0)*3+(cc/3|0),v=su.val[i];if(v)done[v]++;
+  c.classList.toggle('sel',i===s);c.classList.toggle('peer',s>=0&&i!==s&&(r===sr||cc===sc||bx===sb));c.classList.toggle('same',!!sv&&i!==s&&v===sv);c.classList.toggle('given',su.given[i]);
   const html=v?String(v):su.notes[i]?'<div class="nt">'+[1,2,3,4,5,6,7,8,9].map(n=>'<span>'+(su.notes[i]&1<<n?n:'')+'</span>').join('')+'</div>':'';if(c._h!==html){c.innerHTML=html;c._h=html}}
- [...$('su-pad').children].forEach((bt,k)=>bt.classList.toggle('used',done[k+1]>=9))}
-function suInput(n){if(mode!=='sudoku'||su.over||su.paused)return;const i=su.sel;if(i<0||su.given[i]||su.val[i]===su.sol[i])return;const cell=$('su-grid').children[i];
+ [...$('su-pad').children].forEach((bt,k)=>bt.classList.toggle('used',done[k+1]>=9));$('su-check').disabled=!su.val.every(v=>v)}
+// Sem cronômetro na tela e sem marcar erros: a conferência acontece quando todas as casas estão preenchidas.
+function suInput(n){if(mode!=='sudoku'||su.over||su.paused)return;const i=su.sel;if(i<0||su.given[i])return;const cell=$('su-grid').children[i];
  if(su.notesMode){if(su.val[i])return;su.notes[i]^=1<<n;suRender();return}
- su.val[i]=n;su.notes[i]=0;
- if(n!==su.sol[i]){su.errors++;$('su-err').textContent=su.errors;bump('su-err');vib(60);suRender();anim(cell,'shake');
-  if(su.errors>=3){su.over=true;su.running=false;vib([50,40,90]);const tok=su;setTimeout(()=>{if(su!==tok||mode!=='sudoku')return;$('stitle').textContent='Fim de jogo';showOver('s',fmtT(su.time),'Você chegou a 3 erros. Bora tentar um Sudoku novo?',false)},600)}return}
- const units=suUnits(i);for(const u of units)for(const k of u)su.notes[k]&=~(1<<n);
+ const wasFull=su.val.every(v=>v);su.val[i]=n;su.notes[i]=0;for(const u of suUnits(i))for(const k of u)su.notes[k]&=~(1<<n);
  suRender();anim(cell,'pop');vib(10);
- for(const u of units)if(u.every(k=>su.val[k]===su.sol[k]))u.forEach((k,j)=>anim(cells(k),'flash',j*35));
- if(su.val.every((v,k)=>v===su.sol[k]))suWin()}
+ if(!wasFull&&su.checks===0&&su.val.every(v=>v))setTimeout(()=>{if(mode==='sudoku'&&!su.over&&su.val.every(v=>v))suCheck()},350)}
+function suCheck(){if(mode!=='sudoku'||su.over||su.paused||!su.val.every(v=>v))return;const wrong=su.val.filter((v,k)=>v!==su.sol[k]).length;
+ if(!wrong){suWin();return}
+ su.checks++;$('su-chk').textContent=su.checks;bump('su-chk');vib(60);
+ if(su.checks>=2){su.over=true;su.running=false;vib([50,40,90]);$('stitle').textContent='Fim de jogo';showOver('s','😢','Ainda havia '+(wrong===1?'1 casa errada':wrong+' casas erradas')+'. Bora tentar um Sudoku novo?',false);return}
+ su.paused=true;$('su-chkmsg').textContent=(wrong===1?'1 casa está':wrong+' casas estão')+' com número errado. Revise e tente de novo. Você tem mais 1 conferência.';$('scheck').classList.remove('hide')}
+function suReview(){su.paused=false;$('scheck').classList.add('hide')}
 const cells=k=>$('su-grid').children[k];
 function suWin(){su.over=true;su.running=false;const tsec=Math.max(1,Math.floor(su.time)),key='sudoku_'+su.diff,rec=!best(key)||tsec<best(key);saveMin(key,tsec);vib([30,50,30]);
  for(let k=0;k<81;k++)anim(cells(k),'flash',((k/9|0)+k%9)*25);const tok=su;
- setTimeout(()=>{if(su!==tok||mode!=='sudoku')return;$('stitle').textContent='Parabéns! 🎉';showOver('s',fmtT(tsec),'Sudoku '+DIFF_NAMES[su.diff]+' resolvido com '+su.errors+' erro(s).',rec)},900)}
-function suErase(){if(mode!=='sudoku'||su.over||su.paused)return;const i=su.sel;if(i<0||su.given[i]||su.val[i]===su.sol[i])return;su.val[i]=0;su.notes[i]=0;suRender()}
+ setTimeout(()=>{if(su!==tok||mode!=='sudoku')return;$('stitle').textContent='Parabéns! 🎉';showOver('s',fmtT(tsec),'Sudoku '+DIFF_NAMES[su.diff]+' resolvido! Esse foi o seu tempo.',rec)},900)}
+function suErase(){if(mode!=='sudoku'||su.over||su.paused)return;const i=su.sel;if(i<0||su.given[i])return;su.val[i]=0;su.notes[i]=0;suRender()}
 function suToggleNotes(){su.notesMode=!su.notesMode;suNotesBtn()}
 function suNotesBtn(){const bt=$('su-notes');bt.classList.toggle('on',!!su.notesMode);bt.textContent='✏️ Anotar: '+(su.notesMode?'sim':'não')}
-function suPause(){if(su.over)return;su.paused=!su.paused;setPause('s',su.paused)}
+function suPause(){if(su.over||!$('scheck').classList.contains('hide'))return;su.paused=!su.paused;setPause('s',su.paused)}
 document.addEventListener('keydown',e=>{if(mode!=='sudoku')return;if(/^[1-9]$/.test(e.key))suInput(+e.key);else if(e.key==='Backspace'||e.key==='Delete')suErase();else if(e.key==='n'||e.key==='N')suToggleNotes();else if(e.key.startsWith('Arrow')&&!su.over&&!su.paused){e.preventDefault();let s=su.sel<0?40:su.sel;const r=s/9|0,c=s%9;if(e.key==='ArrowUp')s=((r+8)%9)*9+c;if(e.key==='ArrowDown')s=((r+1)%9)*9+c;if(e.key==='ArrowLeft')s=r*9+(c+8)%9;if(e.key==='ArrowRight')s=r*9+(c+1)%9;suSelect(s)}});
 
 // ---------- Campo Minado ----------
-const MN={easy:[9,9,10],med:[12,12,25],hard:[14,14,40]};
+const MN={easy:[8,8,10],med:[12,12,25],hard:[16,16,50]};
+let mnZ=1;
 function startMines(){enterGame('mines');mnNew(getPref('mn_diff','easy'))}
 function mnNew(diff){diff=diff||mn.diff||'easy';const[R,C,M]=MN[diff];mn={diff,R,C,M,mine:new Uint8Array(R*C),open:new Uint8Array(R*C),flag:new Uint8Array(R*C),cnt:new Uint8Array(R*C),first:true,over:false,time:0,running:false,paused:false,flagMode:false,opened:0,flags:0};
  const g=$('mn-grid');g.innerHTML='';g.style.gridTemplateColumns=`repeat(${C},var(--cs))`;for(let i=0;i<R*C;i++){const c=document.createElement('div');c.className='mn-c'+(((i/C|0)+i%C)%2?' b':'');c.dataset.i=i;g.append(c)}
  g.classList.remove('shakeb');anim(g,'fresh');segSet('mn-seg',diff);$('mover').classList.add('hide');setPause('m',false);mnMode(false);$('mn-time').textContent='0:00';$('mn-best').textContent=bestTxt('mines_'+diff);mnLeft();mnSize()}
-function mnSize(){const bd=$('mn-board').getBoundingClientRect(),sh=$('mn-seg').offsetHeight;const cs=Math.max(18,Math.floor(Math.min((bd.width-32)/mn.C,(bd.height-sh-40)/mn.R,46)));$('mn-grid').style.setProperty('--cs',cs+'px')}
+// Ocupa toda a largura; se a casa ficar menor que 28px, mantém 28px e o tabuleiro rola (＋/－ ou pinça para zoom).
+function mnSize(){const r=$('mn-scroll').getBoundingClientRect(),fit=Math.floor(Math.min((r.width-16)/mn.C,(r.height-16)/mn.R)),cs=Math.round(Math.max(28,Math.min(fit,64))*mnZ);$('mn-grid').style.setProperty('--cs',cs+'px')}
+function mnZoom(k){mnZ=Math.round(Math.min(2,Math.max(1,mnZ+k*.2))*10)/10;mnSize()}
 function mnN(i){const r=i/mn.C|0,c=i%mn.C,out=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const y=r+dy,x=c+dx;if(y>=0&&y<mn.R&&x>=0&&x<mn.C)out.push(y*mn.C+x)}return out}
 function mnPlace(i0){const ban=new Set([i0,...mnN(i0)]),cand=[];for(let k=0;k<mn.R*mn.C;k++)if(!ban.has(k))cand.push(k);shuffle(cand).slice(0,mn.M).forEach(k=>mn.mine[k]=1);for(let k=0;k<mn.R*mn.C;k++)mn.cnt[k]=mnN(k).reduce((s,j)=>s+mn.mine[j],0)}
 function mnPaint(i){const c=$('mn-grid').children[i];c.classList.toggle('open',!!mn.open[i]);if(mn.open[i]){c.textContent=mn.cnt[i]||'';if(mn.cnt[i])c.dataset.n=mn.cnt[i]}else c.textContent=mn.flag[i]?'🚩':''}
@@ -583,6 +647,46 @@ function dfHintBtn(){const bt=$('df-hint');bt.textContent='💡 Dica ('+df.hints
 function dfPause(){if(!df.running)return;df.paused=!df.paused;setPause('f',df.paused)}
 function dfInit(){for(const id of ['df-a','df-b']){const s=$(id);s.addEventListener('pointerdown',e=>dfTap(e,s))}}
 
+// ---------- Snake ----------
+// Tela LCD de 80x64 "pontos": placar no topo e campo de 19x13 casas (cada casa = 4x4 pontos). A cobra atravessa as bordas e perde ao bater em si mesma.
+const SNF={'0':'111101101101111','1':'010110010010111','2':'111001111100111','3':'111001111001111','4':'101101111001001','5':'111100111001111','6':'111100111101111','7':'111001001001001','8':'111101111101111','9':'111101111001111','A':'010101111101101','E':'111100110100111','G':'111100101101111','H':'101101111101101','I':'111010010010111','M':'101111111101101','O':'111101101101111','P':'111101111100100','R':'110101110101101','S':'111100111001111','U':'101101101101111','V':'101101101101010',' ':'000000000000000'};
+const SN={DW:80,DH:64,C:19,R:13,X0:2,Y0:11};
+let sn={},snG=null,snW=0,snH=0;
+function snSize(){const bd=$('sn-board').getBoundingClientRect(),ph=$('sn-phone');let fs=Math.min((bd.width-24)/20,26);ph.style.fontSize=fs+'px';const ratio=ph.offsetHeight/ph.offsetWidth;fs=Math.max(9,Math.min(fs,(bd.height-16)/ratio/20));ph.style.fontSize=fs+'px';const r=$('sn-lcd').getBoundingClientRect();snW=r.width;snH=r.height;snG=fitCanvas($('sn-c'),snW,snH);if(sn.snake)snDraw()}
+function snInit(){const keys=[['1',''],['2','abc','u'],['3','def'],['4','ghi','l'],['5','jkl'],['6','mno','r'],['7','pqrs'],['8','tuv','d'],['9','wxyz'],['*','+'],['0','⎵'],['#','⇧']];
+ $('sn-keys').innerHTML=keys.map(([n,l,dd])=>`<button class="key${dd?' dir':''}" data-k="${n}" aria-label="Tecla ${n}"><b>${n}</b><small>${dd?{u:'▲',l:'◀',r:'▶',d:'▼'}[dd]:l}</small></button>`).join('');
+ $('sn-keys').querySelectorAll('.key').forEach(k=>k.addEventListener('pointerdown',e=>{e.preventDefault();snKey(k.dataset.k);anim(k,'press');setTimeout(()=>k.classList.remove('press'),120)}));
+ let sx=0,sy=0,st=false;const bd=$('sn-board');
+ bd.addEventListener('touchstart',e=>{if(e.target.closest('.key,.overlay'))return;st=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+ bd.addEventListener('touchmove',e=>{if(!st)return;const dx=e.touches[0].clientX-sx,dy=e.touches[0].clientY-sy;if(Math.max(Math.abs(dx),Math.abs(dy))>22){if(Math.abs(dx)>Math.abs(dy))snDir(Math.sign(dx),0);else snDir(0,Math.sign(dy));st=false}},{passive:true});
+ bd.addEventListener('touchend',()=>{st=false},{passive:true})}
+function snKey(k){if(k==='2')snDir(0,-1);else if(k==='8')snDir(0,1);else if(k==='4')snDir(-1,0);else if(k==='6')snDir(1,0);else if(k==='5')snPause()}
+function snDir(dx,dy){if(mode!=='snake'||sn.over||sn.paused)return;const lastD=sn.q.length?sn.q[sn.q.length-1]:sn.dir;if((dx===-lastD.x&&dy===-lastD.y)||(dx===lastD.x&&dy===lastD.y)||sn.q.length>2)return;sn.q.push({x:dx,y:dy})}
+function snFood(){const free=[];for(let y=0;y<SN.R;y++)for(let x=0;x<SN.C;x++)if(!sn.snake.some(p=>p.x===x&&p.y===y))free.push({x,y});return free.length?pick(free):null}
+function startSnake(){enterGame('snake');snSize();snNew()}
+function snNew(){const y=SN.R>>1;sn={snake:[{x:7,y},{x:6,y},{x:5,y},{x:4,y}],dir:{x:1,y:0},q:[],score:0,over:false,paused:false,speed:170,acc:0,t:0,last:performance.now(),startBest:best('snake'),tok:{}};sn.food=snFood();
+ $('nover').classList.add('hide');setPause('n',false);snDraw();const tok=sn.tok;const loop=now=>{if(mode!=='snake'||sn.tok!==tok)return;const dt=Math.min(now-sn.last,100);sn.last=now;if(!sn.paused&&!sn.over){sn.t+=dt;sn.acc+=dt;while(sn.acc>=sn.speed&&!sn.over){sn.acc-=sn.speed;snStep()}}snDraw();requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+function snStep(){if(sn.q.length)sn.dir=sn.q.shift();const h=sn.snake[0],nx=(h.x+sn.dir.x+SN.C)%SN.C,ny=(h.y+sn.dir.y+SN.R)%SN.R,eat=sn.food&&nx===sn.food.x&&ny===sn.food.y,body=eat?sn.snake:sn.snake.slice(0,-1);
+ if(body.some(p=>p.x===nx&&p.y===ny)){snOver();return}
+ sn.snake.unshift({x:nx,y:ny});if(eat){sn.score++;sn.speed=Math.max(70,sn.speed-4);sn.food=snFood();vib(15);if(!sn.food){snOver();return}}else sn.snake.pop()}
+function snOver(){sn.over=true;save('snake',sn.score);vib([50,40,90]);const tok=sn.tok,rec=sn.score>sn.startBest&&sn.score>0;setTimeout(()=>{if(sn.tok!==tok||mode!=='snake')return;showOver('n',sn.score,'Você fez '+sn.score+' ponto'+(sn.score===1?'':'s')+'.',rec)},1100)}
+function snPause(){if(sn.over)return;sn.paused=!sn.paused;sn.last=performance.now();setPause('n',sn.paused)}
+function snDraw(){const g=snG;if(!g)return;const u=Math.min(snW/SN.DW,snH/SN.DH),ox=(snW-u*SN.DW)/2,oy=(snH-u*SN.DH)/2,on=new Uint8Array(SN.DW*SN.DH);
+ const dot=(x,y)=>{if(x>=0&&x<SN.DW&&y>=0&&y<SN.DH)on[y*SN.DW+x]=1},off=(x,y)=>{if(x>=0&&x<SN.DW&&y>=0&&y<SN.DH)on[y*SN.DW+x]=0};
+ const text=(str,x,y)=>{for(const ch of str){const f=SNF[ch]||SNF[' '];for(let i=0;i<15;i++)if(f[i]==='1')dot(x+i%3,y+(i/3|0));x+=4}};
+ const num=n=>String(n).padStart(4,'0');text(num(sn.score),2,1);const hi=Math.max(best('snake'),sn.score);text('HI'+num(hi),SN.DW-25,1);
+ for(let x=0;x<SN.DW;x++){dot(x,8);dot(x,SN.DH-1)}for(let y=8;y<SN.DH;y++){dot(0,y);dot(SN.DW-1,y)}
+ const cell=(c,r)=>[SN.X0+c*4,SN.Y0+r*4];
+ sn.snake.forEach((p,i)=>{const[x,y]=cell(p.x,p.y);for(let a=0;a<3;a++)for(let b=0;b<3;b++)dot(x+a,y+b);const nx=sn.snake[i+1];if(nx&&Math.abs(nx.x-p.x)+Math.abs(nx.y-p.y)===1){if(nx.x>p.x)for(let b=0;b<3;b++)dot(x+3,y+b);if(nx.x<p.x)for(let b=0;b<3;b++)dot(x-1,y+b);if(nx.y>p.y)for(let a=0;a<3;a++)dot(x+a,y+3);if(nx.y<p.y)for(let a=0;a<3;a++)dot(x+a,y-1)}});
+ const h=sn.snake[0];if(h&&!sn.over){const[x,y]=cell(h.x,h.y);off(x+1+sn.dir.x,y+1+sn.dir.y)}
+ if(sn.food&&(sn.over||Math.floor(sn.t/260)%4!==3)){const[x,y]=cell(sn.food.x,sn.food.y);dot(x+1,y);dot(x,y+1);dot(x+2,y+1);dot(x+1,y+2)}
+ const banner=str=>{const w=str.length*4+5,bx=(SN.DW-w)>>1,by=30;for(let x=bx;x<bx+w;x++)for(let y=by;y<by+11;y++)off(x,y);for(let x=bx;x<bx+w;x++){dot(x,by);dot(x,by+10)}for(let y=by;y<by+11;y++){dot(bx,y);dot(bx+w-1,y)}text(str,bx+3,by+3)};
+ if(sn.over)banner('GAME OVER');else if(sn.paused)banner('PAUSE');
+ g.fillStyle='#a9b88f';g.fillRect(0,0,snW,snH);const s=u*.84;
+ for(let y=0;y<SN.DH;y++)for(let x=0;x<SN.DW;x++){g.fillStyle=on[y*SN.DW+x]?'#1f2a17':'rgba(40,60,20,.07)';g.fillRect(ox+x*u,oy+y*u,s,s)}}
+document.addEventListener('keydown',e=>{if(mode!=='snake')return;const m={ArrowUp:'2',ArrowDown:'8',ArrowLeft:'4',ArrowRight:'6',' ':'5'};const k=m[e.key]||e.key;if('24568'.includes(k)&&k.length===1){e.preventDefault();snKey(k)}});
+snInit();
+
 suInit();mnInit();dfInit();
 menu();
 </script>
@@ -607,7 +711,8 @@ const RGAMES={
  block:{name:'Block',emoji:'🧩',high:true,diffs:['normal'],ok:s=>s>0&&s%100===0&&s<=2000000},
  sudoku:{name:'Sudoku',emoji:'🔢',high:false,diffs:['facil','medio','dificil'],ok:(s,dd)=>s>={facil:20,medio:30,dificil:40}[dd]&&s<=86400},
  minesweeper:{name:'Campo Minado',emoji:'💣',high:false,diffs:['facil','medio','dificil'],ok:(s,dd)=>s>={facil:3,medio:8,dificil:15}[dd]&&s<=86400},
- 'sete-erros':{name:'7 Erros',emoji:'🔍',high:false,diffs:['normal'],ok:s=>s>=8&&s<=86400}};
+ 'sete-erros':{name:'7 Erros',emoji:'🔍',high:false,diffs:['normal'],ok:s=>s>=8&&s<=86400},
+ snake:{name:'Snake',emoji:'🐍',high:true,diffs:['normal'],ok:s=>s>0&&s<=250}};
 const RDIFF={normal:'Normal',facil:'Fácil',medio:'Médio',dificil:'Difícil'},LVL={easy:'facil',med:'medio',hard:'dificil'};
 const rkGet=(k,def)=>{try{const v=localStorage.getItem('cantus_rk_'+k);return v==null?def:JSON.parse(v)}catch{return def}};
 const rkSet=(k,v)=>{try{localStorage.setItem('cantus_rk_'+k,JSON.stringify(v))}catch(e){}};
@@ -628,17 +733,18 @@ let rkBusy=false,rkTimer=0;
 async function rkFetch(path,opt={}){const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),8000);try{return await fetch(RK.url+'/rest/v1/'+path,{...opt,signal:ctl.signal,headers:{apikey:RK.key,Authorization:'Bearer '+RK.key,'Content-Type':'application/json',...(opt.headers||{})}})}finally{clearTimeout(tm)}}
 async function rkFlush(){if(rkBusy)return;const q=rkGet('queue',[]);if(!q.length||!navigator.onLine)return;const wait=rkGet('last',0)+RK.gap-Date.now();if(wait>0){clearTimeout(rkTimer);rkTimer=setTimeout(rkFlush,wait+50);return}
  rkBusy=true;const e=q[0];let sent=false,drop=false;try{rkSet('last',Date.now());const r=await rkFetch('game_scores',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({game:e.game,difficulty:e.difficulty,nickname:e.nickname,score:e.score})});if(r.ok)sent=true;else if(r.status>=400&&r.status<500&&r.status!==408&&r.status!==429)drop=true}catch(err){}finally{rkBusy=false}
- if(sent||drop){const cur=rkGet('queue',[]).filter(x=>x.id!==e.id);rkSet('queue',cur);rkCache={};if(sent){rkToast('✅ Pontuação enviada ao ranking');rkBoxSent(e.id)}if(cur.length){clearTimeout(rkTimer);rkTimer=setTimeout(rkFlush,RK.gap+50)}}
+ if(sent||drop){const cur=rkGet('queue',[]).filter(x=>x.id!==e.id);rkSet('queue',cur);rkCache={};if(sent){rkToast('✅ Pontuação enviada ao ranking');rkBoxSent(e.id);if(rkMenuOn())rkHome()}if(cur.length){clearTimeout(rkTimer);rkTimer=setTimeout(rkFlush,RK.gap+50)}}
  else{clearTimeout(rkTimer);rkTimer=setTimeout(rkFlush,30000)}}
 function rkQueue(game,difficulty,nickname,score){const e={id:Date.now()+'-'+Math.random().toString(36).slice(2,7),game,difficulty,nickname,score};const q=rkGet('queue',[]);q.push(e);rkSet('queue',q.slice(-30));return e}
 window.addEventListener('online',()=>rkFlush());setInterval(rkFlush,20000);setTimeout(rkFlush,1500);
 
 // Caixa "Entrar no ranking" no fim de cada partida.
-const RK_P={d:'kangaroo',b:'basket',t:'block',s:'sudoku',m:'minesweeper',f:'sete-erros'};
+const RK_P={d:'kangaroo',b:'basket',t:'block',s:'sudoku',m:'minesweeper',f:'sete-erros',n:'snake'};
 function rkResult(p){
  if(p==='d')return{score:Math.floor(d.score),difficulty:'normal',eligible:Math.floor(d.score)>0};
  if(p==='b')return{score:b.score,difficulty:'normal',eligible:b.score>0};
  if(p==='t')return{score:t.score,difficulty:'normal',eligible:t.score>0};
+ if(p==='n')return{score:sn.score,difficulty:'normal',eligible:sn.score>0};
  if(p==='s')return{score:Math.max(1,Math.floor(su.time)),difficulty:LVL[su.diff],eligible:su.val.every((v,k)=>v===su.sol[k])};
  if(p==='m')return{score:Math.max(1,Math.floor(mn.time)),difficulty:LVL[mn.diff],eligible:mn.opened===mn.R*mn.C-mn.M};
  return{score:Math.max(1,Math.floor(df.time)),difficulty:'normal',eligible:df.found>=7}}
@@ -672,20 +778,37 @@ function rkOpen(game,difficulty,p){if(p)rkHold(p);if(game)rkSel={game,difficulty
 function rkClose(){$('rkmodal').classList.add('hide')}
 $('rkmodal').addEventListener('pointerdown',e=>{if(e.target.id==='rkmodal')rkClose()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('rkmodal').classList.contains('hide'))rkClose()});
+async function rkLoad(game,difficulty){const key=game+'|'+difficulty,c=rkCache[key];if(c&&Date.now()-c.t<30000)return c.rows;
+ const r=await rkFetch(`game_scores?select=nickname,score,created_at&game=eq.${game}&difficulty=eq.${difficulty}&order=score.${RGAMES[game].high?'desc':'asc'},created_at.asc&limit=300`);if(!r.ok)throw new Error('http '+r.status);
+ const seen=new Set(),rows=(await r.json()).filter(x=>{const k=x.nickname.trim().toLowerCase();if(seen.has(k))return false;seen.add(k);return true});rkCache[key]={t:Date.now(),rows};return rows}
+function rkRowsHtml(game,rows){const nick=rkGet('nick','').trim().toLowerCase(),medal=['🥇','🥈','🥉'];return rows.slice(0,5).map((x,i)=>`<div class="rk-row-i${x.nickname.trim().toLowerCase()===nick?' me':''}${i<3?' top':''}"><span class="rk-pos">${medal[i]||i+1+'º'}</span><span class="rk-nick">${rkEsc(x.nickname)}</span><span class="rk-sc">${rkFmt(game,x.score)}</span></div>`).join('')}
+const RK_OFF='📶 Ranking disponível quando estiver online.';
 async function rkShow(){const{game,difficulty}=rkSel,G=RGAMES[game];
  $('rk-games').querySelectorAll('button').forEach(bt=>bt.classList.toggle('on',bt.dataset.g===game));
  const ds=$('rk-diffs');ds.classList.toggle('hide',G.diffs.length<2);ds.innerHTML=G.diffs.length<2?'':G.diffs.map(x=>`<button data-d="${x}" class="${x===difficulty?'on':''}">${RDIFF[x]}</button>`).join('');
  ds.querySelectorAll('button').forEach(bt=>bt.onclick=()=>{rkSel={game,difficulty:bt.dataset.d};rkShow()});
- const list=$('rk-list'),me=$('rk-me');me.textContent='';
- if(!navigator.onLine){list.innerHTML='<div class="rk-empty">📶 Ranking disponível quando estiver online.</div>';return}
- const key=game+'|'+difficulty,req=++rkReq;let rows=rkCache[key]&&Date.now()-rkCache[key].t<30000?rkCache[key].rows:null;
- if(!rows){list.innerHTML='<div class="rk-empty">Carregando…</div>';
-  try{const r=await rkFetch(`game_scores?select=nickname,score,created_at&game=eq.${game}&difficulty=eq.${difficulty}&order=score.${G.high?'desc':'asc'},created_at.asc&limit=300`);if(!r.ok)throw new Error('http '+r.status);const seen=new Set();rows=(await r.json()).filter(x=>{const k=x.nickname.trim().toLowerCase();if(seen.has(k))return false;seen.add(k);return true});rkCache[key]={t:Date.now(),rows}}
-  catch(err){if(req!==rkReq)return;list.innerHTML=!navigator.onLine?'<div class="rk-empty">📶 Ranking disponível quando estiver online.</div>':'<div class="rk-empty">Não foi possível carregar o ranking agora.<br><button class="tool" onclick="rkCache={};rkShow()">Tentar de novo</button></div>';return}}
- if(req!==rkReq)return;const nick=rkGet('nick','').trim().toLowerCase(),medal=['🥇','🥈','🥉'];
- list.innerHTML=rows.length?rows.slice(0,20).map((x,i)=>`<div class="rk-row-i${x.nickname.trim().toLowerCase()===nick?' me':''}${i<3?' top':''}"><span class="rk-pos">${medal[i]||i+1+'º'}</span><span class="rk-nick">${rkEsc(x.nickname)}</span><span class="rk-sc">${rkFmt(game,x.score)}</span></div>`).join(''):'<div class="rk-empty">Ninguém no ranking ainda. Seja o primeiro! 🎉</div>';
+ const list=$('rk-list'),me=$('rk-me'),req=++rkReq;me.textContent='';
+ if(!navigator.onLine){list.innerHTML=`<div class="rk-empty">${RK_OFF}</div>`;return}
+ if(!rkCache[game+'|'+difficulty])list.innerHTML='<div class="rk-empty">Carregando…</div>';let rows;
+ try{rows=await rkLoad(game,difficulty)}catch(err){if(req!==rkReq)return;list.innerHTML=!navigator.onLine?`<div class="rk-empty">${RK_OFF}</div>`:'<div class="rk-empty">Não foi possível carregar o ranking agora.<br><button class="tool" onclick="rkCache={};rkShow()">Tentar de novo</button></div>';return}
+ if(req!==rkReq)return;const nick=rkGet('nick','').trim().toLowerCase();
+ list.innerHTML=rows.length?rkRowsHtml(game,rows):'<div class="rk-empty">Ninguém no ranking ainda. Seja o primeiro! 🎉</div>';
  const mine=nick?rows.findIndex(x=>x.nickname.trim().toLowerCase()===nick):-1;
- if(mine>=0)me.textContent=mine<20?'⭐ Você está em '+(mine+1)+'º lugar!':'⭐ Sua posição: '+(mine+1)+'º lugar ('+rkFmt(game,rows[mine].score)+')';else if(nick)me.textContent='Jogue e entre no ranking como '+rkGet('nick','')+'!'}
+ if(mine>=0)me.textContent=mine<5?'⭐ Você está em '+(mine+1)+'º lugar!':'⭐ Sua posição: '+(mine+1)+'º lugar ('+rkFmt(game,rows[mine].score)+')';else if(nick)me.textContent='Jogue e entre no ranking como '+rkGet('nick','')+'!'}
+const rkHomeSel={};
+function rkHome(){const box=$('rk-home');if(!box)return;
+ if(!box.children.length){box.innerHTML=Object.entries(RGAMES).map(([k,g])=>`<div class="rkblk" id="rkb-${k}"><div class="rkblk-h">${g.emoji} ${g.name}</div>${g.diffs.length>1?`<div class="rkblk-tabs">${g.diffs.map(x=>`<button data-d="${x}">${RDIFF[x]}</button>`).join('')}</div>`:''}<div class="rkblk-l"></div></div>`).join('');
+  box.querySelectorAll('.rkblk-tabs button').forEach(bt=>bt.onclick=()=>{const k=bt.closest('.rkblk').id.slice(4);rkHomeSel[k]=bt.dataset.d;rkHomeOne(k)})}
+ for(const k in RGAMES)rkHomeOne(k)}
+async function rkHomeOne(k){const G=RGAMES[k],blk=$('rkb-'+k),dd=rkHomeSel[k]||G.diffs[0],l=blk.querySelector('.rkblk-l'),tok=blk._tok=(blk._tok||0)+1;
+ blk.querySelectorAll('.rkblk-tabs button').forEach(bt=>bt.classList.toggle('on',bt.dataset.d===dd));
+ if(!navigator.onLine){l.innerHTML=`<div class="rk-empty sm">${RK_OFF}</div>`;return}
+ if(!rkCache[k+'|'+dd])l.innerHTML='<div class="rk-empty sm">Carregando…</div>';
+ try{const rows=await rkLoad(k,dd);if(blk._tok!==tok)return;l.innerHTML=rows.length?rkRowsHtml(k,rows):'<div class="rk-empty sm">Ninguém ainda. Seja o primeiro! 🎉</div>'}
+ catch(e){if(blk._tok!==tok)return;l.innerHTML=`<div class="rk-empty sm">${navigator.onLine?'Não foi possível carregar agora.':RK_OFF}</div>`}}
+const rkMenuOn=()=>!$('menu').classList.contains('hide');
+window.addEventListener('online',()=>{rkCache={};if(rkMenuOn())rkHome()});window.addEventListener('offline',()=>{if(rkMenuOn())rkHome()});
+rkHome();
 </script>
 </body>
 </html>
