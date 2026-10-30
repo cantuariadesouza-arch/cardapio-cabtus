@@ -155,6 +155,43 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes fadeout{70%{opacity:1}100%{opacity:0}}
 
+/* Ranking online */
+.rkbtn{margin-top:14px;background:linear-gradient(180deg,#ffd76a,#f6a93b);color:#5b2a00;border-radius:999px;padding:10px 22px;font-weight:800;font-size:17px;box-shadow:0 5px 0 #c27a12,0 10px 20px rgba(246,169,59,.35)}
+.rkbtn:active{transform:translateY(4px);box-shadow:0 1px 0 #c27a12}
+.panel{max-height:100%;overflow:auto}
+.rk-box{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:0 0 14px}
+.rk-box .tool{min-height:46px;font-size:15px}
+.rk-go{background:linear-gradient(180deg,#ffd76a,#f6a93b);color:#5b2a00;border-radius:14px;min-height:50px;padding:8px 14px;font-weight:800;font-size:16px;box-shadow:0 4px 0 #c27a12}
+.rk-go:active{transform:translateY(3px);box-shadow:0 1px 0 #c27a12}
+.rk-go b{font-weight:800}
+.rk-link{background:transparent;color:inherit;opacity:.75;font-weight:700;font-size:14px;text-decoration:underline;padding:0}
+.rk-in{width:100%;padding:12px 14px;border-radius:14px;border:2px solid rgba(122,31,54,.25);font:inherit;font-size:18px;font-weight:700;text-align:center;color:var(--ink);background:#fff}
+.rk-in:focus{outline:none;border-color:var(--wine2)}
+.rk-err{min-height:1.1em;color:#e0233f;font-weight:700;font-size:14px}
+.rk-row{display:flex;gap:8px}
+.rk-msg{margin:0!important;font-weight:700}
+.basket .rk-box .tool,.block .rk-box .tool{background:rgba(255,255,255,.14);color:#fff;box-shadow:none}
+.rkm{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:12px;background:rgba(40,12,20,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.rkp{width:min(480px,100%);max-height:min(88dvh,760px);display:flex;flex-direction:column;gap:10px;background:linear-gradient(180deg,#fff,#fff6ee);border-radius:26px;padding:18px 16px 14px;box-shadow:0 20px 50px rgba(0,0,0,.3);animation:pop .4s cubic-bezier(.2,1.5,.4,1) both}
+.rkhead{display:flex;align-items:center;justify-content:space-between}
+.rkhead h2{margin:0;font-size:26px;font-weight:800;color:var(--wine)}
+.rkx{width:42px;height:42px;border-radius:50%;background:#fff0e4;color:var(--wine);font-size:18px;font-weight:800}
+.rktabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;flex-shrink:0}
+.rktabs::-webkit-scrollbar{display:none}
+.rktabs button{flex-shrink:0;background:#fff0e4;color:var(--wine);border-radius:999px;padding:7px 14px;font-weight:800;font-size:14px;white-space:nowrap}
+.rktabs button.on{background:linear-gradient(180deg,#d14a68,#8b2941);color:#fff}
+.rkseg{align-self:center}
+.rklist{flex:1;min-height:120px;overflow:auto;display:flex;flex-direction:column;gap:6px}
+.rk-row-i{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:8px;padding:9px 12px;border-radius:14px;background:#fff;box-shadow:0 2px 8px rgba(122,31,54,.08);font-weight:700}
+.rk-row-i.top{background:linear-gradient(90deg,#fff7df,#fff)}
+.rk-row-i.me{background:linear-gradient(90deg,#ffe08a,#ffd1dc);box-shadow:0 0 0 2px #f6a93b}
+.rk-pos{font-size:18px;font-weight:800;color:var(--muted);text-align:center}.rk-row-i.top .rk-pos{font-size:24px}
+.rk-nick{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-sc{font-weight:800;color:var(--wine)}
+.rk-empty{text-align:center;color:var(--muted);padding:30px 10px;font-weight:700;line-height:1.5}
+.rk-empty .tool{margin-top:12px;flex:none;padding:0 18px}
+.rkme{margin:0;text-align:center;font-weight:800;color:var(--wine);min-height:1.2em}
+.rktoast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;background:#2f8a3b;color:#fff;font-weight:800;padding:12px 20px;border-radius:999px;box-shadow:0 10px 26px rgba(0,0,0,.25);white-space:nowrap}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
@@ -178,7 +215,7 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 <header><div><strong>❤️ CANTÚ'S GAMES</strong><small>Carinho e amor em forma de sabor.</small></div><button class="nav" id="home">Início</button></header>
 
 <main id="menu" class="page">
- <div class="intro"><h1>Hora de jogar! 🎮</h1><p>Obrigado por comprar na Cantú's! Escolha sua diversão.</p></div>
+ <div class="intro"><h1>Hora de jogar! 🎮</h1><p>Obrigado por comprar na Cantú's! Escolha sua diversão.</p><button class="rkbtn" onclick="rkOpen()">🏆 Ranking</button></div>
  <div class="cards">
   <div class="card" style="--glow:linear-gradient(135deg,#ffc36b,#ff7a59)"><div class="icon">🦘</div><h2>Kangaroo Run</h2><p>Pule os obstáculos e bata seu recorde.</p><p class="best" id="dBest"></p><button class="play" onclick="start('dino')">Jogar Canguru</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#7b8cff,#a35cff)"><div class="icon">🏀</div><h2>Basket Shot</h2><p>Arraste a bola, mire e faça cestas!</p><p class="best" id="bBest"></p><button class="play" onclick="start('basket')">Jogar Basquete</button></div>
@@ -540,7 +577,7 @@ function dfTap(e,svg){if(mode!=='diff'||df.paused||!df.running)return;e.preventD
  if(hit){dfMark(hit,false);return}
  df.time+=5;$('df-time').textContent=fmtT(df.time);bump('df-time');vib(40);const m=document.createElementNS(SVGNS,'g');m.setAttribute('class','miss');m.innerHTML=`<path d="M${x-9} ${y-9}L${x+9} ${y+9}M${x+9} ${y-9}L${x-9} ${y+9}" stroke="#e0233f" stroke-width="5" stroke-linecap="round"/><text x="${x}" y="${y-15}" text-anchor="middle" font-size="18" font-weight="800" fill="#e0233f" stroke="#fff" stroke-width="4" paint-order="stroke" font-family="Baloo 2, sans-serif">+5s</text>`;svg.querySelector('.marks').append(m);setTimeout(()=>m.remove(),1000)}
 function dfWin(){df.running=false;const tok=df,tsec=Math.max(1,Math.floor(df.time)),rec=!best('diff')||tsec<best('diff');saveMin('diff',tsec);vib([30,50,30]);
- setTimeout(()=>{if(df!==tok||mode!=='diff')return;$('ftitle').textContent='Achou todas! 🎉';showOver('f',fmtT(tsec),'',rec);let n=3;const tick=()=>{if(df!==tok||mode!=='diff'||$('fover').classList.contains('hide'))return;if(n<=0){dfNew();return}$('fresult').textContent='Cena '+df.round+' completa! Nova cena em '+n+'…';n--;df.auto=setTimeout(tick,1000)};tick()},800)}
+ setTimeout(()=>{if(df!==tok||mode!=='diff')return;$('ftitle').textContent='Achou todas! 🎉';showOver('f',fmtT(tsec),'',rec);let n=3;const tick=()=>{if(df!==tok||mode!=='diff'||$('fover').classList.contains('hide'))return;if(df.hold){$('fresult').textContent='Cena '+df.round+' completa!';return}if(n<=0){dfNew();return}$('fresult').textContent='Cena '+df.round+' completa! Nova cena em '+n+'…';n--;df.auto=setTimeout(tick,1000)};tick()},800)}
 function dfHint(){if(mode!=='diff'||!df.running||df.paused||df.hints<=0)return;df.hints--;dfHintBtn();dfMark(pick(df.diffs.filter(dd=>!dd.found)),true)}
 function dfHintBtn(){const bt=$('df-hint');bt.textContent='💡 Dica ('+df.hints+')';bt.disabled=df.hints<=0}
 function dfPause(){if(!df.running)return;df.paused=!df.paused;setPause('f',df.paused)}
@@ -548,6 +585,107 @@ function dfInit(){for(const id of ['df-a','df-b']){const s=$(id);s.addEventListe
 
 suInit();mnInit();dfInit();
 menu();
+</script>
+
+<div id="rkmodal" class="rkm hide" role="dialog" aria-modal="true" aria-label="Ranking"><div class="rkp">
+ <div class="rkhead"><h2>🏆 Ranking</h2><button class="rkx" aria-label="Fechar" onclick="rkClose()">✕</button></div>
+ <div class="rktabs" id="rk-games"></div>
+ <div class="seg rkseg hide" id="rk-diffs"></div>
+ <div class="rklist" id="rk-list"></div>
+ <p class="rkme" id="rk-me"></p>
+</div></div>
+<div id="rktoast" class="rktoast hide"></div>
+
+<script>
+// ---------- Ranking online (opcional) ----------
+// Usa só a chave PÚBLICA do Supabase (a mesma do cardápio); a tabela aceita leitura e envio públicos.
+// Sem internet os jogos funcionam normalmente e os envios ficam guardados no aparelho até a conexão voltar.
+const RK={url:'https://tpjhvjbakauvenbbflht.supabase.co',key:'sb_publishable_gqpJe_834MlGxsmsI9sFHw_jeNWO0KW',gap:10000};
+const RGAMES={
+ kangaroo:{name:'Kangaroo Run',emoji:'🦘',high:true,diffs:['normal'],ok:s=>s>0&&s<=60000},
+ basket:{name:'Basket Shot',emoji:'🏀',high:true,diffs:['normal'],ok:s=>s>0&&s<=1500},
+ block:{name:'Block',emoji:'🧩',high:true,diffs:['normal'],ok:s=>s>0&&s%100===0&&s<=2000000},
+ sudoku:{name:'Sudoku',emoji:'🔢',high:false,diffs:['facil','medio','dificil'],ok:(s,dd)=>s>={facil:20,medio:30,dificil:40}[dd]&&s<=86400},
+ minesweeper:{name:'Campo Minado',emoji:'💣',high:false,diffs:['facil','medio','dificil'],ok:(s,dd)=>s>={facil:3,medio:8,dificil:15}[dd]&&s<=86400},
+ 'sete-erros':{name:'7 Erros',emoji:'🔍',high:false,diffs:['normal'],ok:s=>s>=8&&s<=86400}};
+const RDIFF={normal:'Normal',facil:'Fácil',medio:'Médio',dificil:'Difícil'},LVL={easy:'facil',med:'medio',hard:'dificil'};
+const rkGet=(k,def)=>{try{const v=localStorage.getItem('cantus_rk_'+k);return v==null?def:JSON.parse(v)}catch{return def}};
+const rkSet=(k,v)=>{try{localStorage.setItem('cantus_rk_'+k,JSON.stringify(v))}catch(e){}};
+const rkEsc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rkFmt=(g,s)=>RGAMES[g].high?s.toLocaleString('pt-BR')+' pts':fmtT(s);
+function rkToast(msg){const el=$('rktoast');el.textContent=msg;el.classList.remove('hide');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.add('hide'),3500)}
+
+// Apelido: 2 a 20 caracteres e filtro simples de palavrões (ignora acentos, números no lugar de letras e símbolos).
+const RK_BAD=['porra','caralh','merda','putari','putinh','putona','buceta','boceta','foda','fuder','foder','fodas','viado','arrombad','cacete','piroca','xoxota','bosta','corno','vagabund','otario','babaca','desgraca','cuzao','punheta','siririca','vadia','escrot','retardad','nazis','hitler','fuck','shit','bitch','pussy','nigg','asshole','penis','vagina','estupr','pedofil'];
+const RK_BAD_WORD=['puta','puto','putas','cu','pqp','vsf','fdp','tnc','krl','crl','prr','kct','pau','rola','pinto','cuz','bct','vtnc','tmnc','nazi','sex','sexo','dick','cock','cum'];
+function rkNorm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[0@4]/g,m=>({'0':'o','@':'a','4':'a'}[m])).replace(/[1!|]/g,'i').replace(/3/g,'e').replace(/[5$]/g,'s').replace(/7/g,'t')}
+function rkNickError(raw){const n=raw.replace(/\s+/g,' ').trim();if(n.length<2)return'Use pelo menos 2 caracteres.';if(n.length>20)return'Use no máximo 20 caracteres.';if(/[<>{}\\]/.test(n))return'Use só letras, números e símbolos simples.';
+ const norm=rkNorm(n),joined=norm.replace(/[^a-z]/g,''),words=norm.split(/[^a-z]+/).filter(Boolean);
+ if(RK_BAD.some(w=>joined.includes(w))||words.some(w=>RK_BAD_WORD.includes(w))||RK_BAD_WORD.includes(joined))return'Escolha outro apelido, por favor 🙂';return''}
+
+// Fila de envio: guarda no aparelho e envia no máximo 1 pontuação a cada 10 segundos.
+let rkBusy=false,rkTimer=0;
+async function rkFetch(path,opt={}){const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),8000);try{return await fetch(RK.url+'/rest/v1/'+path,{...opt,signal:ctl.signal,headers:{apikey:RK.key,Authorization:'Bearer '+RK.key,'Content-Type':'application/json',...(opt.headers||{})}})}finally{clearTimeout(tm)}}
+async function rkFlush(){if(rkBusy)return;const q=rkGet('queue',[]);if(!q.length||!navigator.onLine)return;const wait=rkGet('last',0)+RK.gap-Date.now();if(wait>0){clearTimeout(rkTimer);rkTimer=setTimeout(rkFlush,wait+50);return}
+ rkBusy=true;const e=q[0];let sent=false,drop=false;try{rkSet('last',Date.now());const r=await rkFetch('game_scores',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({game:e.game,difficulty:e.difficulty,nickname:e.nickname,score:e.score})});if(r.ok)sent=true;else if(r.status>=400&&r.status<500&&r.status!==408&&r.status!==429)drop=true}catch(err){}finally{rkBusy=false}
+ if(sent||drop){const cur=rkGet('queue',[]).filter(x=>x.id!==e.id);rkSet('queue',cur);rkCache={};if(sent){rkToast('✅ Pontuação enviada ao ranking');rkBoxSent(e.id)}if(cur.length){clearTimeout(rkTimer);rkTimer=setTimeout(rkFlush,RK.gap+50)}}
+ else{clearTimeout(rkTimer);rkTimer=setTimeout(rkFlush,30000)}}
+function rkQueue(game,difficulty,nickname,score){const e={id:Date.now()+'-'+Math.random().toString(36).slice(2,7),game,difficulty,nickname,score};const q=rkGet('queue',[]);q.push(e);rkSet('queue',q.slice(-30));return e}
+window.addEventListener('online',()=>rkFlush());setInterval(rkFlush,20000);setTimeout(rkFlush,1500);
+
+// Caixa "Entrar no ranking" no fim de cada partida.
+const RK_P={d:'kangaroo',b:'basket',t:'block',s:'sudoku',m:'minesweeper',f:'sete-erros'};
+function rkResult(p){
+ if(p==='d')return{score:Math.floor(d.score),difficulty:'normal',eligible:Math.floor(d.score)>0};
+ if(p==='b')return{score:b.score,difficulty:'normal',eligible:b.score>0};
+ if(p==='t')return{score:t.score,difficulty:'normal',eligible:t.score>0};
+ if(p==='s')return{score:Math.max(1,Math.floor(su.time)),difficulty:LVL[su.diff],eligible:su.val.every((v,k)=>v===su.sol[k])};
+ if(p==='m')return{score:Math.max(1,Math.floor(mn.time)),difficulty:LVL[mn.diff],eligible:mn.opened===mn.R*mn.C-mn.M};
+ return{score:Math.max(1,Math.floor(df.time)),difficulty:'normal',eligible:df.found>=7}}
+let rkCtx={};
+function rkBox(p){let box=$(p+'rk');if(!box){box=document.createElement('div');box.id=p+'rk';box.className='rk-box';const panel=$(p+'over').querySelector('.panel');panel.insertBefore(box,panel.querySelector('.play'))}return box}
+function rkAfterOver(p){const game=RK_P[p],res=rkResult(p);rkCtx[p]={game,...res,state:'offer'};rkDraw(p)}
+function rkDraw(p){const c=rkCtx[p],box=rkBox(p),nick=rkGet('nick','');let h='';
+ if(c.state==='form'){h=`<input class="rk-in" id="${p}rk-in" maxlength="20" placeholder="Seu nome ou apelido" value="${rkEsc(nick)}" autocomplete="nickname" enterkeyhint="send"><div class="rk-err" id="${p}rk-err"></div><div class="rk-row"><button class="tool on" onclick="rkSubmit('${p}')">Enviar</button><button class="tool" onclick="rkCancel('${p}')">Agora não</button></div>`}
+ else if(c.state==='done')h=`<p class="rk-msg">${c.msg}</p><button class="tool" onclick="rkOpen('${c.game}','${c.difficulty}','${p}')">📊 Ver ranking</button>`;
+ else{const can=c.eligible&&RGAMES[c.game].ok(c.score,c.difficulty);
+  h=(can?(nick?`<button class="rk-go" onclick="rkSubmit('${p}',true)">🏆 Entrar no ranking como <b>${rkEsc(nick)}</b></button><button class="rk-link" onclick="rkForm('${p}')">trocar apelido</button>`:`<button class="rk-go" onclick="rkForm('${p}')">🏆 Entrar no ranking</button>`):'')+`<button class="tool" onclick="rkOpen('${c.game}','${c.difficulty}','${p}')">📊 Ver ranking</button>`}
+ box.innerHTML=h;if(c.state==='form'){const inp=$(p+'rk-in');inp.focus({preventScroll:true});inp.addEventListener('keydown',e=>{if(e.key==='Enter')rkSubmit(p)})}}
+function rkHold(p){if(p==='f')df.hold=true}
+function rkForm(p){rkHold(p);rkCtx[p].state='form';rkDraw(p)}
+function rkCancel(p){rkCtx[p].state='offer';rkDraw(p)}
+function rkSubmit(p,saved){rkHold(p);const c=rkCtx[p];if(c.state==='done')return;let nick=rkGet('nick','');
+ if(!saved){const raw=$(p+'rk-in').value,err=rkNickError(raw);if(err){$(p+'rk-err').textContent=err;anim($(p+'rk-in'),'shake');return}nick=raw.replace(/\s+/g,' ').trim();rkSet('nick',nick)}
+ if(!RGAMES[c.game].ok(c.score,c.difficulty)){c.state='done';c.msg='Essa pontuação ficou fora do normal e não foi enviada.';rkDraw(p);return}
+ const e=rkQueue(c.game,c.difficulty,nick,c.score);c.entry=e.id;c.state='done';
+ const wait=rkGet('last',0)+RK.gap-Date.now();
+ c.msg=!navigator.onLine?'📶 Sem internet agora. Guardamos sua pontuação e enviamos sozinhos quando a conexão voltar.':wait>0?'⏳ Enviando em alguns segundos…':'⏳ Enviando…';rkDraw(p);rkFlush().then(()=>{if(c.state==='done'&&c.entry===e.id&&rkGet('queue',[]).some(x=>x.id===e.id)&&!navigator.onLine){c.msg='📶 Sem internet agora. Guardamos sua pontuação e enviamos sozinhos quando a conexão voltar.';rkDraw(p)}})}
+function rkBoxSent(id){for(const p in rkCtx){const c=rkCtx[p];if(c.entry===id&&c.state==='done'){c.msg='✅ Pontuação enviada ao ranking!';if(!$(p+'over').classList.contains('hide'))rkDraw(p)}}}
+const _showOver=showOver;showOver=function(p,...a){_showOver(p,...a);try{rkAfterOver(p)}catch(e){}};
+
+// Tela do ranking: TOP 20 por jogo e dificuldade, um registro (o melhor) por apelido.
+let rkSel={game:'kangaroo',difficulty:'normal'},rkCache={},rkReq=0;
+function rkOpen(game,difficulty,p){if(p)rkHold(p);if(game)rkSel={game,difficulty:RGAMES[game].diffs.includes(difficulty)?difficulty:RGAMES[game].diffs[0]};
+ $('rk-games').innerHTML=Object.entries(RGAMES).map(([k,g])=>`<button data-g="${k}">${g.emoji} ${g.name}</button>`).join('');
+ $('rk-games').querySelectorAll('button').forEach(bt=>bt.onclick=()=>{rkSel={game:bt.dataset.g,difficulty:RGAMES[bt.dataset.g].diffs[0]};rkShow()});
+ $('rkmodal').classList.remove('hide');rkShow();const on=$('rk-games').querySelector('.on');if(on)on.scrollIntoView({inline:'center',block:'nearest'})}
+function rkClose(){$('rkmodal').classList.add('hide')}
+$('rkmodal').addEventListener('pointerdown',e=>{if(e.target.id==='rkmodal')rkClose()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('rkmodal').classList.contains('hide'))rkClose()});
+async function rkShow(){const{game,difficulty}=rkSel,G=RGAMES[game];
+ $('rk-games').querySelectorAll('button').forEach(bt=>bt.classList.toggle('on',bt.dataset.g===game));
+ const ds=$('rk-diffs');ds.classList.toggle('hide',G.diffs.length<2);ds.innerHTML=G.diffs.length<2?'':G.diffs.map(x=>`<button data-d="${x}" class="${x===difficulty?'on':''}">${RDIFF[x]}</button>`).join('');
+ ds.querySelectorAll('button').forEach(bt=>bt.onclick=()=>{rkSel={game,difficulty:bt.dataset.d};rkShow()});
+ const list=$('rk-list'),me=$('rk-me');me.textContent='';
+ if(!navigator.onLine){list.innerHTML='<div class="rk-empty">📶 Ranking disponível quando estiver online.</div>';return}
+ const key=game+'|'+difficulty,req=++rkReq;let rows=rkCache[key]&&Date.now()-rkCache[key].t<30000?rkCache[key].rows:null;
+ if(!rows){list.innerHTML='<div class="rk-empty">Carregando…</div>';
+  try{const r=await rkFetch(`game_scores?select=nickname,score,created_at&game=eq.${game}&difficulty=eq.${difficulty}&order=score.${G.high?'desc':'asc'},created_at.asc&limit=300`);if(!r.ok)throw new Error('http '+r.status);const seen=new Set();rows=(await r.json()).filter(x=>{const k=x.nickname.trim().toLowerCase();if(seen.has(k))return false;seen.add(k);return true});rkCache[key]={t:Date.now(),rows}}
+  catch(err){if(req!==rkReq)return;list.innerHTML=!navigator.onLine?'<div class="rk-empty">📶 Ranking disponível quando estiver online.</div>':'<div class="rk-empty">Não foi possível carregar o ranking agora.<br><button class="tool" onclick="rkCache={};rkShow()">Tentar de novo</button></div>';return}}
+ if(req!==rkReq)return;const nick=rkGet('nick','').trim().toLowerCase(),medal=['🥇','🥈','🥉'];
+ list.innerHTML=rows.length?rows.slice(0,20).map((x,i)=>`<div class="rk-row-i${x.nickname.trim().toLowerCase()===nick?' me':''}${i<3?' top':''}"><span class="rk-pos">${medal[i]||i+1+'º'}</span><span class="rk-nick">${rkEsc(x.nickname)}</span><span class="rk-sc">${rkFmt(game,x.score)}</span></div>`).join(''):'<div class="rk-empty">Ninguém no ranking ainda. Seja o primeiro! 🎉</div>';
+ const mine=nick?rows.findIndex(x=>x.nickname.trim().toLowerCase()===nick):-1;
+ if(mine>=0)me.textContent=mine<20?'⭐ Você está em '+(mine+1)+'º lugar!':'⭐ Sua posição: '+(mine+1)+'º lugar ('+rkFmt(game,rows[mine].score)+')';else if(nick)me.textContent='Jogue e entre no ranking como '+rkGet('nick','')+'!'}
 </script>
 </body>
 </html>
