@@ -219,33 +219,25 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 .rkblk .rk-row-i.me{background:linear-gradient(90deg,#ffe08a,#ffd1dc)}
 .rk-empty.sm{padding:14px 6px;font-size:14px}
 .card:nth-child(7){animation-delay:.48s}.card:nth-child(7) .icon{animation-delay:-3s}
-/* Snake: celular "tijolão" retrô (só neste jogo) */
-.snakeg{background:linear-gradient(180deg,#fdebe0,#f3cfc2)}
-.hbtns{display:flex;gap:6px}
-#sn-board{display:flex;align-items:center;justify-content:center;padding:14px 8px 8px;touch-action:none}
-.phone{position:relative;font-size:16px;width:20em;padding:1.3em 1.5em 1.7em;border-radius:3.4em 3.4em 4.4em 4.4em/2.8em 2.8em 4.8em 4.8em;background:radial-gradient(120% 55% at 28% 6%,rgba(255,255,255,.32),transparent 45%),linear-gradient(90deg,#1b3a84 0,#3866c2 11%,#4a7ad5 50%,#3360bb 89%,#183273 100%);box-shadow:inset 0 .3em .3em rgba(255,255,255,.45),inset 0 -.6em .8em rgba(0,0,0,.35),inset .35em 0 .4em rgba(255,255,255,.12),inset -.35em 0 .5em rgba(0,0,0,.25),0 .45em 0 #152b66,0 .85em 0 #0f2252,0 1.6em 2.6em rgba(15,25,70,.45);display:flex;flex-direction:column;align-items:center;gap:.5em;user-select:none;-webkit-user-select:none;margin-bottom:.9em}
-.phone::before{content:"";position:absolute;top:-1.7em;right:2.6em;width:1.5em;height:1.8em;border-radius:.7em .7em .2em .2em;background:linear-gradient(90deg,#191d28,#4b5266 45%,#191d28);box-shadow:inset 0 .2em .2em rgba(255,255,255,.25)}
-.ph-speaker{display:grid;grid-template-columns:repeat(7,.42em);gap:.3em .32em;margin-top:.1em}
-.ph-speaker i{width:.42em;height:.42em;border-radius:50%;background:#10204a;box-shadow:inset 0 .08em .1em rgba(0,0,0,.8),0 .06em 0 rgba(255,255,255,.25)}
-.ph-brand{font-family:var(--font);font-weight:800;letter-spacing:.32em;font-size:.9em;color:#dbe5ff;text-shadow:0 -.05em 0 rgba(0,0,0,.45),0 .06em 0 rgba(255,255,255,.3);margin:-.15em 0 -.2em}
-.ph-screen{width:86%;padding:.75em .8em .9em;border-radius:.9em .9em 1.4em 1.4em;background:linear-gradient(#27344f,#131c31);box-shadow:inset 0 .25em .5em rgba(0,0,0,.75),0 .1em 0 rgba(255,255,255,.25)}
-.lcd{position:relative;width:100%;aspect-ratio:5/4;border-radius:.3em;background:radial-gradient(ellipse at 50% 42%,#d2e2b0 0,#b2c391 55%,#93a575 100%);box-shadow:inset 0 0 .8em rgba(30,50,10,.45),inset 0 .2em .3em rgba(0,0,0,.35);overflow:hidden}
-.lcd::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.2),transparent 42%);pointer-events:none}
+/* Snake: celular retrô original da Cantú's, em tela cheia, com controles no rodapé */
+.snakeg{background:linear-gradient(180deg,#fff1e6,#f6d4c6)}
+body.lock{overflow:hidden;overscroll-behavior:none}
+#sn-board{display:flex;padding:8px max(8px,env(safe-area-inset-right)) 4px max(8px,env(safe-area-inset-left));touch-action:none}
+.phone{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:7px;padding:9px 11px 10px;border-radius:30px 30px 36px 36px;background:radial-gradient(120% 40% at 25% 0%,rgba(255,255,255,.3),transparent 55%),linear-gradient(90deg,#5a1226,#8f2741 14%,#ad3652 50%,#8f2741 86%,#5a1226);box-shadow:inset 0 2px 2px rgba(255,255,255,.4),inset 0 -6px 10px rgba(0,0,0,.3),0 5px 0 #4a0f20,0 14px 28px rgba(94,20,40,.35);user-select:none;-webkit-user-select:none}
+.ph-slot{width:58px;height:6px;border-radius:6px;background:#3d0b19;box-shadow:inset 0 1px 2px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.25);flex-shrink:0}
+.ph-brand{font-weight:800;letter-spacing:.26em;font-size:13px;line-height:1;color:#fff1e6;text-shadow:0 1px 0 rgba(0,0,0,.35);flex-shrink:0}
+.ph-screen{flex:1;min-height:0;width:100%;display:flex;padding:9px;border-radius:18px;background:linear-gradient(#3b1321,#200810);box-shadow:inset 0 3px 8px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.22)}
+.lcd{position:relative;flex:1;min-width:0;border-radius:8px;background:radial-gradient(ellipse at 50% 40%,#d3e3b1 0,#b3c492 60%,#97a979 100%);box-shadow:inset 0 0 14px rgba(30,50,10,.4),inset 0 3px 5px rgba(0,0,0,.3);overflow:hidden}
+.lcd::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.18),transparent 40%);pointer-events:none}
 .lcd canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.ph-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:100%;gap:.7em;margin-top:.25em}
-.ph-soft{height:1em;border-radius:1em;background:linear-gradient(#eef1f6,#b5bdcb);box-shadow:0 .16em 0 #5f6b88,inset 0 .1em .1em rgba(255,255,255,.7)}
-.ph-rocker{position:relative;width:5.4em;height:2.7em;border-radius:50%;background:radial-gradient(ellipse at 50% 28%,#f6f8fb,#bcc4d2 68%,#98a2b5);box-shadow:0 .22em 0 #5a6683,0 .35em .5em rgba(0,0,0,.3),inset 0 -.15em .2em rgba(0,0,0,.15)}
-.ph-rocker::before{content:"";position:absolute;inset:.75em 1.8em;border-radius:50%;background:radial-gradient(#e2e7ee,#a8b1c2);box-shadow:inset 0 .08em .15em rgba(0,0,0,.35)}
-.ph-rocker::after{content:"";position:absolute;inset:.35em .9em;border-radius:50%;border:.08em solid rgba(80,90,120,.25)}
-.ph-calls{display:flex;justify-content:space-between;width:100%;padding:0 .4em;margin-top:-.2em}
-.ph-call{width:3.4em;height:1.1em;border-radius:1em;box-shadow:0 .16em 0 rgba(0,0,0,.35),inset 0 .1em .1em rgba(255,255,255,.45)}
-.ph-call.g{background:linear-gradient(#78d874,#2f9a3a)}.ph-call.r{background:linear-gradient(#ff8070,#c8352a)}
-.ph-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:.55em .75em;width:100%;padding:0 .15em}
-.key{height:2.3em;border-radius:45%/50%;background:radial-gradient(ellipse at 50% 22%,#f4f6f9,#cdd3dd 60%,#b0b8c6);color:#24304d;box-shadow:0 .22em 0 #67738f,0 .32em .45em rgba(0,0,0,.28),inset 0 -.12em .2em rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;gap:.3em;padding:0;font-family:system-ui,sans-serif;touch-action:manipulation}
-.key b{font-size:1.2em;font-weight:800}.key small{font-size:.55em;opacity:.65;text-transform:uppercase;letter-spacing:.05em}
-.key.dir{background:radial-gradient(ellipse at 50% 22%,#fff4c8,#f5cc61 60%,#dfa538);box-shadow:0 .22em 0 #a5720f,0 .32em .45em rgba(0,0,0,.28),inset 0 -.12em .2em rgba(0,0,0,.1)}
-.key.press,.key:active{transform:translateY(.17em)!important;box-shadow:0 .05em 0 #67738f,inset 0 .1em .2em rgba(0,0,0,.2)}
-.key.dir.press,.key.dir:active{box-shadow:0 .05em 0 #a5720f,inset 0 .1em .2em rgba(0,0,0,.2)}
+.ph-chin{display:flex;gap:6px;flex-shrink:0}.ph-chin i{width:22px;height:4px;border-radius:4px;background:rgba(0,0,0,.28);box-shadow:0 1px 0 rgba(255,255,255,.18)}
+.sn-pad{flex-shrink:0;display:grid;grid-template-columns:repeat(3,clamp(64px,20vw,84px));grid-template-rows:repeat(3,clamp(64px,8.6dvh,76px));gap:6px;justify-content:center;padding:6px max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));touch-action:none}
+.pb{border-radius:20px;font-size:28px;color:#fff;background:linear-gradient(180deg,#d14a68,#8b2941);box-shadow:0 5px 0 #5e1528,0 8px 16px rgba(139,41,65,.28);touch-action:none}
+.pb:active,.pb.press{transform:translateY(4px)!important;box-shadow:0 1px 0 #5e1528}
+.pb.mid{border-radius:50%;font-size:26px;background:linear-gradient(180deg,#ffd76a,#f6a93b);color:#5b2a00;box-shadow:0 5px 0 #c27a12,0 8px 16px rgba(246,169,59,.3)}
+.pb.mid:active,.pb.mid.press{box-shadow:0 1px 0 #c27a12}
+.pb.rs{width:56px;height:56px;place-self:center;font-size:22px;border-radius:16px;background:#fff;color:var(--wine);box-shadow:0 4px 0 rgba(122,31,54,.2)}
+.pb.rs:active,.pb.rs.press{box-shadow:0 1px 0 rgba(122,31,54,.2)}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
@@ -313,12 +305,13 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 </section>
 
 <section id="snake" class="game snakeg hide">
- <div class="hud"><div class="chips"><span class="chip main">🐍 Snake</span></div><div class="hbtns"><button class="pbtn" onclick="snNew()">↺ Recomeçar</button><button class="pbtn" id="npb" onclick="snPause()">⏸ Pausar</button></div></div>
  <div class="board" id="sn-board">
-  <div class="phone" id="sn-phone"><div class="ph-speaker"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="ph-brand">CANTÚ'S</div><div class="ph-screen"><div class="lcd" id="sn-lcd"><canvas id="sn-c"></canvas></div></div><div class="ph-nav"><span class="ph-soft"></span><span class="ph-rocker"></span><span class="ph-soft"></span></div><div class="ph-calls"><span class="ph-call g"></span><span class="ph-call r"></span></div><div class="ph-keys" id="sn-keys"></div></div>
+  <div class="phone" id="sn-phone"><span class="ph-slot"></span><span class="ph-brand">❤️ CANTÚ'S</span><div class="ph-screen"><div class="lcd" id="sn-lcd"><canvas id="sn-c"></canvas></div></div><div class="ph-chin"><i></i><i></i><i></i></div></div>
   <div id="npause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>A cobrinha espera por você.</p><button class="play" onclick="snPause()">▶ Continuar</button><button class="ghost" onclick="snNew()">↺ Recomeçar</button></div></div>
   <div id="nover" class="overlay hide"><div class="panel"><h2>Fim de jogo!</h2><div class="big" id="nbig">0</div><div class="badge hide" id="nrec">🏆 Novo recorde!</div><p id="nresult"></p><button class="play" onclick="snNew()">Jogar de novo</button></div></div>
  </div>
+ <div class="sn-pad" id="sn-pad"><button class="pb rs" data-k="r" aria-label="Recomeçar">↺</button><button class="pb" data-k="2" aria-label="Para cima">▲</button><span></span><button class="pb" data-k="4" aria-label="Para a esquerda">◀</button><button class="pb mid" id="sn-mid" data-k="5" aria-label="Pausar ou continuar">⏸</button><button class="pb" data-k="6" aria-label="Para a direita">▶</button><span></span><button class="pb" data-k="8" aria-label="Para baixo">▼</button><span></span></div>
+ <span id="npb" hidden></span>
 </section>
 
 <section id="sudoku" class="game sudo hide">
@@ -373,7 +366,7 @@ function setPause(p,on){$(p+'pause').classList.toggle('hide',!on);$(p+'pb').text
 function showOver(p,score,text,rec){$(p+'big').textContent=score;$(p+'result').textContent=text;$(p+'rec').classList.toggle('hide',!rec);$(p+'pause').classList.add('hide');$(p+'over').classList.remove('hide')}
 function fitCanvas(cv,w,h){const ratio=Math.min(window.devicePixelRatio||1,3);cv.width=Math.max(1,Math.round(w*ratio));cv.height=Math.max(1,Math.round(h*ratio));const c=cv.getContext('2d');c.setTransform(ratio,0,0,ratio,0,0);return c}
 
-function hideGames(){document.querySelectorAll('.game').forEach(s=>s.classList.add('hide'))}
+function hideGames(){document.body.classList.remove('lock');document.querySelectorAll('.game').forEach(s=>s.classList.add('hide'))}
 function menu(){mode='';cancelAnimationFrame(raf);cancelAnimationFrame(blockRaf);clearInterval(tTimer);$('menu').classList.remove('hide');hideGames();$('tBest').textContent='🏆 Recorde: '+best('block');$('dBest').textContent='🏆 Recorde: '+best('dino');$('bBest').textContent='🏆 Recorde: '+best('basket');newBests()};$('home').onclick=menu;
 function size(){if(!mode)return;if(mode==='block'){blockSize();return}if(mode!=='dino'&&mode!=='basket'){nResize();return}let board=$(mode==='dino'?'dboard':'bboard');canvas=$(mode==='dino'?'dc':'bc');let rect=board.getBoundingClientRect();W=rect.width;H=rect.height;ctx=fitCanvas(canvas,W,H)}
 function start(which){if(which==='block'){startBlock();return}clearInterval(tTimer);cancelAnimationFrame(raf);cancelAnimationFrame(blockRaf);mode=which;paused=false;$('menu').classList.add('hide');hideGames();$(which).classList.remove('hide');const p=which==='dino'?'d':'b';$(p+'over').classList.add('hide');setPause(p,false);size();if(which==='dino'){d={y:0,vy:0,score:0,obstacles:[],spawn:0,dead:false,off:0,t:0,fx:[],pops:[],mile:100,startBest:best('dino'),rec:false,air:false};$('dr').textContent=best('dino')}else{b={score:0,combo:0,ball:null,drag:false,aim:null,shots:0,misses:0,particles:[],pops:[],trail:[],flash:0,hoopX:.64,hoopY:.52,toast:'',toastT:0,toastBad:false,netT:0,t:0,startBest:best('basket'),rec:false};$('br').textContent=best('basket');$('bs').textContent=0;$('misses').textContent=0;resetBall()}last=performance.now();raf=requestAnimationFrame(frame)}
@@ -663,39 +656,39 @@ function dfInit(){for(const id of ['df-a','df-b']){const s=$(id);s.addEventListe
 // ---------- Snake ----------
 // Tela LCD de 80x64 "pontos": placar no topo e campo de 19x13 casas (cada casa = 4x4 pontos). A cobra atravessa as bordas e perde ao bater em si mesma.
 const SNF={'0':'111101101101111','1':'010110010010111','2':'111001111100111','3':'111001111001111','4':'101101111001001','5':'111100111001111','6':'111100111101111','7':'111001001001001','8':'111101111101111','9':'111101111001111','A':'010101111101101','E':'111100110100111','G':'111100101101111','H':'101101111101101','I':'111010010010111','M':'101111111101101','O':'111101101101111','P':'111101111100100','R':'110101110101101','S':'111100111001111','U':'101101101101111','V':'101101101101010',' ':'000000000000000'};
-const SN={DW:80,DH:64,C:19,R:13,X0:2,Y0:11};
+const SN={DW:64,DH:64,C:15,R:11,X0:2,Y0:10,HS:1};
 let sn={},snG=null,snW=0,snH=0;
-function snSize(){const bd=$('sn-board').getBoundingClientRect(),ph=$('sn-phone');let fs=Math.min((bd.width-24)/20,26);ph.style.fontSize=fs+'px';const tall=ph.offsetHeight+2.6*fs;if(tall>bd.height-22)fs=Math.max(9,fs*(bd.height-22)/tall);ph.style.fontSize=fs+'px';const r=$('sn-lcd').getBoundingClientRect();snW=r.width;snH=r.height;snG=fitCanvas($('sn-c'),snW,snH);if(sn.snake)snDraw()}
-function snInit(){const keys=[['1',''],['2','abc','u'],['3','def'],['4','ghi','l'],['5','jkl'],['6','mno','r'],['7','pqrs'],['8','tuv','d'],['9','wxyz'],['*','+'],['0','⎵'],['#','⇧']];
- $('sn-keys').innerHTML=keys.map(([n,l,dd])=>`<button class="key${dd?' dir':''}" data-k="${n}" aria-label="Tecla ${n}"><b>${n}</b><small>${dd?{u:'▲',l:'◀',r:'▶',d:'▼'}[dd]:l}</small></button>`).join('');
- $('sn-keys').querySelectorAll('.key').forEach(k=>k.addEventListener('pointerdown',e=>{e.preventDefault();snKey(k.dataset.k);anim(k,'press');setTimeout(()=>k.classList.remove('press'),120)}));
+// A tela LCD ocupa quase todo o aparelho; o tamanho do campo (colunas x linhas) se ajusta à tela a cada partida, com casas de ~22px.
+function snSize(){const r=$('sn-lcd').getBoundingClientRect();snW=r.width;snH=r.height;snG=fitCanvas($('sn-c'),snW,snH);if(sn.snake)snDraw()}
+function snLayout(){const C=Math.max(12,Math.min(20,Math.round(snW/22))),DW=C*4+4,DH=Math.max(44,Math.floor(DW*snH/snW)),HS=snH>380?2:1,Y0=HS===2?17:10,R=Math.max(7,Math.floor((DH-Y0-2)/4));Object.assign(SN,{C,R,DW,DH:Y0+R*4+1,X0:2,Y0,HS})}
+function snInit(){$('sn-pad').querySelectorAll('.pb').forEach(k=>k.addEventListener('pointerdown',e=>{e.preventDefault();vib(12);anim(k,'press');setTimeout(()=>k.classList.remove('press'),130);if(k.dataset.k==='r')snNew();else snKey(k.dataset.k)}));
  let sx=0,sy=0,st=false;const bd=$('sn-board');
- bd.addEventListener('touchstart',e=>{if(e.target.closest('.key,.overlay'))return;st=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+ bd.addEventListener('touchstart',e=>{if(e.target.closest('.overlay'))return;st=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
  bd.addEventListener('touchmove',e=>{if(!st)return;const dx=e.touches[0].clientX-sx,dy=e.touches[0].clientY-sy;if(Math.max(Math.abs(dx),Math.abs(dy))>22){if(Math.abs(dx)>Math.abs(dy))snDir(Math.sign(dx),0);else snDir(0,Math.sign(dy));st=false}},{passive:true});
  bd.addEventListener('touchend',()=>{st=false},{passive:true})}
 function snKey(k){if(k==='2')snDir(0,-1);else if(k==='8')snDir(0,1);else if(k==='4')snDir(-1,0);else if(k==='6')snDir(1,0);else if(k==='5')snPause()}
 function snDir(dx,dy){if(mode!=='snake'||sn.over||sn.paused)return;const lastD=sn.q.length?sn.q[sn.q.length-1]:sn.dir;if((dx===-lastD.x&&dy===-lastD.y)||(dx===lastD.x&&dy===lastD.y)||sn.q.length>2)return;sn.q.push({x:dx,y:dy})}
 function snFood(){const free=[];for(let y=0;y<SN.R;y++)for(let x=0;x<SN.C;x++)if(!sn.snake.some(p=>p.x===x&&p.y===y))free.push({x,y});return free.length?pick(free):null}
-function startSnake(){enterGame('snake');snSize();snNew()}
-function snNew(){const y=SN.R>>1;sn={snake:[{x:7,y},{x:6,y},{x:5,y},{x:4,y}],dir:{x:1,y:0},q:[],score:0,over:false,paused:false,speed:300,acc:0,t:0,last:performance.now(),startBest:best('snake'),tok:{}};sn.food=snFood();
- $('nover').classList.add('hide');setPause('n',false);snDraw();const tok=sn.tok;const loop=now=>{if(mode!=='snake'||sn.tok!==tok)return;const dt=Math.min(now-sn.last,100);sn.last=now;if(!sn.paused&&!sn.over){sn.t+=dt;sn.acc+=dt;while(sn.acc>=sn.speed&&!sn.over){sn.acc-=sn.speed;snStep()}}snDraw();requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+function startSnake(){enterGame('snake');document.body.classList.add('lock');snSize();snNew()}
+function snNew(){snSize();snLayout();const y=SN.R>>1;sn={snake:[{x:7,y},{x:6,y},{x:5,y},{x:4,y}],dir:{x:1,y:0},q:[],score:0,over:false,paused:false,speed:300,acc:0,t:0,last:performance.now(),startBest:best('snake'),tok:{}};sn.food=snFood();
+ $('nover').classList.add('hide');setPause('n',false);$('sn-mid').textContent='⏸';snDraw();const tok=sn.tok;const loop=now=>{if(mode!=='snake'||sn.tok!==tok)return;const dt=Math.min(now-sn.last,100);sn.last=now;if(!sn.paused&&!sn.over){sn.t+=dt;sn.acc+=dt;while(sn.acc>=sn.speed&&!sn.over){sn.acc-=sn.speed;snStep()}}snDraw();requestAnimationFrame(loop)};requestAnimationFrame(loop)}
 // Começa devagar (300 ms por passo) e acelera aos poucos com a comida e o tempo de partida, até 95 ms por passo.
 function snSpeed(){return Math.max(95,Math.round(300*Math.pow(.972,sn.score)-Math.min(60,sn.t/1000*.5)))}
 function snStep(){sn.speed=snSpeed();if(sn.q.length)sn.dir=sn.q.shift();const h=sn.snake[0],nx=(h.x+sn.dir.x+SN.C)%SN.C,ny=(h.y+sn.dir.y+SN.R)%SN.R,eat=sn.food&&nx===sn.food.x&&ny===sn.food.y,body=eat?sn.snake:sn.snake.slice(0,-1);
  if(body.some(p=>p.x===nx&&p.y===ny)){snOver();return}
  sn.snake.unshift({x:nx,y:ny});if(eat){sn.score++;sn.food=snFood();vib(15);if(!sn.food){snOver();return}}else sn.snake.pop()}
 function snOver(){sn.over=true;save('snake',sn.score);vib([50,40,90]);const tok=sn.tok,rec=sn.score>sn.startBest&&sn.score>0;setTimeout(()=>{if(sn.tok!==tok||mode!=='snake')return;showOver('n',sn.score,'Você fez '+sn.score+' ponto'+(sn.score===1?'':'s')+'.',rec)},1100)}
-function snPause(){if(sn.over)return;sn.paused=!sn.paused;sn.last=performance.now();setPause('n',sn.paused)}
+function snPause(){if(sn.over)return;sn.paused=!sn.paused;sn.last=performance.now();setPause('n',sn.paused);$('sn-mid').textContent=sn.paused?'▶':'⏸'}
 function snDraw(){const g=snG;if(!g)return;const u=Math.min(snW/SN.DW,snH/SN.DH),ox=(snW-u*SN.DW)/2,oy=(snH-u*SN.DH)/2,on=new Uint8Array(SN.DW*SN.DH);
  const dot=(x,y)=>{if(x>=0&&x<SN.DW&&y>=0&&y<SN.DH)on[y*SN.DW+x]=1},off=(x,y)=>{if(x>=0&&x<SN.DW&&y>=0&&y<SN.DH)on[y*SN.DW+x]=0};
- const text=(str,x,y)=>{for(const ch of str){const f=SNF[ch]||SNF[' '];for(let i=0;i<15;i++)if(f[i]==='1')dot(x+i%3,y+(i/3|0));x+=4}};
- const num=n=>String(n).padStart(4,'0');text(num(sn.score),2,1);const hi=Math.max(best('snake'),sn.score);text('HI'+num(hi),SN.DW-25,1);
- for(let x=0;x<SN.DW;x++){dot(x,8);dot(x,SN.DH-1)}for(let y=8;y<SN.DH;y++){dot(0,y);dot(SN.DW-1,y)}
+ const text=(str,x,y,k=1)=>{for(const ch of str){const f=SNF[ch]||SNF[' '];for(let i=0;i<15;i++)if(f[i]==='1')for(let a=0;a<k;a++)for(let b=0;b<k;b++)dot(x+(i%3)*k+a,y+(i/3|0)*k+b);x+=4*k}};
+ const num=n=>String(n).padStart(4,'0'),HS=SN.HS,top=SN.Y0-2,bot=SN.Y0+SN.R*4;text(num(sn.score),2,HS===2?2:1,HS);const hi=Math.max(best('snake'),sn.score);text('HI'+num(hi),SN.DW-25,HS===2?5:1);
+ for(let x=0;x<SN.DW;x++){dot(x,top);dot(x,bot)}for(let y=top;y<=bot;y++){dot(0,y);dot(SN.DW-1,y)}
  const cell=(c,r)=>[SN.X0+c*4,SN.Y0+r*4];
  sn.snake.forEach((p,i)=>{const[x,y]=cell(p.x,p.y);for(let a=0;a<3;a++)for(let b=0;b<3;b++)dot(x+a,y+b);const nx=sn.snake[i+1];if(nx&&Math.abs(nx.x-p.x)+Math.abs(nx.y-p.y)===1){if(nx.x>p.x)for(let b=0;b<3;b++)dot(x+3,y+b);if(nx.x<p.x)for(let b=0;b<3;b++)dot(x-1,y+b);if(nx.y>p.y)for(let a=0;a<3;a++)dot(x+a,y+3);if(nx.y<p.y)for(let a=0;a<3;a++)dot(x+a,y-1)}});
  const h=sn.snake[0];if(h&&!sn.over){const[x,y]=cell(h.x,h.y);off(x+1+sn.dir.x,y+1+sn.dir.y)}
  if(sn.food&&(sn.over||Math.floor(sn.t/260)%4!==3)){const[x,y]=cell(sn.food.x,sn.food.y);dot(x+1,y);dot(x,y+1);dot(x+2,y+1);dot(x+1,y+2)}
- const banner=str=>{const w=str.length*4+5,bx=(SN.DW-w)>>1,by=30;for(let x=bx;x<bx+w;x++)for(let y=by;y<by+11;y++)off(x,y);for(let x=bx;x<bx+w;x++){dot(x,by);dot(x,by+10)}for(let y=by;y<by+11;y++){dot(bx,y);dot(bx+w-1,y)}text(str,bx+3,by+3)};
+ const banner=str=>{const w=str.length*4+5,bx=(SN.DW-w)>>1,by=SN.Y0+((SN.R*4-11)>>1);for(let x=bx;x<bx+w;x++)for(let y=by;y<by+11;y++)off(x,y);for(let x=bx;x<bx+w;x++){dot(x,by);dot(x,by+10)}for(let y=by;y<by+11;y++){dot(bx,y);dot(bx+w-1,y)}text(str,bx+3,by+3)};
  if(sn.over)banner('GAME OVER');else if(sn.paused)banner('PAUSE');
  g.clearRect(0,0,snW,snH);const s=u*.84;
  for(let y=0;y<SN.DH;y++)for(let x=0;x<SN.DW;x++){g.fillStyle=on[y*SN.DW+x]?'rgba(24,34,16,.92)':'rgba(40,60,20,.12)';g.fillRect(ox+x*u,oy+y*u,s,s)}}
@@ -727,7 +720,7 @@ const RGAMES={
  sudoku:{name:'Sudoku',emoji:'🔢',high:false,diffs:['facil','medio','dificil'],ok:(s,dd)=>s>={facil:20,medio:30,dificil:40}[dd]&&s<=86400},
  minesweeper:{name:'Campo Minado',emoji:'💣',high:false,diffs:['facil','medio','dificil'],ok:(s,dd)=>s>={facil:3,medio:8,dificil:15}[dd]&&s<=86400},
  'sete-erros':{name:'7 Erros',emoji:'🔍',high:false,diffs:['normal'],ok:s=>s>=8&&s<=86400},
- snake:{name:'Snake',emoji:'🐍',high:true,diffs:['normal'],ok:s=>s>0&&s<=250}};
+ snake:{name:'Snake',emoji:'🐍',high:true,diffs:['normal'],ok:s=>s>0&&s<=600}};
 const RDIFF={normal:'Normal',facil:'Fácil',medio:'Médio',dificil:'Difícil'},LVL={easy:'facil',med:'medio',hard:'dificil'};
 const rkGet=(k,def)=>{try{const v=localStorage.getItem('cantus_rk_'+k);return v==null?def:JSON.parse(v)}catch{return def}};
 const rkSet=(k,v)=>{try{localStorage.setItem('cantus_rk_'+k,JSON.stringify(v))}catch(e){}};
