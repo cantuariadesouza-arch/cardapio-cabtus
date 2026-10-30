@@ -219,18 +219,30 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 .rkblk .rk-row-i.me{background:linear-gradient(90deg,#ffe08a,#ffd1dc)}
 .rk-empty.sm{padding:14px 6px;font-size:14px}
 .card:nth-child(7){animation-delay:.48s}.card:nth-child(7) .icon{animation-delay:-3s}
-/* Snake: celular retrô original da Cantú's, em tela cheia, com controles no rodapé */
+/* Snake: celular retrô original da Cantú's (vinho e creme), com o jogo na tela LCD e controles no rodapé */
 .snakeg{background:linear-gradient(180deg,#fff1e6,#f6d4c6)}
 body.lock{overflow:hidden;overscroll-behavior:none}
-#sn-board{display:flex;padding:8px max(8px,env(safe-area-inset-right)) 4px max(8px,env(safe-area-inset-left));touch-action:none}
-.phone{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:7px;padding:9px 11px 10px;border-radius:30px 30px 36px 36px;background:radial-gradient(120% 40% at 25% 0%,rgba(255,255,255,.3),transparent 55%),linear-gradient(90deg,#5a1226,#8f2741 14%,#ad3652 50%,#8f2741 86%,#5a1226);box-shadow:inset 0 2px 2px rgba(255,255,255,.4),inset 0 -6px 10px rgba(0,0,0,.3),0 5px 0 #4a0f20,0 14px 28px rgba(94,20,40,.35);user-select:none;-webkit-user-select:none}
-.ph-slot{width:58px;height:6px;border-radius:6px;background:#3d0b19;box-shadow:inset 0 1px 2px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.25);flex-shrink:0}
+#sn-board{display:flex;align-items:center;justify-content:center;padding:8px max(10px,env(safe-area-inset-right)) 6px max(10px,env(safe-area-inset-left));touch-action:none}
+.phone{height:100%;aspect-ratio:.74;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px 12px;border-radius:34px 34px 42px 42px;background:radial-gradient(120% 35% at 25% 0%,rgba(255,255,255,.32),transparent 55%),linear-gradient(90deg,#5a1226,#8f2741 14%,#ad3652 50%,#8f2741 86%,#5a1226);box-shadow:inset 0 2px 2px rgba(255,255,255,.4),inset 0 -6px 10px rgba(0,0,0,.3),0 5px 0 #4a0f20,0 14px 28px rgba(94,20,40,.35);user-select:none;-webkit-user-select:none}
+.ph-top{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-top:2px}
+.ph-cam{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#6b5560,#1c0810);box-shadow:0 1px 0 rgba(255,255,255,.25)}
+.ph-slot{width:58px;height:6px;border-radius:6px;background:#3d0b19;box-shadow:inset 0 1px 2px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.25)}
 .ph-brand{font-weight:800;letter-spacing:.26em;font-size:13px;line-height:1;color:#fff1e6;text-shadow:0 1px 0 rgba(0,0,0,.35);flex-shrink:0}
 .ph-screen{flex:1;min-height:0;width:100%;display:flex;padding:9px;border-radius:18px;background:linear-gradient(#3b1321,#200810);box-shadow:inset 0 3px 8px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.22)}
 .lcd{position:relative;flex:1;min-width:0;border-radius:8px;background:radial-gradient(ellipse at 50% 40%,#d3e3b1 0,#b3c492 60%,#97a979 100%);box-shadow:inset 0 0 14px rgba(30,50,10,.4),inset 0 3px 5px rgba(0,0,0,.3);overflow:hidden}
 .lcd::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.18),transparent 40%);pointer-events:none}
 .lcd canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.ph-chin{display:flex;gap:6px;flex-shrink:0}.ph-chin i{width:22px;height:4px;border-radius:4px;background:rgba(0,0,0,.28);box-shadow:0 1px 0 rgba(255,255,255,.18)}
+.lcd.poweron{animation:poweron 1.2s ease-out}.lcd.lcdblink{animation:lcdblink .9s steps(1)}
+@keyframes poweron{0%{filter:brightness(.2)}35%{filter:brightness(.2)}70%{filter:brightness(1.18)}100%{filter:none}}
+@keyframes lcdblink{0%,40%,80%{filter:brightness(.45)}20%,60%,100%{filter:none}}
+.ph-deck{width:100%;display:flex;flex-direction:column;align-items:center;gap:7px;flex-shrink:0;padding-top:2px}
+.ph-row1{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;width:92%;align-items:center}
+.ph-soft{height:9px;border-radius:9px;background:linear-gradient(#fff6ec,#e8cdb9);box-shadow:0 2px 0 #4a0f20}
+.ph-navk{position:relative;width:58px;height:28px;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,#fff6ec,#e3c3ad);box-shadow:0 3px 0 #4a0f20,inset 0 -2px 3px rgba(0,0,0,.15)}
+.ph-navk::after{content:"";position:absolute;inset:8px 20px;border-radius:50%;background:#f0d8c6;box-shadow:inset 0 1px 2px rgba(0,0,0,.25)}
+.ph-row2{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 12px;width:80%}
+.ph-row2 i{height:10px;border-radius:10px;background:linear-gradient(#fff6ec,#e8cdb9);box-shadow:0 2px 0 #4a0f20}
+.phone.compact .ph-row2{grid-template-columns:repeat(6,1fr);gap:6px;width:92%}.phone.compact .ph-row2 i{height:8px}
 .sn-pad{flex-shrink:0;display:grid;grid-template-columns:repeat(3,clamp(64px,20vw,84px));grid-template-rows:repeat(3,clamp(64px,8.6dvh,76px));gap:6px;justify-content:center;padding:6px max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));touch-action:none}
 .pb{border-radius:20px;font-size:28px;color:#fff;background:linear-gradient(180deg,#d14a68,#8b2941);box-shadow:0 5px 0 #5e1528,0 8px 16px rgba(139,41,65,.28);touch-action:none}
 .pb:active,.pb.press{transform:translateY(4px)!important;box-shadow:0 1px 0 #5e1528}
@@ -238,6 +250,17 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 .pb.mid:active,.pb.mid.press{box-shadow:0 1px 0 #c27a12}
 .pb.rs{width:56px;height:56px;place-self:center;font-size:22px;border-radius:16px;background:#fff;color:var(--wine);box-shadow:0 4px 0 rgba(122,31,54,.2)}
 .pb.rs:active,.pb.rs.press{box-shadow:0 1px 0 rgba(122,31,54,.2)}
+/* Ver partida (Sudoku, Campo Minado, 7 Erros) */
+.revbar{display:flex;flex-direction:column;gap:6px;padding:8px 12px;background:rgba(255,255,255,.88);box-shadow:0 4px 12px rgba(122,31,54,.12);flex-shrink:0}
+.rvt{display:flex;justify-content:space-between;align-items:center;gap:8px}.rvt b{color:var(--wine);font-size:16px}.rvx{font-weight:800;color:var(--muted)}
+.rvb{display:flex;flex-wrap:wrap;gap:6px}.rvb button{flex:1 1 auto;min-height:40px;padding:6px 12px;border-radius:12px;background:#fff0e4;color:var(--wine);font-weight:800;font-size:14px}
+.rvb button.pri{background:linear-gradient(180deg,#d14a68,#8b2941);color:#fff}
+.reviewing .hud{display:none}.reviewing .bottom{opacity:.35;pointer-events:none}.reviewing .lvl{opacity:.45;pointer-events:none}
+.su-c .badn{font-size:calc(var(--cs)*.46);line-height:1;color:#e0233f}.su-c .fixn{font-size:calc(var(--cs)*.3);line-height:1;color:#1f9d55;font-weight:800}
+.su-c.solv{color:#1f9d55}
+.mn-c.flagok{background:#d7f5d0}.mn-c.flagbad{background:#ffe0e3}
+.mk.lost{stroke:#e5484d;stroke-dasharray:7 5;stroke-dashoffset:0;animation:none}
+.reviewing .mk.hint{stroke:#2fbf71}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
@@ -306,7 +329,7 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 
 <section id="snake" class="game snakeg hide">
  <div class="board" id="sn-board">
-  <div class="phone" id="sn-phone"><span class="ph-slot"></span><span class="ph-brand">❤️ CANTÚ'S</span><div class="ph-screen"><div class="lcd" id="sn-lcd"><canvas id="sn-c"></canvas></div></div><div class="ph-chin"><i></i><i></i><i></i></div></div>
+  <div class="phone" id="sn-phone"><div class="ph-top"><span class="ph-cam"></span><span class="ph-slot"></span></div><span class="ph-brand">❤️ CANTÚ'S</span><div class="ph-screen"><div class="lcd" id="sn-lcd"><canvas id="sn-c"></canvas></div></div><div class="ph-deck" aria-hidden="true"><div class="ph-row1"><span class="ph-soft"></span><span class="ph-navk"></span><span class="ph-soft"></span></div><div class="ph-row2"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
   <div id="npause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>A cobrinha espera por você.</p><button class="play" onclick="snPause()">▶ Continuar</button><button class="ghost" onclick="snNew()">↺ Recomeçar</button></div></div>
   <div id="nover" class="overlay hide"><div class="panel"><h2>Fim de jogo!</h2><div class="big" id="nbig">0</div><div class="badge hide" id="nrec">🏆 Novo recorde!</div><p id="nresult"></p><button class="play" onclick="snNew()">Jogar de novo</button></div></div>
  </div>
@@ -316,11 +339,12 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 
 <section id="sudoku" class="game sudo hide">
  <div class="hud"><div class="chips"><span class="chip main">🔎 <span><span id="su-chklbl">Revisões</span>: <b id="su-chk">0</b>/<span id="su-max">2</span></span></span><span class="chip">🏆 <span id="su-best">—</span></span></div><button class="pbtn" id="spb" onclick="suPause()">⏸ Pausar</button></div>
+ <div class="revbar hide" id="srev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="srvx"></span></div><div class="rvb"><button onclick="revResult('s')">Ver resultado</button><button id="su-solbtn" onclick="revSol()">Mostrar solução completa</button><button class="pri" onclick="revNew('s')">Novo jogo</button><button onclick="menu()">Início</button></div></div>
  <div class="board nboard" id="su-board">
   <div class="lvl" id="su-seg"><button data-d="easy">🟢 Fácil</button><button data-d="med">🟡 Médio</button><button data-d="hard">🔴 Difícil</button></div>
   <div class="su-grid" id="su-grid"></div>
   <div id="spause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>O Sudoku espera por você.</p><button class="play" onclick="suPause()">▶ Continuar</button><button class="ghost" onclick="suNew()">↺ Recomeçar com outro</button></div></div>
-  <div id="sover" class="overlay hide"><div class="panel"><h2 id="stitle">Parabéns!</h2><div class="big" id="sbig">0:00</div><div class="badge hide" id="srec">🏆 Novo recorde!</div><p id="sresult"></p><button class="play" onclick="suNew()">Novo Sudoku</button></div></div>
+  <div id="sover" class="overlay hide"><div class="panel"><h2 id="stitle">Parabéns!</h2><div class="big" id="sbig">0:00</div><div class="badge hide" id="srec">🏆 Novo recorde!</div><p id="sresult"></p><button class="play" onclick="suNew()">Novo Sudoku</button><button class="ghost" onclick="revOpen('s')">👀 Ver partida</button></div></div>
   <div id="scheck" class="overlay hide"><div class="panel"><h2 id="su-chkt">Há erros no seu Sudoku 🧐</h2><p id="su-chkmsg" style="margin-top:10px"></p><button class="play" id="su-chkbtn" onclick="suReview()">Continuar</button></div></div>
  </div>
  <div class="bottom"><div class="su-tools"><button class="tool" id="su-notes" onclick="suToggleNotes()">✏️ Anotar: não</button><button class="tool" onclick="suErase()">⌫ Apagar</button><button class="tool" id="su-check" onclick="suCheck()">✅ Revisar</button></div><div class="su-pad" id="su-pad"></div></div>
@@ -328,21 +352,23 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 
 <section id="mines" class="game mines hide">
  <div class="hud"><div class="chips"><span class="chip main">💣 <b id="mn-left">10</b></span><span class="chip">⏱ <span id="mn-time">0:00</span></span><span class="chip">🏆 <span id="mn-best">—</span></span></div><button class="pbtn" id="mpb" onclick="mnPause()">⏸ Pausar</button></div>
+ <div class="revbar hide" id="mrev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="mrvx"></span></div><div class="rvb"><button onclick="revResult('m')">Ver resultado</button><button class="pri" onclick="revNew('m')">Novo jogo</button><button onclick="menu()">Início</button></div></div>
  <div class="board nboard" id="mn-board">
   <div class="lvl" id="mn-seg"><button data-d="easy">🟢 Fácil</button><button data-d="med">🟡 Médio</button><button data-d="hard">🔴 Difícil</button></div>
   <div class="mn-scroll" id="mn-scroll"><div class="mn-grid" id="mn-grid"></div></div>
   <div id="mpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>As bombas não vão a lugar nenhum.</p><button class="play" onclick="mnPause()">▶ Continuar</button><button class="ghost" onclick="mnNew()">↺ Recomeçar</button></div></div>
-  <div id="mover" class="overlay hide"><div class="panel"><h2 id="mtitle">Você venceu!</h2><div class="big" id="mbig">0:00</div><div class="badge hide" id="mrec">🏆 Novo recorde!</div><p id="mresult"></p><button class="play" onclick="mnNew()">Nova partida</button></div></div>
+  <div id="mover" class="overlay hide"><div class="panel"><h2 id="mtitle">Você venceu!</h2><div class="big" id="mbig">0:00</div><div class="badge hide" id="mrec">🏆 Novo recorde!</div><p id="mresult"></p><button class="play" onclick="mnNew()">Nova partida</button><button class="ghost" onclick="revOpen('m')">👀 Ver partida</button></div></div>
  </div>
  <div class="bottom" style="flex-direction:column;align-items:stretch;gap:6px;padding-top:6px"><div class="su-tools"><button class="tool on" id="mn-open" onclick="mnMode(false)">⛏️ Abrir</button><button class="tool" id="mn-flag" onclick="mnMode(true)">🚩 Bandeira</button></div><div class="mn-zoom"><button class="zbtn" aria-label="Diminuir tabuleiro" onclick="mnZoom(-1)">－</button><span class="hint">Segure uma casa para 🚩</span><button class="zbtn" aria-label="Aumentar tabuleiro" onclick="mnZoom(1)">＋</button></div></div>
 </section>
 
 <section id="diff" class="game diffg hide">
  <div class="hud"><div class="chips"><span class="chip main">🔍 <b id="df-found">0</b>/7</span><span class="chip">⏱ <span id="df-time">0:00</span></span><span class="chip">🏆 <span id="df-best">—</span></span></div><button class="pbtn" id="fpb" onclick="dfPause()">⏸ Pausar</button></div>
+ <div class="revbar hide" id="frev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="frvx"></span></div><div class="rvb"><button onclick="revResult('f')">Ver resultado</button><button class="pri" onclick="revNew('f')">Próxima cena</button><button onclick="menu()">Início</button></div></div>
  <div class="board nboard">
   <div class="df-wrap" id="df-wrap"><div class="df-card"><span class="df-tag">A</span><svg id="df-a" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet"></svg></div><div class="df-card"><span class="df-tag">B</span><svg id="df-b" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet"></svg></div></div>
   <div id="fpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>As diferenças esperam por você.</p><button class="play" onclick="dfPause()">▶ Continuar</button><button class="ghost" onclick="dfNew()">↺ Recomeçar com outra cena</button></div></div>
-  <div id="fover" class="overlay hide"><div class="panel"><h2 id="ftitle">Achou todas!</h2><div class="big" id="fbig">0:00</div><div class="badge hide" id="frec">🏆 Novo recorde!</div><p id="fresult"></p><button class="play" onclick="dfNew()">Próxima cena</button></div></div>
+  <div id="fover" class="overlay hide"><div class="panel"><h2 id="ftitle">Achou todas!</h2><div class="big" id="fbig">0:00</div><div class="badge hide" id="frec">🏆 Novo recorde!</div><p id="fresult"></p><button class="play" onclick="dfNew()">Próxima cena</button><button class="ghost" onclick="revOpen('f')">👀 Ver partida</button></div></div>
  </div>
  <div class="bottom"><span class="hint">Toque nas diferenças em qualquer imagem. Toque errado: +5s</span><button class="jump" id="df-hint" onclick="dfHint()">💡 Dica (3)</button></div>
 </section>
@@ -374,10 +400,12 @@ function togglePause(){if(!mode||mode==='block')return;if(mode==='dino'?d.dead:b
 function frame(t){if(!mode||paused)return;let dt=Math.min((t-last)/1000,.04);last=t;if(mode==='dino')drawDino(dt);else if(mode==='basket')drawBasket(dt);raf=requestAnimationFrame(frame)}window.addEventListener('resize',()=>{if(mode)size()});
 
 // ---------- Kangaroo Run ----------
-// A física (tamanhos, velocidade, gravidade, pulo, obstáculos e colisão) é a mesma da versão anterior; só o desenho mudou.
+// Tamanhos, gravidade, pulo e colisão são os de antes. A velocidade agora começa baixa (105 px/s) e sobe com a pontuação até o máximo de antes (510).
+// A distância entre obstáculos é a mesma de antes (calculada com a velocidade antiga), só que percorrida mais devagar.
+// Exceção: se o espaço ficasse longo demais para um pulo só cobrir dois obstáculos e curto demais para pousar e pular de novo, o próximo nasce um pouco mais longe.
 function jump(){if(mode==='dino'&&!d.dead&&d.y===0){d.vy=Math.max(530,H*1.25)}}$('jump').addEventListener('pointerdown',e=>{e.preventDefault();jump()});$('dboard').addEventListener('pointerdown',e=>{if(e.target.tagName==='CANVAS'){e.preventDefault();jump()}});document.addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();jump()}});
-function drawDino(dt){let g=ctx,ground=H*.84,unit=Math.max(24,Math.min(35,H*.075)),dx=Math.max(14,W*.05);
- let speed=Math.min(510,Math.max(185,W*.32)+d.score*.07);d.score+=dt*18;$('ds').textContent=Math.floor(d.score);d.vy-=1450*dt;d.y=Math.max(0,d.y+d.vy*dt);if(d.y===0)d.vy=0;d.spawn-=dt;if(d.spawn<=0){d.obstacles.push({x:W+30,w:unit*.55,h:unit*(.8+Math.random()*.6)});d.spawn=Math.max(.72,1.55-d.score/550)+Math.random()*.3}d.obstacles.forEach(o=>o.x-=speed*dt);d.obstacles=d.obstacles.filter(o=>o.x>-70);
+function drawDino(dt){let g=ctx,ground=H*.84,unit=Math.max(24,Math.min(35,H*.075)),dx=W*.37;
+ let speed=Math.min(510,105+d.score*.087),oldSpeed=Math.min(510,Math.max(185,W*.32)+d.score*.07);d.score+=dt*18;$('ds').textContent=Math.floor(d.score);d.vy-=1450*dt;d.y=Math.max(0,d.y+d.vy*dt);if(d.y===0)d.vy=0;d.spawn-=speed*dt;if(d.spawn<=0){d.obstacles.push({x:W+30,w:unit*.55,h:unit*(.8+Math.random()*.6)});let gap=(Math.max(.72,1.55-d.score/550)+Math.random()*.3)*oldSpeed;const v0=Math.max(530,H*1.25),dis=Math.sqrt(v0*v0-2900*(unit*1.4-11)),air=2*v0/1450,cover=2*dis/1450-(unit*1.25-10)/speed,gt=gap/speed;if(gt>cover-.06&&gt<air+.08)gap=speed*(air+.08);d.spawn=gap}d.obstacles.forEach(o=>o.x-=speed*dt);d.obstacles=d.obstacles.filter(o=>o.x>-70);
  for(let o of d.obstacles){if(!d.dead&&dx+unit*.7>o.x+5&&dx+5<o.x+o.w&&ground-d.y-unit+7<ground&&ground-d.y-4>ground-o.h+7){d.dead=true;const s=Math.floor(d.score);save('dino',s);$('dr').textContent=best('dino');paused=true;vib([50,40,90]);burst(d.fx,dx+unit*.6,ground-d.y-unit*.7,18,['#ffd23f','#ff8a5c','#fff'],200,{shape:'star',size:5});showOver('d',s,'Você fez '+s+' pontos',s>d.startBest&&s>0)}}
  // efeitos visuais
  d.t+=dt;d.off+=speed*dt;const air=d.y>0;if(d.air&&!air)burst(d.fx,dx+unit*.5,ground,8,['#d9a274','#e9bf96'],90,{shape:'c',size:5,up:60,decay:2.2});d.air=air;
@@ -515,14 +543,14 @@ function suInit(){const gr=$('su-grid');for(let i=0;i<81;i++){const c=document.c
  for(let n=1;n<=9;n++){const bt=document.createElement('button');bt.className='nk';bt.textContent=n;bt.onclick=()=>suInput(n);$('su-pad').append(bt)}
  segInit('su-seg',dd=>{setPref('su_diff',dd);suNew(dd)})}
 function startSudoku(){enterGame('sudoku');suNew(getPref('su_diff','easy'))}
-function suNew(diff){diff=diff||su.diff||'easy';const{sol,p}=suMake(diff);su={diff,sol,given:p.map(v=>v>0),val:p.slice(),notes:Array(81).fill(0),marks:Array(81).fill(false),sel:-1,notesMode:false,checks:0,maxChecks:diff==='hard'?1:2,time:0,running:true,paused:false,over:false};
+function suNew(diff){revEnd('s');diff=diff||su.diff||'easy';const{sol,p}=suMake(diff);su={diff,sol,given:p.map(v=>v>0),val:p.slice(),notes:Array(81).fill(0),marks:Array(81).fill(false),sel:-1,notesMode:false,checks:0,maxChecks:diff==='hard'?1:2,time:0,running:true,paused:false,over:false};
  $('sover').classList.add('hide');$('scheck').classList.add('hide');setPause('s',false);segSet('su-seg',diff);$('su-chk').textContent=0;$('su-max').textContent=su.maxChecks;$('su-chklbl').textContent=su.maxChecks===1?'Revisão':'Revisões';$('su-best').textContent=bestTxt('sudoku_'+diff);suNotesBtn();suSize();suRender();anim($('su-grid'),'fresh')}
 function suSize(){const bd=$('su-board').getBoundingClientRect(),sh=$('su-seg').offsetHeight;let s=Math.floor(Math.min(bd.width-24,bd.height-sh-28,560));s=Math.max(180,s);const g=$('su-grid');g.style.width=g.style.height=s+'px';g.style.gridTemplateRows='repeat(9,1fr)';g.style.setProperty('--cs',(s/9)+'px')}
 function suSelect(i){if(su.over||su.paused)return;su.sel=i;suRender()}
 function suRender(){const cells=$('su-grid').children,s=su.sel,sv=s>=0?su.val[s]:0,sr=s/9|0,sc=s%9,sb=s>=0?(sr/3|0)*3+(sc/3|0):-1,done=Array(10).fill(0);
  for(let i=0;i<81;i++){const c=cells[i],r=i/9|0,cc=i%9,bx=(r/3|0)*3+(cc/3|0),v=su.val[i];if(v)done[v]++;
   c.classList.toggle('sel',i===s);c.classList.toggle('peer',s>=0&&i!==s&&(r===sr||cc===sc||bx===sb));c.classList.toggle('same',!!sv&&i!==s&&v===sv);c.classList.toggle('given',su.given[i]);c.classList.toggle('bad',!!su.marks[i]);
-  const html=v?String(v):su.notes[i]?'<div class="nt">'+[1,2,3,4,5,6,7,8,9].map(n=>'<span>'+(su.notes[i]&1<<n?n:'')+'</span>').join('')+'</div>':'';if(c._h!==html){c.innerHTML=html;c._h=html}}
+  let html;if(su.review){const ok=v===su.sol[i];html=su.given[i]?String(v):su.review==='sol'?String(su.sol[i]):ok?String(v):`<span class="badn">${v||''}</span><span class="fixn">${su.sol[i]}</span>`;c.classList.toggle('bad',su.review==='mine'&&!su.given[i]&&!ok);c.classList.toggle('solv',su.review==='sol'&&!su.given[i])}else{c.classList.remove('solv');html=v?String(v):su.notes[i]?'<div class="nt">'+[1,2,3,4,5,6,7,8,9].map(n=>'<span>'+(su.notes[i]&1<<n?n:'')+'</span>').join('')+'</div>':''}if(c._h!==html){c.innerHTML=html;c._h=html}}
  [...$('su-pad').children].forEach((bt,k)=>bt.classList.toggle('used',done[k+1]>=9));$('su-check').disabled=!su.val.every(v=>v)}
 // Sem cronômetro na tela e sem marcar erros: a conferência acontece quando todas as casas estão preenchidas.
 function suInput(n){if(mode!=='sudoku'||su.over||su.paused)return;const i=su.sel;if(i<0||su.given[i])return;const cell=$('su-grid').children[i];
@@ -555,7 +583,7 @@ document.addEventListener('keydown',e=>{if(mode!=='sudoku')return;if(/^[1-9]$/.t
 const MN={easy:[8,8,10],med:[12,12,25],hard:[16,16,50]};
 let mnZ=1;
 function startMines(){enterGame('mines');mnNew(getPref('mn_diff','easy'))}
-function mnNew(diff){diff=diff||mn.diff||'easy';const[R,C,M]=MN[diff];mn={diff,R,C,M,mine:new Uint8Array(R*C),open:new Uint8Array(R*C),flag:new Uint8Array(R*C),cnt:new Uint8Array(R*C),first:true,over:false,time:0,running:false,paused:false,flagMode:false,opened:0,flags:0};
+function mnNew(diff){revEnd('m');diff=diff||mn.diff||'easy';const[R,C,M]=MN[diff];mn={diff,R,C,M,mine:new Uint8Array(R*C),open:new Uint8Array(R*C),flag:new Uint8Array(R*C),cnt:new Uint8Array(R*C),first:true,over:false,time:0,running:false,paused:false,flagMode:false,opened:0,flags:0};
  const g=$('mn-grid');g.innerHTML='';g.style.gridTemplateColumns=`repeat(${C},var(--cs))`;for(let i=0;i<R*C;i++){const c=document.createElement('div');c.className='mn-c'+(((i/C|0)+i%C)%2?' b':'');c.dataset.i=i;g.append(c)}
  g.classList.remove('shakeb');anim(g,'fresh');segSet('mn-seg',diff);$('mover').classList.add('hide');setPause('m',false);mnMode(false);$('mn-time').textContent='0:00';$('mn-best').textContent=bestTxt('mines_'+diff);mnLeft();mnSize()}
 // Ocupa toda a largura; se a casa ficar menor que 28px, mantém 28px e o tabuleiro rola (＋/－ ou pinça para zoom).
@@ -572,7 +600,7 @@ function mnOpen(i){if(mn.over||mn.paused||mn.flag[i])return;
 function mnFlood(i0){const cl=$('mn-grid').children,q=[[i0,0]];mn.open[i0]=1;mn.opened++;while(q.length){const[i,dd]=q.shift();mnPaint(i);anim(cl[i],'op',Math.min(dd*22,500));if(!mn.cnt[i])for(const k of mnN(i))if(!mn.open[k]&&!mn.flag[k]&&!mn.mine[k]){mn.open[k]=1;mn.opened++;q.push([k,dd+1])}}}
 function mnFlag(i){if(mn.over||mn.paused||mn.open[i])return;mn.flag[i]^=1;mn.flags+=mn.flag[i]?1:-1;mnPaint(i);anim($('mn-grid').children[i],'pop');mnLeft()}
 function mnCheck(){if(mn.opened===mn.R*mn.C-mn.M)mnWin()}
-function mnLose(i){mn.over=true;mn.running=false;const cl=$('mn-grid').children,tok=mn;cl[i].textContent='💣';cl[i].classList.add('boom');anim(cl[i],'pop');anim($('mn-grid'),'shakeb');vib([80,50,120]);
+function mnLose(i){mn.boom=i;mn.over=true;mn.running=false;const cl=$('mn-grid').children,tok=mn;cl[i].textContent='💣';cl[i].classList.add('boom');anim(cl[i],'pop');anim($('mn-grid'),'shakeb');vib([80,50,120]);
  const rest=shuffle([...Array(mn.R*mn.C).keys()].filter(k=>k!==i&&(mn.mine[k]||mn.flag[k]))),step=Math.min(60,900/Math.max(1,rest.length));
  rest.forEach((k,n)=>setTimeout(()=>{if(mn!==tok)return;const c=cl[k];if(mn.mine[k]&&!mn.flag[k]){c.textContent='💣';c.classList.add('mine');anim(c,'pop')}else if(!mn.mine[k]&&mn.flag[k])c.textContent='❌'},300+n*step));
  setTimeout(()=>{if(mn!==tok||mode!=='mines')return;$('mtitle').textContent='Boom! 💥';showOver('m',fmtT(mn.time),'Você abriu '+Math.round(mn.opened/(mn.R*mn.C-mn.M)*100)+'% do campo. Tente de novo!',false)},300+rest.length*step+700)}
@@ -637,7 +665,7 @@ function dfBuild(){for(let attempt=0;attempt<40;attempt++){
   diffs.push({...h,type,found:false})}
  if(diffs.length<7)continue;const decor=dfDecor(sc),a=dfSvg(decor,objs),b2=dfSvg(decor,B.filter(Boolean));return Math.random()<.5?{a,b:b2,diffs}:{a:b2,b:a,diffs}}}
 function startDiff(){enterGame('diff');df={round:0};dfNew()}
-function dfNew(){clearTimeout(df.auto);const sc=dfBuild();df={round:(df.round||0)+1,diffs:sc.diffs,found:0,hints:3,time:0,running:true,paused:false,auto:0};$('df-a').innerHTML=sc.a;$('df-b').innerHTML=sc.b;$('fover').classList.add('hide');setPause('f',false);$('df-found').textContent=0;$('df-time').textContent='0:00';$('df-best').textContent=bestTxt('diff');dfHintBtn();dfSize();anim($('df-wrap'),'fresh')}
+function dfNew(){revEnd('f');clearTimeout(df.auto);const sc=dfBuild();df={round:(df.round||0)+1,diffs:sc.diffs,found:0,hints:3,time:0,running:true,paused:false,auto:0};$('df-a').innerHTML=sc.a;$('df-b').innerHTML=sc.b;$('fover').classList.add('hide');setPause('f',false);$('df-found').textContent=0;$('df-time').textContent='0:00';$('df-best').textContent=bestTxt('diff');dfHintBtn();dfSize();anim($('df-wrap'),'fresh')}
 function dfSize(){const w=$('df-wrap'),r=w.getBoundingClientRect(),gap=10,row=r.width>r.height*1.15;w.classList.toggle('row',row);const cw=Math.floor(row?Math.min((r.width-gap)/2,r.height*4/3):Math.min(r.width,(r.height-gap)/2*4/3));for(const c of w.children){c.style.width=cw+'px';c.style.height=Math.floor(cw*.75)+'px'}}
 const SVGNS='http://www.w3.org/2000/svg';
 function dfMark(dd,hint){dd.found=true;df.found++;for(const id of ['df-a','df-b']){const c=document.createElementNS(SVGNS,'circle');c.setAttribute('cx',dd.x);c.setAttribute('cy',dd.y);c.setAttribute('r',dd.r);c.setAttribute('pathLength','100');c.setAttribute('class','mk'+(hint?' hint':''));$(id).querySelector('.marks').append(c)}
@@ -647,41 +675,59 @@ function dfTap(e,svg){if(mode!=='diff'||df.paused||!df.running)return;e.preventD
  if(hit){dfMark(hit,false);return}
  df.time+=5;$('df-time').textContent=fmtT(df.time);bump('df-time');vib(40);const m=document.createElementNS(SVGNS,'g');m.setAttribute('class','miss');m.innerHTML=`<path d="M${x-9} ${y-9}L${x+9} ${y+9}M${x+9} ${y-9}L${x-9} ${y+9}" stroke="#e0233f" stroke-width="5" stroke-linecap="round"/><text x="${x}" y="${y-15}" text-anchor="middle" font-size="18" font-weight="800" fill="#e0233f" stroke="#fff" stroke-width="4" paint-order="stroke" font-family="Baloo 2, sans-serif">+5s</text>`;svg.querySelector('.marks').append(m);setTimeout(()=>m.remove(),1000)}
 function dfWin(){df.running=false;const tok=df,tsec=Math.max(1,Math.floor(df.time)),rec=!best('diff')||tsec<best('diff');saveMin('diff',tsec);vib([30,50,30]);
- setTimeout(()=>{if(df!==tok||mode!=='diff')return;$('ftitle').textContent='Achou todas! 🎉';showOver('f',fmtT(tsec),'',rec);let n=3;const tick=()=>{if(df!==tok||mode!=='diff'||$('fover').classList.contains('hide'))return;if(df.hold){$('fresult').textContent='Cena '+df.round+' completa!';return}if(n<=0){dfNew();return}$('fresult').textContent='Cena '+df.round+' completa! Nova cena em '+n+'…';n--;df.auto=setTimeout(tick,1000)};tick()},800)}
+ setTimeout(()=>{if(df!==tok||mode!=='diff')return;$('ftitle').textContent='Achou todas! 🎉';showOver('f',fmtT(tsec),'',rec);let n=5;const tick=()=>{if(df!==tok||mode!=='diff'||$('fover').classList.contains('hide'))return;if(df.hold){$('fresult').textContent='Cena '+df.round+' completa!';return}if(n<=0){dfNew();return}$('fresult').textContent='Cena '+df.round+' completa! Nova cena em '+n+'s';n--;df.auto=setTimeout(tick,1000)};tick()},800)}
 function dfHint(){if(mode!=='diff'||!df.running||df.paused||df.hints<=0)return;df.hints--;dfHintBtn();dfMark(pick(df.diffs.filter(dd=>!dd.found)),true)}
 function dfHintBtn(){const bt=$('df-hint');bt.textContent='💡 Dica ('+df.hints+')';bt.disabled=df.hints<=0}
 function dfPause(){if(!df.running)return;df.paused=!df.paused;setPause('f',df.paused)}
 function dfInit(){for(const id of ['df-a','df-b']){const s=$(id);s.addEventListener('pointerdown',e=>dfTap(e,s))}}
 
+// ---------- Ver partida: mostra o tabuleiro final travado, com uma barra no topo ----------
+const REV={s:{sec:'sudoku',open(){su.review='mine';su.sel=-1;$('su-solbtn').textContent='Mostrar solução completa';$('srvx').textContent=su.val.every((v,k)=>v===su.sol[k])?'Tudo certo ✅':'Erradas em vermelho, número certo em verde';suRender()},again:()=>suNew()},
+ m:{sec:'mines',open(){mnRevealAll();$('mrvx').textContent=mn.boom!=null?'💣 explodiu em vermelho':'Campo limpo ✅'},again:()=>mnNew()},
+ f:{sec:'diff',open(){df.hold=true;clearTimeout(df.auto);dfRevealAll();$('frvx').textContent='Encontradas '+df.found+'/7'},again:()=>dfNew()}};
+function revOpen(p){const R=REV[p];$(p+'over').classList.add('hide');$(p+'rev').classList.remove('hide');$(R.sec).classList.add('reviewing');R.open();nResize()}
+function revResult(p){$(p+'rev').classList.add('hide');$(REV[p].sec).classList.remove('reviewing');$(p+'over').classList.remove('hide');nResize()}
+function revEnd(p){const bar=$(p+'rev');if(!bar||bar.classList.contains('hide'))return;bar.classList.add('hide');$(REV[p].sec).classList.remove('reviewing')}
+function revNew(p){revEnd(p);REV[p].again()}
+function revSol(){su.review=su.review==='sol'?'mine':'sol';$('su-solbtn').textContent=su.review==='sol'?'Mostrar minha grade':'Mostrar solução completa';suRender()}
+function mnRevealAll(){const cl=$('mn-grid').children;for(let k=0;k<mn.R*mn.C;k++){const c=cl[k];if(mn.mine[k]){if(k===mn.boom){c.textContent='💣';c.classList.add('boom')}else if(mn.flag[k]){c.textContent='✅';c.classList.add('flagok')}else{c.textContent='💣';c.classList.add('mine')}}else if(mn.flag[k]){c.textContent='❌';c.classList.add('flagbad')}}}
+function dfRevealAll(){for(const dd of df.diffs)if(!dd.found&&!dd.shown){dd.shown=true;for(const id of ['df-a','df-b']){const c=document.createElementNS(SVGNS,'circle');c.setAttribute('cx',dd.x);c.setAttribute('cy',dd.y);c.setAttribute('r',dd.r);c.setAttribute('class','mk lost');$(id).querySelector('.marks').append(c)}}}
+
 // ---------- Snake ----------
 // Tela LCD de 80x64 "pontos": placar no topo e campo de 19x13 casas (cada casa = 4x4 pontos). A cobra atravessa as bordas e perde ao bater em si mesma.
-const SNF={'0':'111101101101111','1':'010110010010111','2':'111001111100111','3':'111001111001111','4':'101101111001001','5':'111100111001111','6':'111100111101111','7':'111001001001001','8':'111101111101111','9':'111101111001111','A':'010101111101101','E':'111100110100111','G':'111100101101111','H':'101101111101101','I':'111010010010111','M':'101111111101101','O':'111101101101111','P':'111101111100100','R':'110101110101101','S':'111100111001111','U':'101101101101111','V':'101101101101010',' ':'000000000000000'};
+const SNF={'0':'111101101101111','1':'010110010010111','2':'111001111100111','3':'111001111001111','4':'101101111001001','5':'111100111001111','6':'111100111101111','7':'111001001001001','8':'111101111101111','9':'111101111001111','A':'010101111101101','E':'111100110100111','G':'111100101101111','H':'101101111101101','I':'111010010010111','M':'101111111101101','O':'111101101101111','P':'111101111100100','R':'110101110101101','S':'111100111001111','U':'101101101101111','V':'101101101101010','C':'111100100100111','N':'110101101101101','T':'111010010010010',"'":'010010000000000',' ':'000000000000000'};
 const SN={DW:64,DH:64,C:15,R:11,X0:2,Y0:10,HS:1};
 let sn={},snG=null,snW=0,snH=0;
 // A tela LCD ocupa quase todo o aparelho; o tamanho do campo (colunas x linhas) se ajusta à tela a cada partida, com casas de ~22px.
-function snSize(){const r=$('sn-lcd').getBoundingClientRect();snW=r.width;snH=r.height;snG=fitCanvas($('sn-c'),snW,snH);if(sn.snake)snDraw()}
-function snLayout(){const C=Math.max(12,Math.min(20,Math.round(snW/22))),DW=C*4+4,DH=Math.max(44,Math.floor(DW*snH/snW)),HS=snH>380?2:1,Y0=HS===2?17:10,R=Math.max(7,Math.floor((DH-Y0-2)/4));Object.assign(SN,{C,R,DW,DH:Y0+R*4+1,X0:2,Y0,HS})}
+function snSize(){$('sn-phone').classList.toggle('compact',$('sn-board').clientHeight<440);const r=$('sn-lcd').getBoundingClientRect();snW=r.width;snH=r.height;snG=fitCanvas($('sn-c'),snW,snH);if(sn.snake)snDraw()}
+function snLayout(){const C=Math.max(10,Math.min(20,Math.round(snW/22))),DW=C*4+4,DH=Math.max(44,Math.floor(DW*snH/snW)),HS=snH>380?2:1,Y0=HS===2?17:10,R=Math.max(7,Math.floor((DH-Y0-2)/4));Object.assign(SN,{C,R,DW,DH:Y0+R*4+1,X0:2,Y0,HS})}
 function snInit(){$('sn-pad').querySelectorAll('.pb').forEach(k=>k.addEventListener('pointerdown',e=>{e.preventDefault();vib(12);anim(k,'press');setTimeout(()=>k.classList.remove('press'),130);if(k.dataset.k==='r')snNew();else snKey(k.dataset.k)}));
  let sx=0,sy=0,st=false;const bd=$('sn-board');
  bd.addEventListener('touchstart',e=>{if(e.target.closest('.overlay'))return;st=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
  bd.addEventListener('touchmove',e=>{if(!st)return;const dx=e.touches[0].clientX-sx,dy=e.touches[0].clientY-sy;if(Math.max(Math.abs(dx),Math.abs(dy))>22){if(Math.abs(dx)>Math.abs(dy))snDir(Math.sign(dx),0);else snDir(0,Math.sign(dy));st=false}},{passive:true});
  bd.addEventListener('touchend',()=>{st=false},{passive:true})}
 function snKey(k){if(k==='2')snDir(0,-1);else if(k==='8')snDir(0,1);else if(k==='4')snDir(-1,0);else if(k==='6')snDir(1,0);else if(k==='5')snPause()}
-function snDir(dx,dy){if(mode!=='snake'||sn.over||sn.paused)return;const lastD=sn.q.length?sn.q[sn.q.length-1]:sn.dir;if((dx===-lastD.x&&dy===-lastD.y)||(dx===lastD.x&&dy===lastD.y)||sn.q.length>2)return;sn.q.push({x:dx,y:dy})}
+function snDir(dx,dy){if(mode!=='snake'||sn.over||sn.paused||sn.boot>0)return;const lastD=sn.q.length?sn.q[sn.q.length-1]:sn.dir;if((dx===-lastD.x&&dy===-lastD.y)||(dx===lastD.x&&dy===lastD.y)||sn.q.length>2)return;sn.q.push({x:dx,y:dy})}
 function snFood(){const free=[];for(let y=0;y<SN.R;y++)for(let x=0;x<SN.C;x++)if(!sn.snake.some(p=>p.x===x&&p.y===y))free.push({x,y});return free.length?pick(free):null}
-function startSnake(){enterGame('snake');document.body.classList.add('lock');snSize();snNew()}
-function snNew(){snSize();snLayout();const y=SN.R>>1;sn={snake:[{x:7,y},{x:6,y},{x:5,y},{x:4,y}],dir:{x:1,y:0},q:[],score:0,over:false,paused:false,speed:300,acc:0,t:0,last:performance.now(),startBest:best('snake'),tok:{}};sn.food=snFood();
- $('nover').classList.add('hide');setPause('n',false);$('sn-mid').textContent='⏸';snDraw();const tok=sn.tok;const loop=now=>{if(mode!=='snake'||sn.tok!==tok)return;const dt=Math.min(now-sn.last,100);sn.last=now;if(!sn.paused&&!sn.over){sn.t+=dt;sn.acc+=dt;while(sn.acc>=sn.speed&&!sn.over){sn.acc-=sn.speed;snStep()}}snDraw();requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+function startSnake(){enterGame('snake');document.body.classList.add('lock');snSize();snNew(true)}
+function snNew(boot){snSize();snLayout();const y=SN.R>>1;sn={snake:[{x:7,y},{x:6,y},{x:5,y},{x:4,y}],dir:{x:1,y:0},q:[],score:0,over:false,paused:false,speed:300,acc:0,t:0,last:performance.now(),startBest:best('snake'),tok:{},boot:boot===true?1600:0};sn.food=snFood();if(sn.boot)anim($('sn-lcd'),'poweron');
+ $('nover').classList.add('hide');setPause('n',false);$('sn-mid').textContent='⏸';snDraw();const tok=sn.tok;const loop=now=>{if(mode!=='snake'||sn.tok!==tok)return;const dt=Math.min(now-sn.last,100);sn.last=now;if(sn.boot>0)sn.boot-=dt;else if(!sn.paused&&!sn.over){sn.t+=dt;sn.acc+=dt;while(sn.acc>=sn.speed&&!sn.over){sn.acc-=sn.speed;snStep()}}snDraw();requestAnimationFrame(loop)};requestAnimationFrame(loop)}
 // Começa devagar (300 ms por passo) e acelera aos poucos com a comida e o tempo de partida, até 95 ms por passo.
 function snSpeed(){return Math.max(95,Math.round(300*Math.pow(.972,sn.score)-Math.min(60,sn.t/1000*.5)))}
 function snStep(){sn.speed=snSpeed();if(sn.q.length)sn.dir=sn.q.shift();const h=sn.snake[0],nx=(h.x+sn.dir.x+SN.C)%SN.C,ny=(h.y+sn.dir.y+SN.R)%SN.R,eat=sn.food&&nx===sn.food.x&&ny===sn.food.y,body=eat?sn.snake:sn.snake.slice(0,-1);
  if(body.some(p=>p.x===nx&&p.y===ny)){snOver();return}
  sn.snake.unshift({x:nx,y:ny});if(eat){sn.score++;sn.food=snFood();vib(15);if(!sn.food){snOver();return}}else sn.snake.pop()}
-function snOver(){sn.over=true;save('snake',sn.score);vib([50,40,90]);const tok=sn.tok,rec=sn.score>sn.startBest&&sn.score>0;setTimeout(()=>{if(sn.tok!==tok||mode!=='snake')return;showOver('n',sn.score,'Você fez '+sn.score+' ponto'+(sn.score===1?'':'s')+'.',rec)},1100)}
+function snOver(){sn.over=true;save('snake',sn.score);vib([50,40,90]);anim($('sn-lcd'),'lcdblink');const tok=sn.tok,rec=sn.score>sn.startBest&&sn.score>0;setTimeout(()=>{if(sn.tok!==tok||mode!=='snake')return;showOver('n',sn.score,'Você fez '+sn.score+' ponto'+(sn.score===1?'':'s')+'.',rec)},1100)}
 function snPause(){if(sn.over)return;sn.paused=!sn.paused;sn.last=performance.now();setPause('n',sn.paused);$('sn-mid').textContent=sn.paused?'▶':'⏸'}
 function snDraw(){const g=snG;if(!g)return;const u=Math.min(snW/SN.DW,snH/SN.DH),ox=(snW-u*SN.DW)/2,oy=(snH-u*SN.DH)/2,on=new Uint8Array(SN.DW*SN.DH);
  const dot=(x,y)=>{if(x>=0&&x<SN.DW&&y>=0&&y<SN.DH)on[y*SN.DW+x]=1},off=(x,y)=>{if(x>=0&&x<SN.DW&&y>=0&&y<SN.DH)on[y*SN.DW+x]=0};
  const text=(str,x,y,k=1)=>{for(const ch of str){const f=SNF[ch]||SNF[' '];for(let i=0;i<15;i++)if(f[i]==='1')for(let a=0;a<k;a++)for(let b=0;b<k;b++)dot(x+(i%3)*k+a,y+(i/3|0)*k+b);x+=4*k}};
+ if(sn.boot>0){// Tela de "ligar": coração e CANTÚ'S aparecendo de cima para baixo
+  const k=SN.DW>=60&&SN.HS===2?2:1,HEART=['0110110','1111111','1111111','0111110','0011100','0001000'],hw=14*k,hy=Math.max(2,((SN.DH-(12*k+6+5*k))>>1)),hx=(SN.DW-hw)>>1;
+  HEART.forEach((row,y)=>[...row].forEach((c,x)=>{if(c==='1')for(let a=0;a<2*k;a++)for(let b=0;b<2*k;b++)dot(hx+x*2*k+a,hy+y*2*k+b)}));
+  const ty=hy+12*k+6,tx=(SN.DW-(27*k))>>1;text("CANTU'S",tx,ty,k);for(let a=0;a<k;a++)for(let b=0;b<k;b++){dot(tx+16*k+2*k+a,ty-2*k+b);dot(tx+16*k+k+a,ty-k-1+b)}
+  const lim=Math.floor((1-sn.boot/1600)*1.5*SN.DH);for(let y=Math.max(0,lim);y<SN.DH;y++)for(let x=0;x<SN.DW;x++)off(x,y);
+  g.clearRect(0,0,snW,snH);const s2=u*.84;for(let y=0;y<SN.DH;y++)for(let x=0;x<SN.DW;x++){g.fillStyle=on[y*SN.DW+x]?'rgba(24,34,16,.92)':'rgba(40,60,20,.12)';g.fillRect(ox+x*u,oy+y*u,s2,s2)}return}
  const num=n=>String(n).padStart(4,'0'),HS=SN.HS,top=SN.Y0-2,bot=SN.Y0+SN.R*4;text(num(sn.score),2,HS===2?2:1,HS);const hi=Math.max(best('snake'),sn.score);text('HI'+num(hi),SN.DW-25,HS===2?5:1);
  for(let x=0;x<SN.DW;x++){dot(x,top);dot(x,bot)}for(let y=top;y<=bot;y++){dot(0,y);dot(SN.DW-1,y)}
  const cell=(c,r)=>[SN.X0+c*4,SN.Y0+r*4];
