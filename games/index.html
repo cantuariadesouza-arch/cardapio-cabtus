@@ -284,6 +284,10 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 .qz-ri{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 4px 12px rgba(122,31,54,.08);border-left:6px solid #e5484d;line-height:1.35}
 .qz-ri.ok{border-left-color:#18a558}.qz-ri.half{border-left-color:#f6a93b}
 .qz-ri .qz-rq{font-weight:800;margin-bottom:4px}.qz-ri div{margin:2px 0;color:var(--muted)}.qz-ri b{color:var(--ink)}
+.df-tip{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:4;width:min(340px,calc(100% - 28px));background:linear-gradient(180deg,#fffaf0,#ffefd6);border:2px solid #f6a93b;border-radius:22px;padding:14px 16px 12px;text-align:center;box-shadow:0 14px 34px rgba(122,31,54,.28);cursor:pointer}
+.df-tip.pop{animation:tippop .35s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes tippop{from{opacity:0;transform:translateX(-50%) scale(.7)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+.df-tip-i{font-size:26px;line-height:1}.df-tip p{margin:4px 0 2px;font-size:19px;font-weight:800;line-height:1.25;color:var(--ink)}.df-tip small{color:var(--muted);font-weight:600}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
@@ -402,10 +406,11 @@ body.lock{overflow:hidden;overscroll-behavior:none}
  <div class="revbar hide" id="frev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="frvx"></span></div><div class="rvb"><button onclick="revResult('f')">Ver resultado</button><button class="pri" onclick="revNew('f')">Próxima cena</button><button onclick="menu()">Início</button></div></div>
  <div class="board nboard">
   <div class="df-wrap" id="df-wrap"><div class="df-card"><span class="df-tag">A</span><svg id="df-a" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet"></svg></div><div class="df-card"><span class="df-tag">B</span><svg id="df-b" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet"></svg></div></div>
+  <div id="df-tip" class="df-tip hide" role="status" aria-live="polite"><span class="df-tip-i">💡</span><p id="df-tip-t"></p><small>Toque para fechar</small></div>
   <div id="fpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>As diferenças esperam por você.</p><button class="play" onclick="dfPause()">▶ Continuar</button><button class="ghost" onclick="dfNew()">↺ Recomeçar com outra cena</button></div></div>
   <div id="fover" class="overlay hide"><div class="panel"><h2 id="ftitle">Achou todas!</h2><div class="big" id="fbig">0:00</div><div class="badge hide" id="frec">🏆 Novo recorde!</div><p id="fresult"></p><button class="play" onclick="dfNew()">Próxima ▶</button><button class="ghost" onclick="revOpen('f')">👀 Ver partida</button></div></div>
  </div>
- <div class="bottom"><span class="hint">Toque nas diferenças em qualquer imagem. Toque errado: +5s</span><button class="jump" id="df-hint" onclick="dfHint()">💡 Dica (3)</button></div>
+ <div class="bottom"><span class="hint">Toque nas diferenças em qualquer imagem. Toque errado: +5s</span><button class="jump" id="df-hint" onclick="dfHint()">💡 Dica (1)</button></div>
 </section>
 
 <script>
@@ -775,7 +780,7 @@ function dfBuild(){for(let attempt=0;attempt<80;attempt++){
  return Math.random()<.5?{a,b:b2,diffs,theme:th.name}:{a:b2,b:a,diffs,theme:th.name}}}
 
 function startDiff(){enterGame('diff');df={round:0};dfNew()}
-function dfNew(){revEnd('f');clearTimeout(df.auto);const sc=dfBuild();df={round:(df.round||0)+1,theme:sc.theme,diffs:sc.diffs,found:0,hints:3,time:0,running:true,paused:false,auto:0};$('df-a').innerHTML=sc.a;$('df-b').innerHTML=sc.b;$('fover').classList.add('hide');setPause('f',false);$('df-found').textContent=0;$('df-time').textContent='0:00';$('df-best').textContent=bestTxt('diff');dfHintBtn();dfSize();anim($('df-wrap'),'fresh')}
+function dfNew(){revEnd('f');clearTimeout(df.auto);const sc=dfBuild();df={round:(df.round||0)+1,theme:sc.theme,diffs:sc.diffs,found:0,hints:1,time:0,running:true,paused:false,auto:0};$('df-a').innerHTML=sc.a;$('df-b').innerHTML=sc.b;$('fover').classList.add('hide');setPause('f',false);$('df-found').textContent=0;$('df-time').textContent='0:00';$('df-best').textContent=bestTxt('diff');dfHintBtn();dfSize();anim($('df-wrap'),'fresh')}
 function dfSize(){const w=$('df-wrap'),r=w.getBoundingClientRect(),gap=10,row=r.width>r.height*1.15;w.classList.toggle('row',row);const cw=Math.floor(row?Math.min((r.width-gap)/2,r.height*4/3):Math.min(r.width,(r.height-gap)/2*4/3));for(const c of w.children){c.style.width=cw+'px';c.style.height=Math.floor(cw*.75)+'px'}}
 const SVGNS='http://www.w3.org/2000/svg';
 function dfMark(dd,hint){dd.found=true;df.found++;for(const id of ['df-a','df-b']){const c=document.createElementNS(SVGNS,'circle');c.setAttribute('cx',dd.x);c.setAttribute('cy',dd.y);c.setAttribute('r',dd.r);c.setAttribute('pathLength','100');c.setAttribute('class','mk'+(hint?' hint':''));$(id).querySelector('.marks').append(c)}
@@ -786,10 +791,21 @@ function dfTap(e,svg){if(mode!=='diff'||df.paused||!df.running)return;e.preventD
  df.time+=5;$('df-time').textContent=fmtT(df.time);bump('df-time');vib(40);const m=document.createElementNS(SVGNS,'g');m.setAttribute('class','miss');m.innerHTML=`<path d="M${x-9} ${y-9}L${x+9} ${y+9}M${x+9} ${y-9}L${x-9} ${y+9}" stroke="#e0233f" stroke-width="5" stroke-linecap="round"/><text x="${x}" y="${y-15}" text-anchor="middle" font-size="18" font-weight="800" fill="#e0233f" stroke="#fff" stroke-width="4" paint-order="stroke" font-family="Baloo 2, sans-serif">+5s</text>`;svg.querySelector('.marks').append(m);setTimeout(()=>m.remove(),1000)}
 function dfWin(){df.running=false;const tok=df,tsec=Math.max(1,Math.floor(df.time)),rec=!best('diff')||tsec<best('diff');saveMin('diff',tsec);vib([30,50,30]);
  setTimeout(()=>{if(df!==tok||mode!=='diff')return;$('ftitle').textContent='Achou todas! 🎉';showOver('f',fmtT(tsec),'Cena '+df.round+' ('+df.theme+') completa! Toque em "Próxima ▶" quando quiser.',rec)},800)}
-function dfHint(){if(mode!=='diff'||!df.running||df.paused||df.hints<=0)return;df.hints--;dfHintBtn();dfMark(pick(df.diffs.filter(dd=>!dd.found)),true)}
-function dfHintBtn(){const bt=$('df-hint');bt.textContent='💡 Dica ('+df.hints+')';bt.disabled=df.hints<=0}
+// Dica em forma de enigma: fala de UMA diferença ainda não encontrada (pelo tipo), sem marcar nada na imagem nem dizer onde. Custa +10s.
+const DF_TIPS={
+ color:['Alguém aqui resolveu trocar de roupa.','Uma das cores não é a mesma de antes.','Alguém mudou de tom sem avisar ninguém.','Teve gente que passou por uma tinta nova.','Um pincel distraído passou por aqui.'],
+ missing:['Tem algo que saiu sem se despedir.','Alguém foi embora e deixou um espaço vazio.','Conte de novo: está faltando alguém.','Um dos objetos resolveu tirar folga.','Sumiu! Mas onde estava antes?'],
+ extra:['Chegou um convidado que não estava na lista.','Alguém apareceu de surpresa.','Tem um intruso nesta cena.','Conte de novo: tem alguém sobrando.','Um visitante entrou sem bater na porta.'],
+ size:['Alguém andou comendo demais… ou de menos.','Nem tudo tem o mesmo tamanho nas duas imagens.','Alguém cresceu ou encolheu de repente.','Compare as medidas: alguém mudou de tamanho.','Um objeto passou por uma lupa mágica.'],
+ move:['Alguém não parou quieto no lugar.','Teve gente que deu uns passinhos para o lado.','Alguém mudou de lugar sem pedir licença.','Um objeto resolveu dar uma voltinha.','Nem todo mundo ficou onde estava.'],
+ flip:['Tem alguém olhando para o lado errado.','Alguém se virou de costas para o outro lado.','Um objeto se olhou no espelho e ficou assim.','Repare para onde cada um está virado.','Alguém deu meia-volta.'],
+ detail:['Repare nos detalhes das estampas e dos números.','Listras, bolinhas ou números: algo mudou.','Olhe de perto: um detalhe não é o mesmo.','Os enfeites de alguém foram trocados.','Conte os detalhes com atenção.']};
+function dfHint(){if(mode!=='diff'||!df.running||df.paused||df.hints<=0)return;const left=df.diffs.filter(dd=>!dd.found);if(!left.length)return;df.hints--;dfHintBtn();
+ const dd=pick(left);df.time+=10;$('df-time').textContent=fmtT(df.time);bump('df-time');vib(15);$('df-tip-t').textContent=pick(DF_TIPS[dd.type]||DF_TIPS.color);const tip=$('df-tip');tip.classList.remove('hide');anim(tip,'pop')}
+function dfTipClose(){$('df-tip').classList.add('hide')}
+function dfHintBtn(){const bt=$('df-hint');bt.textContent='💡 Dica ('+df.hints+')';bt.disabled=df.hints<=0;dfTipClose()}
 function dfPause(){if(!df.running)return;df.paused=!df.paused;setPause('f',df.paused)}
-function dfInit(){for(const id of ['df-a','df-b']){const s=$(id);s.addEventListener('pointerdown',e=>dfTap(e,s))}}
+function dfInit(){$('df-tip').addEventListener('pointerdown',e=>{e.preventDefault();dfTipClose()});for(const id of ['df-a','df-b']){const s=$(id);s.addEventListener('pointerdown',e=>dfTap(e,s))}}
 
 // ---------- Ver partida: mostra o tabuleiro final travado, com uma barra no topo ----------
 const REV={s:{sec:'sudoku',open(){su.review='mine';su.sel=-1;$('su-solbtn').textContent='Mostrar solução completa';$('srvx').textContent=su.val.every((v,k)=>v===su.sol[k])?'Tudo certo ✅':'Erradas em vermelho, número certo em verde';suRender()},again:()=>suNew()},
