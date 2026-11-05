@@ -331,6 +331,27 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 @keyframes cgwin{0%{transform:translate(var(--tx),var(--ty))}30%{transform:translate(calc(var(--tx) + var(--wx)*.3),calc(var(--ty) - var(--wy))) rotate(calc(var(--wr)*.3))}100%{transform:translate(calc(var(--tx) + var(--wx)),calc(var(--ty) + 1000px)) rotate(var(--wr))}}
 .cgask{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(40,12,20,.4);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
 .cgask-b{display:flex;flex-direction:column;gap:8px}.cgask-b .play,.cgask-b .tool{width:100%}.cgask-b .tool{min-height:48px}
+/* Forca */
+.card:nth-child(12){animation-delay:.72s}
+.forcag{background:linear-gradient(180deg,#fff7ec,#fde3d3)}
+.fg-card{gap:10px}
+.fg-top{display:flex;gap:10px;align-items:stretch;background:#fff;border-radius:22px;padding:10px 12px;box-shadow:0 10px 24px rgba(122,31,54,.12)}
+.fg-svg{width:52%;max-width:220px;height:auto;flex-shrink:0}
+.fg-part{opacity:0;transition:opacity .25s}.fg-part.on{opacity:1}
+.fg-x{display:none}.fg-svg.lost .fg-x{display:inline}.fg-svg.lost .fg-ok{display:none}.fg-svg.won .fg-part{opacity:1}.fg-svg.won #g-p1{animation:bump .6s ease 2}
+.fg-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;justify-content:center}
+.fg-lives{font-weight:800;font-size:18px}.fg-misslab{font-size:13px;color:var(--muted);font-weight:700}
+.fg-miss{font-size:20px;font-weight:800;color:#e5484d;letter-spacing:.08em;word-break:break-word}
+.fg-word{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:4px 2px}
+.fg-l{width:30px;height:40px;border-bottom:4px solid var(--wine);display:grid;place-items:end center;font-size:28px;font-weight:800;line-height:1;color:var(--ink);padding-bottom:2px}
+.fg-l.miss{color:#e5484d}.fg-sp{width:14px;height:40px;display:grid;place-items:end center;font-size:26px;font-weight:800}
+.fg-rev{display:flex;flex-direction:column;gap:8px}
+.fg-bottom{flex-direction:column;align-items:stretch;gap:6px;padding-top:6px}
+.fg-kb{display:flex;flex-direction:column;gap:5px}.fg-row{display:flex;justify-content:center;gap:4px}
+.fg-k{flex:1;max-width:40px;min-height:46px;border-radius:10px;background:#fff;color:var(--wine);font-weight:800;font-size:18px;padding:0;box-shadow:0 3px 0 rgba(122,31,54,.2)}
+.fg-k:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(122,31,54,.2)}
+.fg-k.ok{background:#18a558;color:#fff;box-shadow:0 3px 0 #0e6b38}.fg-k.no{background:#e5484d;color:#fff;box-shadow:0 3px 0 #9c1f24;opacity:.85}.fg-k:disabled{cursor:default}
+.fg-tools{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:6px}.fg-tools .tool{min-height:44px;font-size:14px}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
@@ -367,6 +388,7 @@ body.lock{overflow:hidden;overscroll-behavior:none}
   <div class="card" style="--glow:linear-gradient(135deg,#6fd39a,#1d7a4d)"><div class="icon">🃏</div><h2>Paciência</h2><p>O clássico de 7 colunas</p><p class="best" id="kBest"></p><button class="play" onclick="startPaciencia()">Jogar Paciência</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#9aa7ff,#3b3f8f)"><div class="icon">🕷️</div><h2>Spider</h2><p>Monte sequências do Rei ao Ás</p><p class="best" id="wBest"></p><button class="play" onclick="startSpider()">Jogar Spider</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#ffb3c1,#b0344f)"><div class="icon">🂡</div><h2>FreeCell</h2><p>Todas as cartas abertas, sempre com solução</p><p class="best" id="cBest"></p><button class="play" onclick="startFreecell()">Jogar FreeCell</button></div>
+  <div class="card" style="--glow:linear-gradient(135deg,#ffe08a,#e07a2e)"><div class="icon">🔤</div><h2>Forca</h2><p>Descubra a palavra antes que a forca se complete</p><p class="best" id="gBest"></p><button class="play" onclick="startForca()">Jogar Forca</button></div>
  </div>
  <section class="rksec" id="rk-home-sec"><h2 class="rksec-t">🏆 Ranking</h2><p class="rksec-s">Os 5 melhores de cada jogo</p><div class="rkgrid" id="rk-home"></div></section>
  <p style="text-align:center"><a class="back" href="https://cardapio-cantus.lovable.app">← Voltar ao cardápio</a></p>
@@ -448,6 +470,32 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 </section>
 
 <div id="cgask" class="cgask hide"><div class="panel"><h2 id="cgask-t"></h2><p id="cgask-p"></p><div id="cgask-b" class="cgask-b"></div></div></div>
+
+<section id="forca" class="game forcag hide">
+ <div class="hud"><div class="chips"><span class="chip main">🔤 <b id="g-n">1</b>ª</span><span class="chip">⭐ <span id="g-pts">0</span></span><span class="chip">🔥 <span id="g-st">0</span></span></div><button class="pbtn" id="gpb" onclick="fgPause()">⏸ Pausar</button></div>
+ <div class="revbar hide" id="grev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="grvx"></span></div><div class="rvb"><button onclick="revResult('g')">Ver resultado</button><button class="pri" onclick="revNew('g')">Novo jogo</button><button onclick="menu()">Início</button></div></div>
+ <div class="board nboard fg-board">
+  <div class="lvl" id="g-seg"><button data-d="easy">🟢 Fácil</button><button data-d="med">🟡 Médio</button><button data-d="hard">🔴 Difícil</button></div>
+  <div class="qz-card fg-card" id="g-card">
+   <div class="fg-top"><svg id="g-svg" class="fg-svg" viewBox="0 0 200 170" aria-label="Forca">
+    <path d="M20 160H120M45 160V14H120V30" stroke="#8d5524" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M45 44L72 14" stroke="#8d5524" stroke-width="5" stroke-linecap="round"/>
+    <g id="g-p1" class="fg-part"><circle cx="120" cy="48" r="17" fill="#ffe0c2" stroke="#2b1d1a" stroke-width="3"/><g class="fg-ok"><circle cx="114" cy="45" r="2.4" fill="#2b1d1a"/><circle cx="126" cy="45" r="2.4" fill="#2b1d1a"/><path d="M113 54q7 6 14 0" stroke="#2b1d1a" stroke-width="2.4" fill="none" stroke-linecap="round"/></g><g class="fg-x"><path d="M110 41l7 7M117 41l-7 7M123 41l7 7M130 41l-7 7" stroke="#2b1d1a" stroke-width="2.4" stroke-linecap="round"/><path d="M114 57q6 -5 12 0" stroke="#2b1d1a" stroke-width="2.4" fill="none" stroke-linecap="round"/></g></g>
+    <path id="g-p2" class="fg-part" d="M120 65V108" stroke="#b0344f" stroke-width="7" stroke-linecap="round"/>
+    <path id="g-p3" class="fg-part" d="M120 76L100 96" stroke="#b0344f" stroke-width="6" stroke-linecap="round"/>
+    <path id="g-p4" class="fg-part" d="M120 76L140 96" stroke="#b0344f" stroke-width="6" stroke-linecap="round"/>
+    <path id="g-p5" class="fg-part" d="M120 106L104 136" stroke="#7a1f36" stroke-width="7" stroke-linecap="round"/>
+    <path id="g-p6" class="fg-part" d="M120 106L136 136" stroke="#7a1f36" stroke-width="7" stroke-linecap="round"/>
+    <path class="fg-rope" d="M120 14V31" stroke="#c98a3e" stroke-width="3"/></svg>
+    <div class="fg-info"><span class="qz-tag">🏷️ <span id="g-cat"></span></span><div class="fg-lives">❤️ <b id="g-lives">6</b> vidas</div><div class="fg-misslab">Erradas:</div><div class="fg-miss" id="g-miss">—</div></div></div>
+   <div class="fg-word" id="g-word"></div>
+   <div id="g-fb"></div><div id="g-rev" class="fg-rev hide"></div>
+  </div>
+  <div id="gpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>A palavra espera por você.</p><button class="play" onclick="fgPause()">▶ Continuar</button></div></div>
+  <div id="gask" class="overlay hide"><div class="panel"><h2 id="gask-t"></h2><p id="gask-p"></p><button class="play" id="gask-y">Sim</button><button class="ghost" onclick="$('gask').classList.add('hide')">Não, continuar</button></div></div>
+  <div id="gover" class="overlay hide"><div class="panel"><h2 id="gtitle">Fim de jogo!</h2><div class="big" id="gbig">0</div><div class="badge hide" id="grec">🏆 Novo recorde!</div><p id="gresult"></p><button class="play" onclick="fgNew()">Jogar de novo</button><button class="ghost" onclick="revOpen('g')">👀 Ver partida</button></div></div>
+ </div>
+ <div class="bottom fg-bottom"><div class="fg-kb" id="g-kb"></div><div class="fg-tools"><button class="tool" id="g-hint">💡 Revelar letra</button><button class="tool" onclick="fgAsk('restart')">↺ Recomeçar</button><button class="tool" onclick="fgAsk('exit')">Sair</button></div></div>
+</section>
 
 <section id="quiz" class="game quizg hide">
  <div class="hud"><div class="chips"><span class="chip main">📖 <b id="qz-n">1</b>/10</span><span class="chip">⭐ <span id="qz-pts">0</span></span><span class="chip">🔥 <span id="qz-st">0</span></span></div><button class="pbtn" onclick="qzAsk('restart')">↺ Recomeçar</button></div>
@@ -636,7 +684,7 @@ function saveMin(k,n){n=Math.max(1,Math.floor(n));const c=best(k);if(!c||n<c)try
 function getPref(k,def){try{return localStorage.getItem('cantus_'+k)||def}catch{return def}}
 function setPref(k,v){try{localStorage.setItem('cantus_'+k,v)}catch(e){}}
 function bestTxt(k){const v=best(k);return v?fmtT(v):'—'}
-function newBests(){const sd=getPref('su_diff','easy'),md=getPref('mn_diff','easy');$('suBest').textContent='🏆 Recorde ('+DIFF_NAMES[sd]+'): '+bestTxt('sudoku_'+sd);$('mnBest').textContent='🏆 Recorde ('+DIFF_NAMES[md]+'): '+bestTxt('mines_'+md);$('dfBest').textContent='🏆 Melhor cena: '+bestTxt('diff');$('nBest').textContent='🏆 Recorde: '+best('snake');{const qd=getPref('qz_diff','easy');$('qzBest').textContent='🏆 Recorde ('+DIFF_NAMES[qd]+'): '+best('quiz_'+qd)+' pts'}if(typeof cgBests==='function')cgBests();if(typeof rkHome==='function')rkHome()}
+function newBests(){const sd=getPref('su_diff','easy'),md=getPref('mn_diff','easy');$('suBest').textContent='🏆 Recorde ('+DIFF_NAMES[sd]+'): '+bestTxt('sudoku_'+sd);$('mnBest').textContent='🏆 Recorde ('+DIFF_NAMES[md]+'): '+bestTxt('mines_'+md);$('dfBest').textContent='🏆 Melhor cena: '+bestTxt('diff');$('nBest').textContent='🏆 Recorde: '+best('snake');{const qd=getPref('qz_diff','easy');$('qzBest').textContent='🏆 Recorde ('+DIFF_NAMES[qd]+'): '+best('quiz_'+qd)+' pts'}if(typeof cgBests==='function')cgBests();{const gd=getPref('fg_diff','med');$('gBest').textContent='🏆 Recorde ('+DIFF_NAMES[gd]+'): '+best('forca_'+gd)+' pts'}if(typeof rkHome==='function')rkHome()}
 function enterGame(id){cancelAnimationFrame(raf);cancelAnimationFrame(blockRaf);clearInterval(tTimer);paused=false;mode=id;$('menu').classList.add('hide');hideGames();$(id).classList.remove('hide')}
 function segInit(id,fn){$(id).querySelectorAll('button').forEach(bt=>bt.onclick=()=>fn(bt.dataset.d))}
 function segSet(id,v){$(id).querySelectorAll('button').forEach(bt=>bt.classList.toggle('on',bt.dataset.d===v))}
@@ -1137,7 +1185,72 @@ function qzReview(){const c=$('qz-card');c.innerHTML=qz.answers.map((a,n)=>`<div
 REV.q={sec:'quiz',open(){qzReview();$('qrvx').textContent='Acertos: '+qzFmt(qz.correct)+'/10'},again:()=>qzNew()};
 function qzInit(){segInit('qz-seg',dd=>{setPref('qz_diff',dd);qzNew(dd)})}
 
-suInit();mnInit();dfInit();qzInit();
+// ---------- Jogo da Forca ----------
+// Palavras sorteadas por nível, com categoria. Uma partida é uma sequência de palavras: cada palavra acertada soma pontos
+// (nível + vidas que sobraram + sequência); a partida termina na primeira palavra perdida. 6 erros = forca completa.
+const FC_WORDS={
+ easy:{'Frutas':['banana','laranja','morango','abacaxi','melancia','mamão','goiaba','limão','manga','cereja','ameixa'],
+  'Animais':['cachorro','coelho','girafa','macaco','cavalo','galinha','elefante','zebra','pato','sapo','tigre','baleia'],
+  'Comidas':['pizza','feijão','arroz','pipoca','sorvete','bolacha','lasanha','salada','sopa','omelete','panqueca'],
+  'Doces':['pudim','cocada','biscoito','bombom','torta','docinho','gelatina','paçoca'],
+  'Casa':['cadeira','janela','panela','relógio','sapato','caneta','mochila','escova','toalha','tapete','garfo'],
+  'Natureza':['árvore','montanha','nuvem','estrela','floresta','chuva','praia','vulcão'],
+  'Esportes':['futebol','natação','vôlei','corrida','basquete','tênis']},
+ med:{'Frutas':['abacate','framboesa','pêssego','tangerina','acerola','maracujá','jabuticaba','pitanga'],
+  'Animais':['hipopótamo','borboleta','jacaré','pinguim','golfinho','papagaio','tamanduá','camaleão','tartaruga','canguru','esquilo','coruja'],
+  'Comidas':['macarronada','coxinha','feijoada','empada','churrasco','pamonha','moqueca','estrogonofe','tapioca'],
+  'Doces':['brigadeiro','quindim','beijinho','rocambole','pavê','merengue','cupcake','chocolate','sequilho'],
+  'Profissões':['bombeiro','professor','dentista','padeiro','carteiro','jardineiro','confeiteiro','enfermeira','motorista','cozinheiro'],
+  'Casa':['geladeira','ventilador','espelho','tesoura','travesseiro','cortina','guarda-chuva','vassoura','lanterna'],
+  'Instrumentos':['violão','pandeiro','sanfona','bateria','teclado','trompete','flauta','cavaquinho'],
+  'Bíblia':['Abraão','Moisés','Salomão','Jerusalém','Belém','Golias','Sansão','Elias']},
+ hard:{'Animais':['ornitorrinco','rinoceronte','crocodilo','escorpião','caranguejo','louva-a-deus','tamanduá-bandeira','pernilongo','caramujo','salamandra','chimpanzé'],
+  'Frutas e legumes':['carambola','cupuaçu','mexerica','gengibre','berinjela','abobrinha','castanha','graviola','pitaia'],
+  'Doces':['marzipã','profiterole','pé-de-moleque','bem-casado','cheesecake','petit-gâteau','churros','ambrosia'],
+  'Profissões':['arquiteto','veterinário','astronauta','eletricista','nutricionista','oceanógrafo','ventríloquo','fisioterapeuta'],
+  'Coisas':['paralelepípedo','liquidificador','caleidoscópio','quebra-cabeça','arranha-céu','espantalho','labirinto','xilofone','saxofone','quinquilharia'],
+  'Bíblia':['Nabucodonosor','Matusalém','Melquisedeque','Zorobabel','Deuteronômio','Eclesiastes','Lamentações','Bartimeu'],
+  'Palavras difíceis':['otorrinolaringologista','desenvolvimento','extraordinário','inconstitucional','pneumonia','excepcional','idiossincrasia']}};
+const FC_BASE={easy:10,med:20,hard:30},FC_HINTS={easy:2,med:1,hard:1},FC_MAX=6;
+const fcNorm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase();
+let fg={};
+function startForca(){enterGame('forca');fgNew(getPref('fg_diff','med'))}
+function fgNew(diff){revEnd('g');diff=diff||fg.diff||'med';$('gover').classList.add('hide');$('gask').classList.add('hide');setPause('g',false);
+ fg={diff,words:[],used:new Set(),score:0,streak:0,won:0,over:false,paused:false,startBest:best('forca_'+diff)};segSet('g-seg',diff);fgWord()}
+function fgPick(){const bank=FC_WORDS[fg.diff],cats=Object.keys(bank);for(let k=0;k<200;k++){const cat=pick(cats),w=pick(bank[cat]);if(!fg.used.has(w)){fg.used.add(w);return{cat,w}}}fg.used.clear();return fgPick()}
+function fgWord(){const{cat,w}=fgPick();fg.cur={cat,w,N:fcNorm(w),guess:new Set(),miss:[],hints:FC_HINTS[fg.diff],done:false,res:''};$('g-rev').classList.add('hide');fgRender();fgKeys();$('g-fb').innerHTML='';anim($('g-card'),'fresh')}
+function fgRender(){const c=fg.cur;$('g-n').textContent=fg.words.length+1;$('g-pts').textContent=fg.score;$('g-st').textContent=fg.streak;$('g-cat').textContent=c.cat;
+ $('g-word').innerHTML=[...c.w].map((ch,k)=>{const n=c.N[k];if(!/[A-Z]/.test(n))return`<span class="fg-sp">${ch==='-'?'-':'&nbsp;'}</span>`;const show=c.guess.has(n)||c.done;const miss=c.done&&!c.guess.has(n);return`<span class="fg-l${show?' on':''}${miss?' miss':''}">${show?ch.toUpperCase():''}</span>`}).join('');
+ $('g-miss').textContent=c.miss.length?c.miss.join(' '):'—';$('g-lives').textContent=FC_MAX-c.miss.length;
+ for(let k=1;k<=6;k++)$('g-p'+k).classList.toggle('on',c.miss.length>=k);$('g-svg').classList.toggle('lost',c.done&&c.res==='no');$('g-svg').classList.toggle('won',c.done&&c.res==='ok');
+ const hb=$('g-hint');hb.textContent='💡 Revelar letra ('+c.hints+')';hb.disabled=c.done||c.hints<=0||c.miss.length>=FC_MAX-1}
+function fgKeys(){const rows=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'];$('g-kb').innerHTML=rows.map(r=>`<div class="fg-row">${[...r].map(L=>`<button class="fg-k" data-l="${L}">${L}</button>`).join('')}</div>`).join('');
+ $('g-kb').querySelectorAll('.fg-k').forEach(b=>b.onclick=()=>fgGuess(b.dataset.l))}
+function fgGuess(L){const c=fg.cur;if(mode!=='forca'||fg.over||fg.paused||c.done||c.guess.has(L)||c.miss.includes(L))return;const key=$('g-kb').querySelector(`[data-l="${L}"]`);
+ if(c.N.includes(L)){c.guess.add(L);key&&key.classList.add('ok');vib(12);fgRender();$('g-word').querySelectorAll('.fg-l.on').forEach(e=>{if(e.textContent&&fcNorm(e.textContent)===L)anim(e,'pop')});
+  if([...c.N].every(n=>!/[A-Z]/.test(n)||c.guess.has(n)))fgEnd(true)}
+ else{c.miss.push(L);key&&key.classList.add('no');vib(50);fgRender();anim($('g-p'+c.miss.length),'pop');if(c.miss.length>=FC_MAX)fgEnd(false)}}
+function fgHint(){const c=fg.cur;if(fg.over||fg.paused||c.done||c.hints<=0||c.miss.length>=FC_MAX-1)return;const left=[...new Set([...c.N].filter(n=>/[A-Z]/.test(n)&&!c.guess.has(n)))];if(!left.length)return;
+ c.hints--;c.miss.push('💡');const L=pick(left);c.guess.add(L);const key=$('g-kb').querySelector(`[data-l="${L}"]`);key&&key.classList.add('ok');fgRender();anim($('g-p'+c.miss.length),'pop');
+ if([...c.N].every(n=>!/[A-Z]/.test(n)||c.guess.has(n)))fgEnd(true)}
+function fgEnd(ok){const c=fg.cur;c.done=true;c.res=ok?'ok':'no';let pts=0;
+ if(ok){const lives=FC_MAX-c.miss.length,uniq=new Set([...c.N].filter(n=>/[A-Z]/.test(n))).size;pts=FC_BASE[fg.diff]+lives*5+uniq*2+Math.min(fg.streak,5)*5;fg.streak++;fg.won++;fg.score+=pts;vib([20,40,20])}else{fg.streak=0;vib([60,40,90])}
+ fg.words.push({cat:c.cat,w:c.w,res:c.res,miss:c.miss.length,pts});fgRender();$('g-kb').querySelectorAll('.fg-k').forEach(b=>b.disabled=true);
+ $('g-fb').innerHTML=ok?`<div class="qz-fb ok"><h4>🎉 Acertou! <small>+${pts}</small></h4><p>A palavra era <b>${rkEsc(c.w.toUpperCase())}</b>.</p></div><div class="qz-acts"><button class="play" id="g-next">Próxima palavra ▶</button><div class="qz-acts2"><button class="tool" onclick="fgAsk('restart')">↺ Recomeçar</button><button class="tool" onclick="fgAsk('exit')">Sair</button></div></div>`
+  :`<div class="qz-fb no"><h4>😵 Enforcado!</h4><p>A palavra era <b>${rkEsc(c.w.toUpperCase())}</b>.</p></div><div class="qz-acts"><button class="play" id="g-next">Ver resultado ▶</button></div>`;
+ $('g-next').onclick=ok?fgWord:fgFinish;setTimeout(()=>$('g-fb').scrollIntoView({behavior:'smooth',block:'nearest'}),60)}
+function fgFinish(){fg.over=true;save('forca_'+fg.diff,fg.score);const rec=fg.score>fg.startBest&&fg.score>0;$('gtitle').textContent=fg.won>=5?'Mandou muito bem! 🏆':fg.won>=2?'Boa partida! 👏':'Fim de jogo!';
+ showOver('g',fg.score+' pts',fg.won+' palavra'+(fg.won===1?'':'s')+' acertada'+(fg.won===1?'':'s')+' em sequência · Nível '+DIFF_NAMES[fg.diff],rec)}
+function fgPause(){if(fg.over)return;fg.paused=!fg.paused;setPause('g',fg.paused)}
+function fgAsk(what){$('gask-t').textContent=what==='exit'?'Sair da forca?':'Recomeçar a partida?';$('gask-p').textContent=what==='exit'?'Você volta para a tela inicial e esta partida será perdida.':'Uma nova partida começa do zero, no mesmo nível.';
+ $('gask-y').onclick=()=>{$('gask').classList.add('hide');if(what==='exit')menu();else fgNew()};$('gask').classList.remove('hide')}
+function fgLevel(dd){setPref('fg_diff',dd);if(!fg.words.length&&!fg.cur.guess.size&&!fg.cur.miss.length){fgNew(dd);return}segSet('g-seg',fg.diff);$('gask-t').textContent='Mudar de nível?';$('gask-p').textContent='Uma nova partida começa no nível '+DIFF_NAMES[dd]+'.';$('gask-y').onclick=()=>{$('gask').classList.add('hide');fgNew(dd)};$('gask').classList.remove('hide')}
+function fgReview(){$('g-fb').innerHTML='';$('g-rev').innerHTML=fg.words.map((x,k)=>`<div class="qz-ri ${x.res}"><div class="qz-rq">${k+1}. ${rkEsc(x.w.toUpperCase())} ${x.res==='ok'?'✅':'❌'}</div><div>Categoria: <b>${rkEsc(x.cat)}</b> · Erros: <b>${x.miss}</b>${x.pts?` · <b>+${x.pts}</b>`:''}</div></div>`).join('');$('g-rev').classList.remove('hide')}
+REV.g={sec:'forca',open(){fgReview();$('grvx').textContent=fg.score+' pts · '+fg.won+' acerto(s)'},again:()=>fgNew()};
+function fgInit(){$('g-seg').querySelectorAll('button').forEach(b=>b.onclick=()=>fgLevel(b.dataset.d));$('g-hint').onclick=fgHint;
+ document.addEventListener('keydown',e=>{if(mode!=='forca'||e.ctrlKey||e.metaKey||e.altKey)return;const L=fcNorm(e.key);if(/^[A-Z]$/.test(L)){e.preventDefault();fgGuess(L)}else if(e.key==='Enter'){const n=$('g-next');if(n)n.click()}})}
+
+suInit();mnInit();dfInit();qzInit();fgInit();
 menu();
 </script>
 
@@ -1166,7 +1279,8 @@ const RGAMES={
  'quiz-biblico':{name:'Quiz Bíblico',emoji:'📖',high:true,diffs:['facil','medio','dificil'],ok:s=>s>0&&s<=1000},
  paciencia:{name:'Paciência',emoji:'🃏',high:false,diffs:['facil','dificil'],ok:s=>s>=30&&s<=86400},
  spider:{name:'Spider',emoji:'🕷️',high:false,diffs:['facil','medio','dificil'],ok:s=>s>=60&&s<=86400},
- freecell:{name:'FreeCell',emoji:'🂡',high:false,diffs:['normal'],ok:s=>s>=30&&s<=86400}};
+ freecell:{name:'FreeCell',emoji:'🂡',high:false,diffs:['normal'],ok:s=>s>=30&&s<=86400},
+ forca:{name:'Forca',emoji:'🔤',high:true,diffs:['facil','medio','dificil'],ok:s=>s>0&&s<=100000}};
 const RDIFF={normal:'Normal',facil:'Fácil',medio:'Médio',dificil:'Difícil'},LVL={easy:'facil',med:'medio',hard:'dificil'};
 const rkGet=(k,def)=>{try{const v=localStorage.getItem('cantus_rk_'+k);return v==null?def:JSON.parse(v)}catch{return def}};
 const rkSet=(k,v)=>{try{localStorage.setItem('cantus_rk_'+k,JSON.stringify(v))}catch(e){}};
@@ -1193,13 +1307,14 @@ function rkQueue(game,difficulty,nickname,score){const e={id:Date.now()+'-'+Math
 window.addEventListener('online',()=>rkFlush());setInterval(rkFlush,20000);setTimeout(rkFlush,1500);
 
 // Caixa "Entrar no ranking" no fim de cada partida.
-const RK_P={d:'kangaroo',b:'basket',t:'block',s:'sudoku',m:'minesweeper',f:'sete-erros',n:'snake',q:'quiz-biblico',k:'paciencia',w:'spider',c:'freecell'};
+const RK_P={d:'kangaroo',b:'basket',t:'block',s:'sudoku',m:'minesweeper',f:'sete-erros',n:'snake',q:'quiz-biblico',k:'paciencia',w:'spider',c:'freecell',g:'forca'};
 function rkResult(p){
  if(p==='d')return{score:Math.floor(d.score),difficulty:'normal',eligible:Math.floor(d.score)>0};
  if(p==='b')return{score:b.score,difficulty:'normal',eligible:b.score>0};
  if(p==='t')return{score:t.score,difficulty:'normal',eligible:t.score>0};
  if(p==='n')return{score:sn.score,difficulty:'normal',eligible:sn.score>0};
  if(p==='q')return{score:qz.score,difficulty:LVL[qz.diff],eligible:qz.score>0};
+ if(p==='g')return{score:fg.score,difficulty:LVL[fg.diff],eligible:fg.score>0};
  if(CG[p]){const G=CG[p];return{score:Math.max(1,Math.floor(G.time)),difficulty:G.levels?LVL[G.level]:'normal',eligible:G.won}}
  if(p==='s')return{score:Math.max(1,Math.floor(su.time)),difficulty:LVL[su.diff],eligible:su.val.every((v,k)=>v===su.sol[k])};
  if(p==='m')return{score:Math.max(1,Math.floor(mn.time)),difficulty:LVL[mn.diff],eligible:mn.opened===mn.R*mn.C-mn.M};
