@@ -296,6 +296,41 @@ body.lock{overflow:hidden;overscroll-behavior:none}
 .qz-timer.red .qz-bar i{background:linear-gradient(90deg,#ff6b6b,#e5484d)}.qz-timer.red b{color:#e5484d;animation:bump .5s ease infinite}
 .qz-acts{display:flex;flex-direction:column;gap:8px;margin-top:12px}.qz-acts .play{width:100%}
 .qz-acts2{display:flex;gap:8px}.qz-acts2 .tool{min-height:48px}
+/* Jogos de cartas */
+.card:nth-child(9){animation-delay:.6s}.card:nth-child(10){animation-delay:.64s}.card:nth-child(11){animation-delay:.68s}
+.cardg{background:radial-gradient(circle at 50% 30%,#23885a,#11552f 75%)}
+.cardg .hud .chip,.cardg .pbtn{background:rgba(255,255,255,.9)}
+.cardg .bottom{background:rgba(0,0,0,.18);padding-top:8px}
+.cg-wrap{gap:6px;padding:6px 6px 4px}
+.cg-seg{background:rgba(255,255,255,.18)}.cg-seg button{color:#fff;font-size:14px;padding:5px 12px}.cg-seg button.on{background:#fff;color:var(--wine)}
+.cg-wrap .overlay{z-index:1200}
+.cg-board{position:relative;flex:1;min-height:0;width:100%;touch-action:none;user-select:none;-webkit-user-select:none}
+.cg-tools{display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px}.cg-tools .tool{min-height:50px;font-size:14px;line-height:1.1}.cg-tools .tool small{display:block;font-size:11px;opacity:.7}
+.cd,.cslot,.cbadge{position:absolute;left:0;top:0;transform:translate(var(--tx,0),var(--ty,0))}
+.cd{width:var(--cw);height:var(--ch);border-radius:calc(var(--cw)*.13);background:linear-gradient(#fff,#fbf7f2);box-shadow:0 1px 2px rgba(0,0,0,.35),0 0 0 1px rgba(60,30,20,.18);transition:transform .22s cubic-bezier(.2,.8,.3,1);cursor:pointer;touch-action:none;overflow:hidden}
+.cd.nt{transition:none}.cd.drag{transition:none;box-shadow:0 12px 24px rgba(0,0,0,.45),0 0 0 1px rgba(60,30,20,.2)}
+.cd .fa{position:absolute;inset:0}
+.cd .tl{position:absolute;left:calc(var(--cw)*.06);top:calc(var(--cw)*.04);display:flex;flex-direction:row;align-items:baseline;gap:calc(var(--cw)*.02);line-height:.9;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.cd .tl b{font-size:calc(var(--cw)*.4);font-weight:900;letter-spacing:-.06em}.cd .tl i{font-style:normal;font-size:calc(var(--cw)*.32)}
+.cd .ct{position:absolute;right:calc(var(--cw)*.06);bottom:calc(var(--cw)*.02);font-size:calc(var(--cw)*.62);line-height:1}
+.cd .ct.ace{left:0;right:0;bottom:calc(var(--ch)*.1);text-align:center;font-size:calc(var(--cw)*.78)}
+.cd .fc{position:absolute;left:calc(var(--cw)*.4);right:calc(var(--cw)*.07);top:calc(var(--ch)*.3);bottom:calc(var(--cw)*.07);border-radius:calc(var(--cw)*.08);border:2px solid currentColor;background:repeating-linear-gradient(135deg,rgba(255,214,120,.35) 0 4px,rgba(255,255,255,0) 4px 8px);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:.95}
+.cd .fc b{font-size:calc(var(--cw)*.34);font-weight:900}.cd .fc i{font-style:normal;font-size:calc(var(--cw)*.26)}
+.red{color:#d0213a}.blk{color:#1b1d2a}
+.cd .bk{display:none;position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle,rgba(255,246,236,.0) 0 40%,rgba(0,0,0,.08)),repeating-linear-gradient(45deg,#7a1f36 0 5px,#93294a 5px 10px);box-shadow:inset 0 0 0 calc(var(--cw)*.06) #fff6ec,inset 0 0 0 calc(var(--cw)*.09) #7a1f36}
+.cd .bk span{position:absolute;left:50%;top:50%;width:calc(var(--cw)*.5);height:calc(var(--cw)*.5);transform:translate(-50%,-50%);border-radius:50%;background:#fff6ec;color:#c0283f;display:grid;place-items:center;font-size:calc(var(--cw)*.32)}
+.cd.dn .fa{display:none}.cd.dn .bk{display:block}
+.cd.tgt{box-shadow:0 0 0 3px #ffd23f,0 0 16px #ffd23f}.cslot.tgt{border:3px solid #ffd23f;background:rgba(255,210,63,.25)}
+.cd.hint,.cslot.hint{animation:cghint .45s ease-in-out 5 alternate}
+@keyframes cghint{to{box-shadow:0 0 0 4px #7dffb5,0 0 20px #7dffb5}}
+.cd.shk{animation:cgshk .3s}@keyframes cgshk{25%,75%{margin-left:-4px}50%{margin-left:4px}}
+.cslot{width:var(--cw);height:var(--ch);border-radius:calc(var(--cw)*.13);border:2px dashed rgba(255,255,255,.45);display:grid;place-items:center;color:rgba(255,255,255,.6);font-weight:900;font-size:calc(var(--cw)*.42);z-index:1}
+.cslot.cell{border-style:solid;background:rgba(0,0,0,.12)}
+.cbadge{z-index:950;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#ffd23f;color:#5b2a00;font-size:12px;font-weight:900;display:grid;place-items:center;pointer-events:none}
+.cd.win{animation:cgwin 1.7s cubic-bezier(.3,.6,.4,1) forwards}
+@keyframes cgwin{0%{transform:translate(var(--tx),var(--ty))}30%{transform:translate(calc(var(--tx) + var(--wx)*.3),calc(var(--ty) - var(--wy))) rotate(calc(var(--wr)*.3))}100%{transform:translate(calc(var(--tx) + var(--wx)),calc(var(--ty) + 1000px)) rotate(var(--wr))}}
+.cgask{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(40,12,20,.4);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.cgask-b{display:flex;flex-direction:column;gap:8px}.cgask-b .play,.cgask-b .tool{width:100%}.cgask-b .tool{min-height:48px}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
 @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
@@ -329,6 +364,9 @@ body.lock{overflow:hidden;overscroll-behavior:none}
   <div class="card" style="--glow:linear-gradient(135deg,#fddb92,#f6a04d)"><div class="icon">🔍</div><h2>7 Erros</h2><p>Ache as 7 diferenças na cozinha.</p><p class="best" id="dfBest"></p><button class="play" onclick="startDiff()">Jogar 7 Erros</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#8fdc8a,#2a7d4f)"><div class="icon">🐍</div><h2>Snake</h2><p>A cobrinha clássica dos celulares antigos</p><p class="best" id="nBest"></p><button class="play" onclick="startSnake()">Jogar Snake</button></div>
   <div class="card" style="--glow:linear-gradient(135deg,#ffd28a,#c0563b)"><div class="icon">📖</div><h2>Quiz Bíblico</h2><p>Teste seus conhecimentos da Bíblia</p><p class="best" id="qzBest"></p><button class="play" onclick="startQuiz()">Jogar Quiz</button></div>
+  <div class="card" style="--glow:linear-gradient(135deg,#6fd39a,#1d7a4d)"><div class="icon">🃏</div><h2>Paciência</h2><p>O clássico de 7 colunas</p><p class="best" id="kBest"></p><button class="play" onclick="startPaciencia()">Jogar Paciência</button></div>
+  <div class="card" style="--glow:linear-gradient(135deg,#9aa7ff,#3b3f8f)"><div class="icon">🕷️</div><h2>Spider</h2><p>Monte sequências do Rei ao Ás</p><p class="best" id="wBest"></p><button class="play" onclick="startSpider()">Jogar Spider</button></div>
+  <div class="card" style="--glow:linear-gradient(135deg,#ffb3c1,#b0344f)"><div class="icon">🂡</div><h2>FreeCell</h2><p>Todas as cartas abertas, sempre com solução</p><p class="best" id="cBest"></p><button class="play" onclick="startFreecell()">Jogar FreeCell</button></div>
  </div>
  <section class="rksec" id="rk-home-sec"><h2 class="rksec-t">🏆 Ranking</h2><p class="rksec-s">Os 5 melhores de cada jogo</p><div class="rkgrid" id="rk-home"></div></section>
  <p style="text-align:center"><a class="back" href="https://cardapio-cantus.lovable.app">← Voltar ao cardápio</a></p>
@@ -372,6 +410,44 @@ body.lock{overflow:hidden;overscroll-behavior:none}
  <div class="sn-pad" id="sn-pad"><button class="pb rs" data-k="r" aria-label="Recomeçar">↺</button><button class="pb" data-k="2" aria-label="Para cima">▲</button><span></span><button class="pb" data-k="4" aria-label="Para a esquerda">◀</button><button class="pb mid" id="sn-mid" data-k="5" aria-label="Pausar ou continuar">⏸</button><button class="pb" data-k="6" aria-label="Para a direita">▶</button><span></span><button class="pb" data-k="8" aria-label="Para baixo">▼</button><span></span></div>
  <span id="npb" hidden></span>
 </section>
+
+<section id="paciencia" class="game cardg hide">
+ <div class="hud"><div class="chips"><span class="chip main">⏱ <b id="k-time">0:00</b></span><span class="chip">👣 <span id="k-mv">0</span></span><span class="chip">🏆 <span id="k-best">—</span></span></div><button class="pbtn" id="kpb" onclick="cgPause('k')">⏸ Pausar</button></div>
+ <div class="revbar hide" id="krev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="krvx"></span></div><div class="rvb"><button onclick="revResult('k')">Ver resultado</button><button class="pri" onclick="revNew('k')">Novo jogo</button><button onclick="menu()">Início</button></div></div>
+ <div class="board nboard cg-wrap"><div class="seg cg-seg" id="k-seg"><button data-d="easy">🟢 Fácil · 1 carta</button><button data-d="hard">🔴 Difícil · 3 cartas</button></div>
+  <div class="cg-board" id="k-board"></div>
+  <div id="kpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>As cartas esperam por você.</p><button class="play" onclick="cgPause('k')">▶ Continuar</button></div></div>
+  <div id="kstuck" class="overlay hide"><div class="panel"><h2>Sem jogadas 😕</h2><p>Não há mais jogadas possíveis nesta partida.</p><button class="play" onclick="cgNew('k')">🆕 Novo jogo</button><button class="ghost" onclick="cgRestart('k')">↺ Recomeçar com as mesmas cartas</button><button class="ghost" onclick="cgUndo('k')">↶ Desfazer</button></div></div>
+  <div id="kover" class="overlay hide"><div class="panel"><h2 id="ktitle">Você venceu!</h2><div class="big" id="kbig">0:00</div><div class="badge hide" id="krec">🏆 Novo recorde!</div><p id="kresult"></p><button class="play" onclick="cgNew('k')">Novo jogo</button><button class="ghost" onclick="revOpen('k')">👀 Ver partida</button></div></div>
+ </div>
+ <div class="bottom cg-tools"><button class="tool" onclick="cgUndo('k')">↶ Desfazer</button><button class="tool" onclick="cgHint('k')">💡 Dica <small>+30s</small></button><button class="tool" onclick="cgAskRestart('k')">↺ Recomeçar</button><button class="tool" onclick="cgAskExit()">Sair</button></div>
+</section>
+
+<section id="spider" class="game cardg hide">
+ <div class="hud"><div class="chips"><span class="chip main">⏱ <b id="w-time">0:00</b></span><span class="chip">👣 <span id="w-mv">0</span></span><span class="chip">🏆 <span id="w-best">—</span></span></div><button class="pbtn" id="wpb" onclick="cgPause('w')">⏸ Pausar</button></div>
+ <div class="revbar hide" id="wrev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="wrvx"></span></div><div class="rvb"><button onclick="revResult('w')">Ver resultado</button><button class="pri" onclick="revNew('w')">Novo jogo</button><button onclick="menu()">Início</button></div></div>
+ <div class="board nboard cg-wrap"><div class="seg cg-seg" id="w-seg"><button data-d="easy">🟢 1 naipe</button><button data-d="med">🟡 2 naipes</button><button data-d="hard">🔴 4 naipes</button></div>
+  <div class="cg-board" id="w-board"></div>
+  <div id="wpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>As cartas esperam por você.</p><button class="play" onclick="cgPause('w')">▶ Continuar</button></div></div>
+  <div id="wstuck" class="overlay hide"><div class="panel"><h2>Sem jogadas 😕</h2><p>Não há mais jogadas possíveis nesta partida.</p><button class="play" onclick="cgNew('w')">🆕 Novo jogo</button><button class="ghost" onclick="cgRestart('w')">↺ Recomeçar com as mesmas cartas</button><button class="ghost" onclick="cgUndo('w')">↶ Desfazer</button></div></div>
+  <div id="wover" class="overlay hide"><div class="panel"><h2 id="wtitle">Você venceu!</h2><div class="big" id="wbig">0:00</div><div class="badge hide" id="wrec">🏆 Novo recorde!</div><p id="wresult"></p><button class="play" onclick="cgNew('w')">Novo jogo</button><button class="ghost" onclick="revOpen('w')">👀 Ver partida</button></div></div>
+ </div>
+ <div class="bottom cg-tools"><button class="tool" onclick="cgUndo('w')">↶ Desfazer</button><button class="tool" onclick="cgHint('w')">💡 Dica <small>+30s</small></button><button class="tool" onclick="cgAskRestart('w')">↺ Recomeçar</button><button class="tool" onclick="cgAskExit()">Sair</button></div>
+</section>
+
+<section id="freecell" class="game cardg hide">
+ <div class="hud"><div class="chips"><span class="chip main">⏱ <b id="c-time">0:00</b></span><span class="chip">👣 <span id="c-mv">0</span></span><span class="chip">🏆 <span id="c-best">—</span></span></div><button class="pbtn" id="cpb" onclick="cgPause('c')">⏸ Pausar</button></div>
+ <div class="revbar hide" id="crev"><div class="rvt"><b>👀 Revisando partida</b><span class="rvx" id="crvx"></span></div><div class="rvb"><button onclick="revResult('c')">Ver resultado</button><button class="pri" onclick="revNew('c')">Novo jogo</button><button onclick="menu()">Início</button></div></div>
+ <div class="board nboard cg-wrap">
+  <div class="cg-board" id="c-board"></div>
+  <div id="cpause" class="overlay hide"><div class="panel"><h2>Pausado</h2><p>As cartas esperam por você.</p><button class="play" onclick="cgPause('c')">▶ Continuar</button></div></div>
+  <div id="cstuck" class="overlay hide"><div class="panel"><h2>Sem jogadas 😕</h2><p>Não há mais jogadas possíveis nesta partida.</p><button class="play" onclick="cgNew('c')">🆕 Novo jogo</button><button class="ghost" onclick="cgRestart('c')">↺ Recomeçar com as mesmas cartas</button><button class="ghost" onclick="cgUndo('c')">↶ Desfazer</button></div></div>
+  <div id="cover" class="overlay hide"><div class="panel"><h2 id="ctitle">Você venceu!</h2><div class="big" id="cbig">0:00</div><div class="badge hide" id="crec">🏆 Novo recorde!</div><p id="cresult"></p><button class="play" onclick="cgNew('c')">Novo jogo</button><button class="ghost" onclick="revOpen('c')">👀 Ver partida</button></div></div>
+ </div>
+ <div class="bottom cg-tools"><button class="tool" onclick="cgUndo('c')">↶ Desfazer</button><button class="tool" onclick="cgHint('c')">💡 Dica <small>+30s</small></button><button class="tool" onclick="cgAskRestart('c')">↺ Recomeçar</button><button class="tool" onclick="cgAskExit()">Sair</button></div>
+</section>
+
+<div id="cgask" class="cgask hide"><div class="panel"><h2 id="cgask-t"></h2><p id="cgask-p"></p><div id="cgask-b" class="cgask-b"></div></div></div>
 
 <section id="quiz" class="game quizg hide">
  <div class="hud"><div class="chips"><span class="chip main">📖 <b id="qz-n">1</b>/10</span><span class="chip">⭐ <span id="qz-pts">0</span></span><span class="chip">🔥 <span id="qz-st">0</span></span></div><button class="pbtn" onclick="qzAsk('restart')">↺ Recomeçar</button></div>
@@ -560,7 +636,7 @@ function saveMin(k,n){n=Math.max(1,Math.floor(n));const c=best(k);if(!c||n<c)try
 function getPref(k,def){try{return localStorage.getItem('cantus_'+k)||def}catch{return def}}
 function setPref(k,v){try{localStorage.setItem('cantus_'+k,v)}catch(e){}}
 function bestTxt(k){const v=best(k);return v?fmtT(v):'—'}
-function newBests(){const sd=getPref('su_diff','easy'),md=getPref('mn_diff','easy');$('suBest').textContent='🏆 Recorde ('+DIFF_NAMES[sd]+'): '+bestTxt('sudoku_'+sd);$('mnBest').textContent='🏆 Recorde ('+DIFF_NAMES[md]+'): '+bestTxt('mines_'+md);$('dfBest').textContent='🏆 Melhor cena: '+bestTxt('diff');$('nBest').textContent='🏆 Recorde: '+best('snake');{const qd=getPref('qz_diff','easy');$('qzBest').textContent='🏆 Recorde ('+DIFF_NAMES[qd]+'): '+best('quiz_'+qd)+' pts'}if(typeof rkHome==='function')rkHome()}
+function newBests(){const sd=getPref('su_diff','easy'),md=getPref('mn_diff','easy');$('suBest').textContent='🏆 Recorde ('+DIFF_NAMES[sd]+'): '+bestTxt('sudoku_'+sd);$('mnBest').textContent='🏆 Recorde ('+DIFF_NAMES[md]+'): '+bestTxt('mines_'+md);$('dfBest').textContent='🏆 Melhor cena: '+bestTxt('diff');$('nBest').textContent='🏆 Recorde: '+best('snake');{const qd=getPref('qz_diff','easy');$('qzBest').textContent='🏆 Recorde ('+DIFF_NAMES[qd]+'): '+best('quiz_'+qd)+' pts'}if(typeof cgBests==='function')cgBests();if(typeof rkHome==='function')rkHome()}
 function enterGame(id){cancelAnimationFrame(raf);cancelAnimationFrame(blockRaf);clearInterval(tTimer);paused=false;mode=id;$('menu').classList.add('hide');hideGames();$(id).classList.remove('hide')}
 function segInit(id,fn){$(id).querySelectorAll('button').forEach(bt=>bt.onclick=()=>fn(bt.dataset.d))}
 function segSet(id,v){$(id).querySelectorAll('button').forEach(bt=>bt.classList.toggle('on',bt.dataset.d===v))}
@@ -572,7 +648,7 @@ setInterval(()=>{const now=performance.now(),dt=Math.min((now-nLast)/1000,1);nLa
  if(mode==='sudoku'&&su.running&&!su.paused){su.time+=dt}
  else if(mode==='mines'&&mn.running&&!mn.paused){mn.time+=dt;$('mn-time').textContent=fmtT(mn.time)}
  else if(mode==='diff'&&df.running&&!df.paused){df.time+=dt;$('df-time').textContent=fmtT(df.time)}},250);
-function nResize(){if(mode==='snake')snSize();else if(mode==='sudoku')suSize();else if(mode==='mines')mnSize();else if(mode==='diff')dfSize()}
+function nResize(){if(typeof CG!=='undefined')for(const k in CG)if(CG[k].key===mode&&CG[k].piles){cgLayout(CG[k]);cgRender(CG[k]);return}if(mode==='snake')snSize();else if(mode==='sudoku')suSize();else if(mode==='mines')mnSize();else if(mode==='diff')dfSize()}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)return;if(mode==='snake'&&!sn.over&&!sn.paused)snPause();if(mode==='sudoku'&&su.running&&!su.paused)suPause();if(mode==='mines'&&mn.running&&!mn.paused)mnPause();if(mode==='diff'&&df.running&&!df.paused)dfPause()});
 
 // ---------- Sudoku ----------
@@ -1087,7 +1163,10 @@ const RGAMES={
  minesweeper:{name:'Campo Minado',emoji:'💣',high:false,diffs:['facil','medio','dificil'],ok:(s,dd)=>s>={facil:3,medio:8,dificil:15}[dd]&&s<=86400},
  'sete-erros':{name:'7 Erros',emoji:'🔍',high:false,diffs:['normal'],ok:s=>s>=8&&s<=86400},
  snake:{name:'Snake',emoji:'🐍',high:true,diffs:['normal'],ok:s=>s>0&&s<=600},
- 'quiz-biblico':{name:'Quiz Bíblico',emoji:'📖',high:true,diffs:['facil','medio','dificil'],ok:s=>s>0&&s<=1000}};
+ 'quiz-biblico':{name:'Quiz Bíblico',emoji:'📖',high:true,diffs:['facil','medio','dificil'],ok:s=>s>0&&s<=1000},
+ paciencia:{name:'Paciência',emoji:'🃏',high:false,diffs:['facil','dificil'],ok:s=>s>=30&&s<=86400},
+ spider:{name:'Spider',emoji:'🕷️',high:false,diffs:['facil','medio','dificil'],ok:s=>s>=60&&s<=86400},
+ freecell:{name:'FreeCell',emoji:'🂡',high:false,diffs:['normal'],ok:s=>s>=30&&s<=86400}};
 const RDIFF={normal:'Normal',facil:'Fácil',medio:'Médio',dificil:'Difícil'},LVL={easy:'facil',med:'medio',hard:'dificil'};
 const rkGet=(k,def)=>{try{const v=localStorage.getItem('cantus_rk_'+k);return v==null?def:JSON.parse(v)}catch{return def}};
 const rkSet=(k,v)=>{try{localStorage.setItem('cantus_rk_'+k,JSON.stringify(v))}catch(e){}};
@@ -1114,13 +1193,14 @@ function rkQueue(game,difficulty,nickname,score){const e={id:Date.now()+'-'+Math
 window.addEventListener('online',()=>rkFlush());setInterval(rkFlush,20000);setTimeout(rkFlush,1500);
 
 // Caixa "Entrar no ranking" no fim de cada partida.
-const RK_P={d:'kangaroo',b:'basket',t:'block',s:'sudoku',m:'minesweeper',f:'sete-erros',n:'snake',q:'quiz-biblico'};
+const RK_P={d:'kangaroo',b:'basket',t:'block',s:'sudoku',m:'minesweeper',f:'sete-erros',n:'snake',q:'quiz-biblico',k:'paciencia',w:'spider',c:'freecell'};
 function rkResult(p){
  if(p==='d')return{score:Math.floor(d.score),difficulty:'normal',eligible:Math.floor(d.score)>0};
  if(p==='b')return{score:b.score,difficulty:'normal',eligible:b.score>0};
  if(p==='t')return{score:t.score,difficulty:'normal',eligible:t.score>0};
  if(p==='n')return{score:sn.score,difficulty:'normal',eligible:sn.score>0};
  if(p==='q')return{score:qz.score,difficulty:LVL[qz.diff],eligible:qz.score>0};
+ if(CG[p]){const G=CG[p];return{score:Math.max(1,Math.floor(G.time)),difficulty:G.levels?LVL[G.level]:'normal',eligible:G.won}}
  if(p==='s')return{score:Math.max(1,Math.floor(su.time)),difficulty:LVL[su.diff],eligible:su.val.every((v,k)=>v===su.sol[k])};
  if(p==='m')return{score:Math.max(1,Math.floor(mn.time)),difficulty:LVL[mn.diff],eligible:mn.opened===mn.R*mn.C-mn.M};
  return{score:Math.max(1,Math.floor(df.time)),difficulty:'normal',eligible:df.found>=7}}
@@ -1185,6 +1265,196 @@ async function rkHomeOne(k){const G=RGAMES[k],blk=$('rkb-'+k),dd=rkHomeSel[k]||G
 const rkMenuOn=()=>!$('menu').classList.contains('hide');
 window.addEventListener('online',()=>{rkCache={};if(rkMenuOn())rkHome()});window.addEventListener('offline',()=>{if(rkMenuOn())rkHome()});
 rkHome();
+</script>
+<script>
+// FreeCell: confere se uma distribuição tem solução. Busca "melhor primeiro" com movimentos de sequências
+// (limitados pelas células livres e colunas vazias, como no jogo) e jogadas seguras automáticas para a fundação.
+// Cartas como números: naipe*13 + (valor-1). Naipes 0♠ 1♥ 2♦ 3♣ (1 e 2 vermelhos).
+function fcSolvable(cols0,limit=30000){
+ const R=c=>c%13+1,S=c=>(c/13)|0,RED=c=>{const s=(c/13)|0;return s===1||s===2};
+ const fits=(c,t)=>R(t)===R(c)+1&&RED(t)!==RED(c);
+ const auto=st=>{let moved=true;const f=st.f;const safe=c=>{const r=R(c),s=S(c);if(f[s]!==r-1)return false;if(r<=2)return true;const o=RED(c)?[0,3]:[1,2];return f[o[0]]>=r-1&&f[o[1]]>=r-1};
+  while(moved){moved=false;for(const a of st.c){while(a.length&&safe(a[a.length-1])){f[S(a.pop())]++;moved=true}}for(let k=st.l.length-1;k>=0;k--)if(safe(st.l[k])){f[S(st.l[k])]++;st.l.splice(k,1);moved=true}}};
+ const key=st=>st.c.map(a=>String.fromCharCode(...a.map(x=>x+48))).sort().join('|')+'#'+String.fromCharCode(...st.l.slice().sort((a,b)=>a-b).map(x=>x+48))+'#'+st.f.join('');
+ const h=st=>{const f=st.f;let blk=0,dis=0;for(const a of st.c){for(let i=0;i<a.length;i++){const c=a[i];if(R(c)===f[S(c)]+1)blk+=a.length-1-i;if(i&&!fits(a[i],a[i-1]))dis++}}return (52-f[0]-f[1]-f[2]-f[3])+blk*1.5+dis*.6+st.l.length*.4};
+ const clone=st=>({c:st.c.map(a=>a.slice()),l:st.l.slice(),f:st.f.slice()});
+ const start={c:cols0.map(a=>a.slice()),l:[],f:[0,0,0,0]};auto(start);
+ const heap=[];const push=n=>{heap.push(n);let i=heap.length-1;while(i>0){const p=(i-1)>>1;if(heap[p].p<=heap[i].p)break;[heap[p],heap[i]]=[heap[i],heap[p]];i=p}};
+ const pop=()=>{const top=heap[0],last=heap.pop();if(heap.length){heap[0]=last;let i=0;for(;;){const l=2*i+1,r=l+1;let m=i;if(l<heap.length&&heap[l].p<heap[m].p)m=l;if(r<heap.length&&heap[r].p<heap[m].p)m=r;if(m===i)break;[heap[m],heap[i]]=[heap[i],heap[m]];i=m}}return top};
+ const seen=new Set([key(start)]);push({s:start,p:h(start)});let n=0;
+ while(heap.length&&n<limit){n++;const st=pop().s;if(st.f[0]+st.f[1]+st.f[2]+st.f[3]===52)return true;
+  const next=[],free=4-st.l.length,empties=st.c.filter(a=>!a.length).length;
+  st.c.forEach((a,i)=>{if(!a.length)return;let k=a.length-1;while(k>0&&fits(a[k],a[k-1]))k--;// a[k..] é a sequência do topo
+   let usedEmpty=false;st.c.forEach((b,j)=>{if(i===j)return;
+    if(b.length){const t=b[b.length-1];for(let s=k;s<a.length;s++)if(fits(a[s],t)){const cap=(free+1)*Math.pow(2,empties);if(a.length-s<=cap){const x=clone(st);x.c[j].push(...x.c[i].splice(s));next.push(x)}break}}
+    else if(!usedEmpty){usedEmpty=true;const cap=(free+1)*Math.pow(2,empties-1);const s=Math.max(k,a.length-cap);if(s>0){const x=clone(st);x.c[j].push(...x.c[i].splice(s));next.push(x)}}});
+   if(free){const x=clone(st);x.l.push(x.c[i].pop());next.push(x)}
+   const c=a[a.length-1];if(st.f[S(c)]===R(c)-1){const x=clone(st);x.c[i].pop();x.f[S(c)]++;next.push(x)}});
+  st.l.forEach((c,q)=>{let usedEmpty=false;st.c.forEach((b,j)=>{if(b.length?fits(c,b[b.length-1]):!usedEmpty){if(!b.length)usedEmpty=true;const x=clone(st);x.c[j].push(x.l.splice(q,1)[0]);next.push(x)}});
+   if(st.f[S(c)]===R(c)-1){const x=clone(st);x.l.splice(q,1);x.f[S(c)]++;next.push(x)}});
+  for(const t of next){auto(t);const k=key(t);if(seen.has(k))continue;seen.add(k);push({s:t,p:h(t)})}}
+ return false}
+// ---------- Jogos de cartas: Paciência (Klondike), Spider e FreeCell ----------
+// Um motor único: pilhas de cartas desenhadas em HTML/CSS, arrastar e soltar ou tocar (vai sozinha para a melhor jogada),
+// desfazer ilimitado, dica (+30s), auto-completar, aviso de "sem jogadas", cronômetro, recorde e ranking (menor tempo).
+const CG_SUITS=['♠','♥','♦','♣'],CG_RED=[0,1,1,0],CG_RANK=['','A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+const CG={};
+function cgShuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function cgCardEl(c){const el=document.createElement('div');el.className='cd '+(CG_RED[c.s]?'red':'blk');el.dataset.id=c.id;const R=CG_RANK[c.r],S=CG_SUITS[c.s];
+ const mid=c.r>10?`<div class="fc"><b>${R}</b><i>${S}</i></div>`:`<div class="ct${c.r===1?' ace':''}">${S}</div>`;
+ el.innerHTML=`<div class="fa"><div class="tl"><b>${R}</b><i>${S}</i></div>${mid}</div><div class="bk"><span>❤</span></div>`;return el}
+function cgTop(p){return p.cards[p.cards.length-1]}
+// ===== Regras =====
+const CG_RULES={
+ klondike:{cols:7,
+  piles(){const P=[{kind:'stock',col:0,row:0},{kind:'waste',col:1,row:0}];for(let i=0;i<4;i++)P.push({kind:'found',col:3+i,row:0,label:'A'});for(let i=0;i<7;i++)P.push({kind:'tab',col:i,row:1});return P},
+  deal(G){const cards=[];for(let s=0;s<4;s++)for(let r=1;r<=13;r++)cards.push({s,r});const d=cgShuffle(cards.map((c,i)=>({...c,id:i,up:false})));G.cards=d.slice().sort((a,b)=>a.id-b.id);
+   const tabs=G.piles.filter(p=>p.kind==='tab');let k=0;tabs.forEach((p,i)=>{for(let j=0;j<=i;j++){const c=d[k++];c.up=j===i;p.cards.push(c)}});G.pile('stock').cards=d.slice(k)},
+  draw:G=>G.level==='hard'?3:1,
+  canPick(G,p,i){const c=p.cards[i];if(!c||!c.up)return false;if(p.kind==='tab')return true;return(p.kind==='waste'||p.kind==='found')&&i===p.cards.length-1},
+  canDrop(G,cards,p){const c=cards[0],t=cgTop(p);if(p.kind==='tab')return t?(t.up&&CG_RED[t.s]!==CG_RED[c.s]&&t.r===c.r+1):c.r===13;if(p.kind==='found')return cards.length===1&&(t?(t.s===c.s&&t.r===c.r-1):c.r===1);return false},
+  after(G,from){if(from.kind==='tab'){const t=cgTop(from);if(t&&!t.up)t.up=true}},
+  stock(G){const st=G.pile('stock'),w=G.pile('waste');if(st.cards.length){const n=Math.min(this.draw(G),st.cards.length);for(let k=0;k<n;k++){const c=st.cards.pop();c.up=true;w.cards.push(c)}return true}
+   if(w.cards.length){st.cards=w.cards.reverse().map(c=>(c.up=false,c));w.cards=[];return true}return false},
+  isWin:G=>G.piles.filter(p=>p.kind==='found').every(p=>p.cards.length===13),
+  autoReady:G=>!G.pile('stock').cards.length&&!G.pile('waste').cards.length&&G.piles.every(p=>p.kind!=='tab'||p.cards.every(c=>c.up)),
+  useful(G,m){const{from,i,to}=m,c=from.cards[i];if(from.kind==='found')return 0;if(to.kind==='found')return 100;if(from.kind==='waste')return 60;
+   if(from.kind==='tab'){if(i>0&&!from.cards[i-1].up)return 80;if(i===0)return c.r!==13&&to.cards.length?40:0;const below=from.cards[i-1];return G.piles.some(f=>f.kind==='found'&&this.canDrop(G,[below],f))?50:0}return 0},
+  stockUseful(G){const pool=G.pile('stock').cards.concat(G.pile('waste').cards);if(!pool.length)return 0;return pool.some(c=>G.piles.some(p=>(p.kind==='tab'||p.kind==='found')&&this.canDrop(G,[c],p)))?20:0}},
+ spider:{cols:10,
+  piles(){const P=[{kind:'stock',col:0,row:0}];for(let i=0;i<8;i++)P.push({kind:'done',col:2+i,row:0,label:'K'});for(let i=0;i<10;i++)P.push({kind:'tab',col:i,row:1});return P},
+  deal(G){const suits=G.level==='easy'?[0,0,0,0,0,0,0,0]:G.level==='med'?[0,0,0,0,1,1,1,1]:[0,0,1,1,2,2,3,3];const cards=[];suits.forEach(s=>{for(let r=1;r<=13;r++)cards.push({s,r})});
+   const d=cgShuffle(cards.map((c,i)=>({...c,id:i,up:false})));G.cards=d.slice().sort((a,b)=>a.id-b.id);let k=0;G.piles.filter(p=>p.kind==='tab').forEach((p,i)=>{const n=i<4?6:5;for(let j=0;j<n;j++){const c=d[k++];c.up=j===n-1;p.cards.push(c)}});G.pile('stock').cards=d.slice(k)},
+  canPick(G,p,i){if(p.kind!=='tab')return false;const a=p.cards;if(!a[i]||!a[i].up)return false;for(let k=i+1;k<a.length;k++)if(!(a[k].up&&a[k].s===a[i].s&&a[k].r===a[k-1].r-1))return false;return true},
+  canDrop(G,cards,p){if(p.kind!=='tab')return false;const t=cgTop(p);return !t||(t.up&&t.r===cards[0].r+1)},
+  after(G,from,to){if(from.kind==='tab'){const t=cgTop(from);if(t&&!t.up)t.up=true}if(to)this.complete(G,to)},
+  complete(G,p){const a=p.cards;if(a.length<13)return;const run=a.slice(-13);if(!run.every((c,k)=>c.up&&c.s===run[0].s&&c.r===13-k))return;const d=G.piles.find(q=>q.kind==='done'&&!q.cards.length);if(!d)return;
+   p.cards.splice(-13);d.cards=run.reverse();const t=cgTop(p);if(t&&!t.up)t.up=true;G.flash=d;vib(30)},
+  stock(G){const st=G.pile('stock');if(!st.cards.length)return false;const tabs=G.piles.filter(p=>p.kind==='tab');if(tabs.some(p=>!p.cards.length)){rkToast('Preencha as colunas vazias antes de distribuir');return false}
+   tabs.forEach(p=>{const c=st.cards.pop();c.up=true;p.cards.push(c)});tabs.forEach(p=>this.complete(G,p));return true},
+  isWin:G=>G.piles.filter(p=>p.kind==='done').every(p=>p.cards.length===13),
+  autoReady:G=>!G.pile('stock').cards.length&&G.piles.every(p=>p.kind!=='tab'||p.cards.every(c=>c.up)),
+  useful(G,m){const{from,i,to}=m,c=from.cards[i],below=from.cards[i-1],linked=below&&below.up&&below.s===c.s&&below.r===c.r+1,t=cgTop(to);
+   if(i>0&&!below.up)return 80;if(i===0)return t?60:0;if(linked)return 0;if(t&&t.s===c.s)return 50;return t?0:5},
+  stockUseful:G=>G.pile('stock').cards.length?15:0},
+ freecell:{cols:8,
+  piles(){const P=[];for(let i=0;i<4;i++)P.push({kind:'cell',col:i,row:0});for(let i=0;i<4;i++)P.push({kind:'found',col:4+i,row:0,label:'A'});for(let i=0;i<8;i++)P.push({kind:'tab',col:i,row:1});return P},
+  deal(G){for(let tries=0;tries<25;tries++){const cards=[];for(let s=0;s<4;s++)for(let r=1;r<=13;r++)cards.push({s,r});const d=cgShuffle(cards.map((c,i)=>({...c,id:i,up:true})));
+    const cols=[[],[],[],[],[],[],[],[]];d.forEach((c,k)=>cols[k%8].push(c));if(tries<24&&!fcSolvable(cols.map(a=>a.map(c=>c.s*13+c.r-1)),8000))continue;
+    G.cards=d.slice().sort((a,b)=>a.id-b.id);G.piles.filter(p=>p.kind==='tab').forEach((p,i)=>p.cards=cols[i]);return}},
+  seq(a,i){for(let k=i+1;k<a.length;k++)if(!(CG_RED[a[k].s]!==CG_RED[a[k-1].s]&&a[k].r===a[k-1].r-1))return false;return true},
+  cap(G,to){const free=G.piles.filter(p=>p.kind==='cell'&&!p.cards.length).length,emp=G.piles.filter(p=>p.kind==='tab'&&!p.cards.length&&p!==to).length;return(free+1)*Math.pow(2,emp)},
+  canPick(G,p,i){if(!p.cards[i])return false;if(p.kind==='tab')return this.seq(p.cards,i);return(p.kind==='cell'||p.kind==='found')&&i===p.cards.length-1},
+  canDrop(G,cards,p){const c=cards[0],t=cgTop(p);if(p.kind==='tab'){if(cards.length>this.cap(G,p))return false;return !t||(CG_RED[t.s]!==CG_RED[c.s]&&t.r===c.r+1)}
+   if(p.kind==='cell')return cards.length===1&&!t;if(p.kind==='found')return cards.length===1&&(t?(t.s===c.s&&t.r===c.r-1):c.r===1);return false},
+  after(){},stock(){return false},
+  isWin:G=>G.piles.filter(p=>p.kind==='found').every(p=>p.cards.length===13),
+  autoReady(G){const f=[0,0,0,0];G.piles.filter(p=>p.kind==='found').forEach(p=>{const t=cgTop(p);if(t)f[t.s]=t.r});const cols=G.piles.filter(p=>p.kind==='tab'||p.kind==='cell').map(p=>p.cards.map(c=>({s:c.s,r:c.r})));
+   let moved=true;while(moved){moved=false;for(const a of cols){const c=a[a.length-1];if(c&&f[c.s]===c.r-1){f[c.s]++;a.pop();moved=true}}}return f.every(v=>v===13)},
+  useful(G,m){const{from,i,to}=m;if(from.kind==='found')return 0;if(to.kind==='found')return 100;if(from.kind==='cell'&&to.kind==='cell')return 0;if(from.kind==='cell')return 25;
+   if(to.kind==='cell')return 5;if(i===0&&!to.cards.length)return 0;return to.cards.length?20:10},
+  stockUseful:()=>0}};
+// ===== Motor =====
+function cgMake(p,key,rule,levels){const sec=$(key),board=$(p+'-board');const G={p,key,rules:CG_RULES[rule],levels,board,els:[],undo:[],moves:0,time:0,running:false,paused:false,over:false,won:false,auto:false,level:levels?levels[0]:'normal'};
+ G.pile=k=>G.piles.find(q=>q.kind===k);CG[p]=G;cgInput(G);return G}
+function cgLayout(G){const W=G.board.clientWidth,H=G.board.clientHeight,n=G.rules.cols,gap=Math.max(3,Math.round(W*.012));let cw=Math.floor((W-gap*(n-1))/n),ch=Math.round(cw*1.4);
+ if(ch*3.1>H){ch=Math.floor(H/3.1);cw=Math.floor(ch/1.4)}const ox=Math.round((W-(cw*n+gap*(n-1)))/2);Object.assign(G,{W,H,cw,ch,gap,ox});G.board.style.setProperty('--cw',cw+'px');G.board.style.setProperty('--ch',ch+'px')}
+function cgPos(G,p){return{x:G.ox+p.col*(G.cw+G.gap),y:p.row?G.ch+G.gap*3:0}}
+function cgRender(G){const where={};G.piles.forEach((p,pi)=>{const b=cgPos(G,p),a=p.cards;let dn=G.ch*.16,up=G.ch*(G.rules.cols>8?.27:.3);
+  if(p.kind==='tab'&&a.length>1){const nd=a.filter(c=>!c.up).length,nu=a.length-nd,need=nd*dn+Math.max(0,nu-1)*up,avail=G.H-b.y-G.ch-4;if(need>avail){const f=avail/need;dn*=f;up*=f}}
+  let y=b.y;a.forEach((c,k)=>{let x=b.x,yy=b.y;if(p.kind==='tab'){yy=y;y+=c.up?up:dn}else if(p.kind==='waste'){const vis=Math.min(a.length,G.rules.draw?G.rules.draw(G):1),start=a.length-vis;if(k>start)x=b.x+(k-start)*G.cw*.32}
+   const el=G.els[c.id];el.style.setProperty('--tx',x+'px');el.style.setProperty('--ty',yy+'px');el.style.zIndex=(p.kind==='tab'?20:p.kind==='waste'?40:10)+k;el.classList.toggle('dn',!c.up);where[c.id]={pi,i:k}});
+  const sl=G.slots[pi];sl.style.setProperty('--tx',b.x+'px');sl.style.setProperty('--ty',b.y+'px');
+  if(p.kind==='stock')sl.textContent=G.rules===CG_RULES.klondike&&!a.length&&G.pile('waste').cards.length?'↺':''});
+ G.where=where;const st=G.pile('stock');if(st&&G.badge){const b=cgPos(G,st),n=G.rules===CG_RULES.spider?Math.ceil(st.cards.length/10):st.cards.length;G.badge.textContent=n;G.badge.style.display=n?'':'none';G.badge.style.setProperty('--tx',(b.x+G.cw-10)+'px');G.badge.style.setProperty('--ty',(b.y-8)+'px')}
+ $(G.p+'-mv').textContent=G.moves}
+function cgBuild(G){G.board.innerHTML='';G.piles=G.rules.piles().map(q=>({...q,cards:[]}));G.slots=G.piles.map(q=>{const s=document.createElement('div');s.className='cslot '+q.kind;s.textContent=q.label||'';G.board.append(s);return s});
+ G.rules.deal(G);G.els=[];G.cards.forEach(c=>{const el=cgCardEl(c);G.els[c.id]=el;G.board.append(el)});
+ G.badge=null;if(G.pile('stock')){G.badge=document.createElement('div');G.badge.className='cbadge';G.board.append(G.badge)}}
+function cgSnap(G){return JSON.stringify(G.piles.map(p=>p.cards.map(c=>c.id*2+(c.up?1:0))))}
+function cgRestore(G,s){JSON.parse(s).forEach((a,k)=>{G.piles[k].cards=a.map(v=>{const c=G.cards[v>>1];c.up=!!(v&1);return c})})}
+function cgNew(p,level){const G=CG[p];revEnd(p);cgAskClose();if(level)G.level=level;else G.level=G.levels?getPref(p+'_lvl',G.levels[0]):'normal';if(G.levels)segSet(p+'-seg',G.level);
+ ['over','stuck','pause'].forEach(x=>$(p+x).classList.add('hide'));setPause(p,false);cgLayout(G);cgBuild(G);G.start=cgSnap(G);Object.assign(G,{undo:[],moves:0,time:0,running:true,paused:false,over:false,won:false,auto:false,spTried:''});
+ $(p+'-best').textContent=bestTxt(cgKey(G));cgDealAnim(G);cgClock(G)}
+function cgRestart(p){const G=CG[p];revEnd(p);cgAskClose();['over','stuck','pause'].forEach(x=>$(p+x).classList.add('hide'));setPause(p,false);G.els.forEach(el=>el.classList.remove('win'));cgRestore(G,G.start);
+ Object.assign(G,{undo:[],moves:0,time:0,running:true,paused:false,over:false,won:false,auto:false,spTried:''});cgDealAnim(G);cgClock(G)}
+function cgDealAnim(G){const st=G.pile('stock')||G.piles.find(q=>q.kind==='tab'),b=st?cgPos(G,st):{x:0,y:0};G.els.forEach(el=>{el.classList.add('nt');el.style.setProperty('--tx',b.x+'px');el.style.setProperty('--ty',(st&&st.kind==='stock'?b.y:G.H)+'px')});
+ void G.board.offsetWidth;cgRender(G);let k=0;G.piles.forEach(p=>{if(p.kind==='stock')return;p.cards.forEach(c=>{const el=G.els[c.id];el.style.transitionDelay=(k++*18)+'ms'})});
+ G.els.forEach(el=>el.classList.remove('nt'));cgRender(G);clearTimeout(G.dt);G.dt=setTimeout(()=>G.els.forEach(el=>el.style.transitionDelay=''),k*18+400)}
+function cgKey(G){return G.key+(G.levels?'_'+G.level:'')}
+function cgClock(G){$(G.p+'-time').textContent=fmtT(G.time)}
+// Ações
+function cgDo(G,act){G.undo.push(cgSnap(G));const R=G.rules;let ok=true;
+ if(act.type==='stock')ok=R.stock(G);else{const from=G.piles[act.from],to=G.piles[act.to],cards=from.cards.splice(act.i);to.cards.push(...cards);R.after(G,from,to)}
+ if(!ok){G.undo.pop();return false}G.moves++;cgRender(G);if(G.flash){const d=G.flash;G.flash=null;G.slots[G.piles.indexOf(d)].classList.add('hint');setTimeout(()=>G.slots[G.piles.indexOf(d)].classList.remove('hint'),1200)}cgAfter(G);return true}
+function cgAfter(G){if(G.rules.isWin(G)){cgWin(G);return}if(G.auto)return;
+ if(G.rules.autoReady(G)){const plan=G.rules===CG_RULES.spider?cgSpiderPlan(G):null;if(G.rules!==CG_RULES.spider||plan){cgAuto(G,plan);return}}
+ if(!cgHasMoves(G))setTimeout(()=>{if(!G.over&&!G.auto&&!cgHasMoves(G)&&mode===G.key)$(G.p+'stuck').classList.remove('hide')},450)}
+function cgMoves(G){const out=[];G.piles.forEach((from,fi)=>{if(from.kind==='stock'||from.kind==='done')return;for(let i=0;i<from.cards.length;i++){if(!G.rules.canPick(G,from,i))continue;const cards=from.cards.slice(i);G.piles.forEach((to,ti)=>{if(ti!==fi&&G.rules.canDrop(G,cards,to))out.push({from,i,to,fi,ti,score:G.rules.useful(G,{from,i,to})})})}});return out}
+function cgHasMoves(G){return cgMoves(G).some(m=>m.score>0)||G.rules.stockUseful(G)>0}
+function cgUndo(p){const G=CG[p];if(G.over||G.auto||!G.undo.length||G.paused)return;cgRestore(G,G.undo.pop());G.moves++;$(p+'stuck').classList.add('hide');cgRender(G)}
+function cgWin(G){G.over=true;G.won=true;G.running=false;const tsec=Math.max(1,Math.floor(G.time)),key=cgKey(G),rec=!best(key)||tsec<best(key);saveMin(key,tsec);vib([30,50,30]);
+ G.els.forEach((el,k)=>{el.style.setProperty('--wx',((Math.random()-.5)*G.W*1.2)+'px');el.style.setProperty('--wy',(40+Math.random()*90)+'px');el.style.setProperty('--wr',((Math.random()-.5)*540)+'deg');el.style.animationDelay=(k*22)+'ms';el.classList.add('win')});
+ const tok=G.start+G.time;setTimeout(()=>{if(mode!==G.key||!G.won)return;$(G.p+'title').textContent='Você venceu! 🎉';showOver(G.p,fmtT(tsec),G.moves+' movimentos'+(G.levels?' · Nível '+DIFF_NAMES[G.level]:''),rec)},Math.min(2600,G.els.length*22+900))}
+function cgAuto(G,plan){G.auto=true;const step=()=>{if(mode!==G.key||G.over)return;if(G.paused){G.at=setTimeout(step,200);return}
+  let m=null;if(plan){m=plan.shift()}else{let bestR=99;G.piles.forEach((from,fi)=>{if(from.kind!=='tab'&&from.kind!=='waste'&&from.kind!=='cell')return;const c=cgTop(from);if(!c)return;G.piles.forEach((to,ti)=>{if(to.kind==='found'&&G.rules.canDrop(G,[c],to)&&c.r<bestR){bestR=c.r;m={from:fi,i:from.cards.length-1,to:ti}}})})}
+  if(!m){G.auto=false;cgAfter(G);return}cgDo(G,{type:'move',...m});if(!G.over)G.at=setTimeout(step,110)};G.at=setTimeout(step,250)}
+// Spider: com todas as cartas viradas e o monte vazio, procura uma sequência de jogadas que termine o jogo.
+function cgSpiderPlan(G){const snap=cgSnap(G);if(G.spTried===snap)return null;G.spTried=snap;
+ const tabs=G.piles.map((p,k)=>p.kind==='tab'?k:-1).filter(k=>k>=0),done0=G.piles.filter(p=>p.kind==='done'&&p.cards.length).length;
+ const st0=tabs.map(k=>G.piles[k].cards.map(c=>[c.s,c.r]));const key=st=>st.map(a=>a.map(c=>c[0]*13+c[1]).join(',')).join('|');
+ const comp=st=>{let n=0;for(const a of st){if(a.length>=13){const r=a.slice(-13);if(r.every((c,k)=>c[0]===r[0][0]&&c[1]===13-k)){a.splice(-13);n++}}}return n};
+ const seen=new Set();let nodes=0;const dfs=(st,done,path)=>{if(done===8)return path;if(++nodes>15000)return null;const k=key(st);if(seen.has(k))return null;seen.add(k);
+  const mv=[];st.forEach((a,i)=>{for(let s=a.length-1;s>=0;s--){if(s<a.length-1&&!(a[s+1][0]===a[s][0]&&a[s+1][1]===a[s][1]-1))break;const c=a[s];
+   st.forEach((b,j)=>{if(i===j)return;const t=b[b.length-1];if(t?t[1]===c[1]+1:s>0){const sc=t?(t[0]===c[0]?3:1):0;const below=a[s-1];if(below&&below[0]===c[0]&&below[1]===c[1]+1&&!(t&&t[0]===c[0]))return;mv.push({i,s,j,sc:sc+(s===0?2:0)})}})}});
+  mv.sort((x,y)=>y.sc-x.sc);for(const m of mv){const nx=st.map(a=>a.slice());nx[m.j].push(...nx[m.i].splice(m.s));const add=comp(nx);const r=dfs(nx,done+add,path.concat([{from:tabs[m.i],i:m.s,to:tabs[m.j]}]));if(r)return r}return null};
+ return dfs(st0,done0,[])}
+// Dica: destaca a jogada mais útil (+30 s), sem fazê-la.
+function cgHint(p){const G=CG[p];if(G.over||G.auto||G.paused)return;const mv=cgMoves(G).filter(m=>m.score>0).sort((a,b)=>b.score-a.score)[0];G.time+=30;cgClock(G);bump(p+'-time');
+ const flash=els=>{els.forEach(e=>{e.classList.remove('hint');void e.offsetWidth;e.classList.add('hint')});setTimeout(()=>els.forEach(e=>e.classList.remove('hint')),2200)};
+ if(mv){const els=mv.from.cards.slice(mv.i).map(c=>G.els[c.id]),t=cgTop(mv.to);els.push(t?G.els[t.id]:G.slots[mv.ti]);flash(els);return}
+ if(G.rules.stockUseful(G)>0){const st=G.pile('stock'),t=cgTop(st);flash([t?G.els[t.id]:G.slots[G.piles.indexOf(st)]]);return}rkToast('Nenhuma jogada útil agora. Tente desfazer.')}
+// Toque: manda a carta para a melhor jogada possível.
+function cgTap(G,pi,i){const from=G.piles[pi];if(from.kind==='stock'){cgDo(G,{type:'stock'});return}if(i<0||!G.rules.canPick(G,from,i)){if(i>=0)cgShake(G,from.cards[i]);return}
+ const cards=from.cards.slice(i);let best=null,bs=-1;G.piles.forEach((to,ti)=>{if(ti===pi||!G.rules.canDrop(G,cards,to))return;const t=cgTop(to);let sc=to.kind==='found'?100:to.kind==='tab'?(t?50+(t.s===cards[0].s?10:0):12):to.kind==='cell'?2:0;
+  if(to.kind==='found'&&from.kind==='found')sc=0;if(i>0&&from.kind==='tab'&&!from.cards[i-1].up)sc+=5;if(sc>bs){bs=sc;best=ti}});
+ if(best==null||bs<=0){cgShake(G,cards[0]);return}cgDo(G,{type:'move',from:pi,i,to:best})}
+function cgShake(G,c){if(!c)return;const el=G.els[c.id];el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk');vib(20)}
+// Arrastar e soltar
+function cgInput(G){const bd=G.board;let D=null;
+ const clear=()=>G.board.querySelectorAll('.tgt').forEach(e=>e.classList.remove('tgt'));
+ bd.addEventListener('pointerdown',e=>{if(G.over||G.paused||G.auto||mode!==G.key)return;const el=e.target.closest('.cd,.cslot');if(!el)return;e.preventDefault();
+  let pi,i;if(el.classList.contains('cd')){const w=G.where[+el.dataset.id];if(!w)return;pi=w.pi;i=w.i}else{pi=G.slots.indexOf(el);i=-1}
+  D={pi,i,x0:e.clientX,y0:e.clientY,on:false};try{bd.setPointerCapture(e.pointerId)}catch(_){}});
+ bd.addEventListener('pointermove',e=>{if(!D)return;const dx=e.clientX-D.x0,dy=e.clientY-D.y0;const from=G.piles[D.pi];
+  if(!D.on){if(Math.hypot(dx,dy)<7||D.i<0||from.kind==='stock'||!G.rules.canPick(G,from,D.i))return;D.on=true;D.cards=from.cards.slice(D.i);D.els=D.cards.map(c=>G.els[c.id]);
+   D.base=D.els.map(el=>[parseFloat(el.style.getPropertyValue('--tx')),parseFloat(el.style.getPropertyValue('--ty'))]);D.els.forEach((el,k)=>{el.classList.add('drag');el.style.zIndex=900+k});
+   D.targets=G.piles.map((to,ti)=>ti!==D.pi&&G.rules.canDrop(G,D.cards,to)?ti:-1).filter(t=>t>=0);D.targets.forEach(ti=>{const t=cgTop(G.piles[ti]);(t?G.els[t.id]:G.slots[ti]).classList.add('tgt')})}
+  D.els.forEach((el,k)=>{el.style.setProperty('--tx',(D.base[k][0]+dx)+'px');el.style.setProperty('--ty',(D.base[k][1]+dy)+'px')})});
+ const end=e=>{if(!D)return;const d=D;D=null;if(!d.on){if(e.type==='pointerup')cgTap(G,d.pi,d.i);return}clear();d.els.forEach(el=>el.classList.remove('drag'));
+  const x=d.base[0][0]+e.clientX-d.x0,y=d.base[0][1]+e.clientY-d.y0;let best=-1,ba=0;d.targets.forEach(ti=>{const p=G.piles[ti],b=cgPos(G,p),t=cgTop(p),ty=t?parseFloat(G.els[t.id].style.getPropertyValue('--ty')):b.y,tx=t?parseFloat(G.els[t.id].style.getPropertyValue('--tx')):b.x;
+   const ov=Math.max(0,Math.min(x+G.cw,tx+G.cw)-Math.max(x,tx))*Math.max(0,Math.min(y+G.ch,ty+G.ch)-Math.max(y,ty));if(ov>ba){ba=ov;best=ti}});
+  if(best>=0)cgDo(G,{type:'move',from:d.pi,i:d.i,to:best});else{cgRender(G);vib(15)}};
+ bd.addEventListener('pointerup',end);bd.addEventListener('pointercancel',end)}
+// Pausa, confirmação, níveis, início
+function cgPause(p){const G=CG[p];if(G.over)return;G.paused=!G.paused;setPause(p,G.paused)}
+function cgAsk(title,text,btns){$('cgask-t').textContent=title;$('cgask-p').textContent=text;const box=$('cgask-b');box.innerHTML='';btns.forEach(([label,cls,fn])=>{const b=document.createElement('button');b.className=cls;b.textContent=label;b.onclick=()=>{cgAskClose();fn&&fn()};box.append(b)});$('cgask').classList.remove('hide')}
+function cgAskClose(){$('cgask').classList.add('hide')}
+function cgAskRestart(p){cgAsk('Recomeçar?','Escolha se quer jogar de novo com as mesmas cartas ou começar um jogo novo.',[['↺ Mesmas cartas','play',()=>cgRestart(p)],['🆕 Novo jogo','tool',()=>cgNew(p)],['Cancelar','ghost',null]])}
+function cgAskExit(){cgAsk('Sair do jogo?','Você volta para a tela inicial e esta partida será perdida.',[['Sair','play',()=>menu()],['Continuar jogando','ghost',null]])}
+function cgLevel(p,lv){const G=CG[p];setPref(p+'_lvl',lv);if(!G.moves||G.over){cgNew(p,lv);return}segSet(p+'-seg',G.level);cgAsk('Mudar de nível?','Um jogo novo começa no nível '+DIFF_NAMES[lv]+'.',[['Começar','play',()=>cgNew(p,lv)],['Cancelar','ghost',null]])}
+function cgStart(p){const G=CG[p];enterGame(G.key);cgNew(p)}
+function startPaciencia(){cgStart('k')}function startSpider(){cgStart('w')}function startFreecell(){cgStart('c')}
+function cgBests(){const t=(id,key,lab)=>{const el=$(id);if(el)el.textContent='🏆 Recorde'+(lab?' ('+lab+')':'')+': '+bestTxt(key)};
+ const kl=getPref('k_lvl','easy'),wl=getPref('w_lvl','easy');t('kBest','paciencia_'+kl,DIFF_NAMES[kl]);t('wBest','spider_'+wl,DIFF_NAMES[wl]);t('cBest','freecell','')}
+setInterval(()=>{for(const p in CG){const G=CG[p];if(mode===G.key&&G.running&&!G.paused&&!G.over&&!document.hidden){G.time+=.25;cgClock(G)}}},250);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)return;for(const p in CG){const G=CG[p];if(mode===G.key&&G.running&&!G.paused&&!G.over)cgPause(p)}});
+window.addEventListener('resize',()=>{for(const p in CG){const G=CG[p];if(mode===G.key&&G.piles){cgLayout(G);cgRender(G)}}});
+function cgInit(){cgMake('k','paciencia','klondike',['easy','hard']);cgMake('w','spider','spider',['easy','med','hard']);cgMake('c','freecell','freecell',null);
+ ['k','w'].forEach(p=>$(p+'-seg').querySelectorAll('button').forEach(b=>b.onclick=()=>cgLevel(p,b.dataset.d)));
+ for(const p of['k','w','c'])REV[p]={sec:CG[p].key,open(){const G=CG[p];G.els.forEach(el=>{el.classList.remove('win');el.style.animationDelay=''});cgRender(G);$(p+'rvx').textContent=fmtT(G.time)+' · '+G.moves+' movimentos'},again:()=>cgNew(p)};
+ cgBests()}
+cgInit();
 </script>
 </body>
 </html>
