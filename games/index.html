@@ -169,7 +169,7 @@ header small{display:block;font-size:12px;color:#ffe1d3;font-weight:500}
 .rk-in:focus{outline:none;border-color:var(--wine2)}
 .rk-err{min-height:1.1em;color:#e0233f;font-weight:700;font-size:14px}
 .rk-row{display:flex;gap:8px}
-.rk-msg{margin:0!important;font-weight:700}
+.rk-msg{margin:0!important;font-weight:700}.rk-why{font-size:.9em;opacity:.85}
 .basket .rk-box .tool,.block .rk-box .tool{background:rgba(255,255,255,.14);color:#fff;box-shadow:none}
 .rkm{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:12px;background:rgba(40,12,20,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .rkp{width:min(480px,100%);max-height:min(88dvh,760px);display:flex;flex-direction:column;gap:10px;background:linear-gradient(180deg,#fff,#fff6ee);border-radius:26px;padding:18px 16px 14px;box-shadow:0 20px 50px rgba(0,0,0,.3);animation:pop .4s cubic-bezier(.2,1.5,.4,1) both}
@@ -505,6 +505,7 @@ body.lock{overflow:hidden;overscroll-behavior:none}
   <div class="qz-card" id="qz-card"></div>
   <div id="qpause" class="hide"></div>
   <div id="qconfirm" class="overlay hide"><div class="panel"><h2 id="qcf-t">Recomeçar?</h2><p id="qcf-p"></p><button class="play" id="qcf-yes">Sim</button><button class="ghost" onclick="qzAskClose()">Não, continuar</button></div></div>
+  <div id="qready" class="overlay hide gate"><div class="panel"><h2>Pronto para jogar?</h2><p>São 10 perguntas, com 30 segundos cada.</p><button class="play" onclick="ungate('q')">▶ Começar</button></div></div>
   <div id="qover" class="overlay hide"><div class="panel"><h2 id="qtitle">Fim do quiz!</h2><div class="big" id="qbig">0/10</div><div class="badge hide" id="qrec">🏆 Novo recorde!</div><p id="qresult"></p><button class="play" onclick="qzNew()">Jogar de novo</button><button class="ghost" onclick="revOpen('q')">👀 Ver partida</button></div></div>
  </div>
 </section>
@@ -1570,6 +1571,25 @@ function cgInit(){cgMake('k','paciencia','klondike',['easy','hard']);cgMake('w',
  for(const p of['k','w','c'])REV[p]={sec:CG[p].key,open(){const G=CG[p];G.els.forEach(el=>{el.classList.remove('win');el.style.animationDelay=''});cgRender(G);$(p+'rvx').textContent=fmtT(G.time)+' · '+G.moves+' movimentos'},again:()=>cgNew(p)};
  cgBests()}
 cgInit();
+</script>
+<script>
+// ---------- Tela "Pronto?": nenhum jogo começa sozinho ----------
+// Ao abrir um jogo, ao pedir nova partida, recomeçar ou mudar de nível, o jogo fica parado até a pessoa tocar em "▶ Começar".
+const GATE={},GTXT={d:'Toque na tela ou no botão para pular os obstáculos.',b:'Arraste a bola e solte para arremessar.',t:'Deslize para mover e toque para girar as peças.',n:'Use as setas do celular para guiar a cobrinha.',s:'O relógio só começa quando você tocar em Começar.',m:'O relógio só começa quando você tocar em Começar.',f:'Ache as 7 diferenças. O relógio começa ao tocar em Começar.',q:'São 10 perguntas, com 30 segundos cada.',g:'Descubra a palavra antes de completar a forca.',k:'O relógio só começa quando você tocar em Começar.',w:'O relógio só começa quando você tocar em Começar.',c:'O relógio só começa quando você tocar em Começar.'};
+const GTOG={d:()=>togglePause(),b:()=>togglePause(),t:()=>toggleBlockPause(),n:()=>snPause(),s:()=>suPause(),m:()=>mnPause(),f:()=>dfPause(),g:()=>fgPause(),k:()=>cgPause('k'),w:()=>cgPause('w'),c:()=>cgPause('c')};
+function gateEl(p){let el=$(p+'ready');if(!el){el=document.createElement('div');el.id=p+'ready';el.className='overlay hide gate';el.innerHTML=`<div class="panel"><h2>Pronto para jogar?</h2><p>${GTXT[p]}</p><button class="play" onclick="ungate('${p}')">▶ Começar</button></div>`;const o=$(p+'over');o.parentNode.insertBefore(el,o)}return el}
+function gate(p){gateEl(p);GATE[p]=true;if(p==='q'){qz.timing=false;$('qready').classList.remove('hide');return}
+ GTOG[p]();if(p==='d'||p==='b'){try{p==='d'?drawDino(0):drawBasket(0)}catch(e){}}}
+function ungate(p){if(!GATE[p])return;vib(15);if(p==='q'){GATE.q=false;$('qready').classList.add('hide');if(!qz.done){qz.timing=true;qzLast=performance.now()}return}GTOG[p]()}
+const _setPause=setPause;setPause=function(p,on){const g=on&&GATE[p];if(!on)GATE[p]=false;_setPause(p,on);const r=$(p+'ready');if(r)r.classList.toggle('hide',!g);if(g){$(p+'pause').classList.add('hide');$(p+'pb').textContent='▶ Começar'}};
+const _showOver2=showOver;showOver=function(p,...a){GATE[p]=false;const r=$(p+'ready');if(r)r.classList.add('hide');_showOver2(p,...a)};
+function gwrap(name,pf){const f=window[name];window[name]=function(...a){const r=f.apply(this,a);const p=pf(a);if(p)gate(p);return r}}
+gwrap('start',a=>a[0]==='dino'?'d':a[0]==='basket'?'b':null);gwrap('startBlock',()=>'t');gwrap('snNew',()=>'n');gwrap('suNew',()=>'s');gwrap('mnNew',()=>'m');
+gwrap('dfNew',()=>'f');gwrap('qzNew',()=>'q');gwrap('fgNew',()=>'g');gwrap('cgNew',a=>a[0]);gwrap('cgRestart',a=>a[0]);
+// Fim de partida sem direito a ranking: explica o motivo em vez de esconder o botão.
+const _rkDraw=rkDraw;rkDraw=function(p){_rkDraw(p);const c=rkCtx[p];if(c.state!=='offer'||(c.eligible&&RGAMES[c.game].ok(c.score,c.difficulty)))return;const high=RGAMES[c.game].high;
+ const why=high?(c.score>0?'Pontuação fora do limite do ranking.':'Faça pelo menos 1 ponto para entrar no ranking.'):(c.eligible?'Partida rápida demais para o ranking.':'Só partidas vencidas entram no ranking. Tente de novo!');
+ const box=rkBox(p);box.insertAdjacentHTML('afterbegin',`<p class="rk-msg rk-why">🏆 ${why}</p>`)};
 </script>
 </body>
 </html>
